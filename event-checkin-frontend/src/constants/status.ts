@@ -1,0 +1,13 @@
+export const EVENT_STATUS = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  CHECKING_IN: 'CHECKING_IN',
+  FINISHED: 'FINISHED',
+  CANCELLED: 'CANCELLED',
+} as const;
+
+export const ATTENDANCE_STATUS = {
+  PRESENT: 'PRESENT',
+  LATE: 'LATE',
+  REJECTED: 'REJECTED',
+} as const;

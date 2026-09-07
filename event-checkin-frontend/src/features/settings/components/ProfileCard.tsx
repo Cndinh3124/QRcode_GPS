@@ -1,0 +1,100 @@
+import {
+  Card,
+  Descriptions,
+  Tag,
+  Typography,
+} from 'antd';
+
+import {
+  MailOutlined,
+  IdcardOutlined,
+  UserOutlined,
+  SafetyOutlined,
+} from '@ant-design/icons';
+
+import type {
+  UserProfile,
+} from '../types/settings.types';
+
+const { Title } = Typography;
+
+interface ProfileCardProps {
+  profile: UserProfile;
+}
+
+export default function ProfileCard({
+  profile,
+}: ProfileCardProps) {
+  return (
+    <Card>
+      <Title
+        level={4}
+        style={{
+          marginTop: 0,
+        }}
+      >
+        Profile
+      </Title>
+
+      <Descriptions
+        bordered
+        column={1}
+        size="middle"
+      >
+        <Descriptions.Item
+          label={
+            <>
+              <UserOutlined /> Full Name
+            </>
+          }
+        >
+          {profile.fullName}
+        </Descriptions.Item>
+
+        <Descriptions.Item
+          label={
+            <>
+              <MailOutlined /> Email
+            </>
+          }
+        >
+          {profile.email}
+        </Descriptions.Item>
+
+        <Descriptions.Item
+          label={
+            <>
+              <IdcardOutlined /> Student Code
+            </>
+          }
+        >
+          {profile.studentCode}
+        </Descriptions.Item>
+
+        <Descriptions.Item
+          label={
+            <>
+              <SafetyOutlined /> Role
+            </>
+          }
+        >
+          <Tag color="blue">
+            {profile.role?.name ?? 'USER'}
+          </Tag>
+        </Descriptions.Item>
+
+        <Descriptions.Item label="Account Status">
+          {profile.isActive ? (
+            <Tag color="green">
+              Active
+            </Tag>
+          ) : (
+            <Tag color="red">
+              Inactive
+            </Tag>
+          )}
+        </Descriptions.Item>
+      </Descriptions>
+    </Card>
+  );
+}
