@@ -12,8 +12,7 @@ export class GpsService {
     lat2: number,
     lon2: number,
   ): number {
-    const earthRadius = 6371000; // mét
-
+    const earthRadius = 6371000; // bán kính của trái đất mét
     const dLat = this.toRadians(lat2 - lat1);
     const dLon = this.toRadians(lon2 - lon1);
 
