@@ -1,6 +1,6 @@
-import Đăng nhậpForm from '../components/Đăng nhậpForm';
+import LoginForm from '../components/LoginForm';
 
-export default function Đăng nhập() {
+export default function Login() {
   return (
     <div
       style={{
@@ -11,7 +11,7 @@ export default function Đăng nhập() {
         background: 'var(--color-page)',
       }}
     >
-      <Đăng nhậpForm />
+      <LoginForm />
     </div>
   );
 }
