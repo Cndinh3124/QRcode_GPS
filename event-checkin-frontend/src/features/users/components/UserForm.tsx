@@ -9,7 +9,7 @@ import {
 
 import type {
   CreateUserDto,
-  Role,
+  Vai trò,
   UpdateUserDto,
   User,
 } from '../types/user.types';
@@ -17,7 +17,7 @@ import type {
 interface UserFormProps {
   mode: 'create' | 'edit';
   user?: User;
-  roles: Role[];
+  roles: Vai trò[];
   loading: boolean;
   onSubmit: (
     values: CreateUserDto | UpdateUserDto,
@@ -70,18 +70,18 @@ export default function UserForm({
       onFinish={handleFinish}
     >
       <Form.Item
-        label="Student Code"
+        label="Mã sinh viên"
         name="studentCode"
         rules={[
           {
             required: true,
             message:
-              'Please enter student code',
+              'Vui lòng nhập mã sinh viên.',
           },
           {
             max: 20,
             message:
-              'Student code cannot exceed 20 characters',
+              'Mã sinh viên không được vượt quá 20 ký tự.',
           },
         ]}
       >
@@ -89,13 +89,13 @@ export default function UserForm({
       </Form.Item>
 
       <Form.Item
-        label="Full Name"
+        label="Họ và tên"
         name="fullName"
         rules={[
           {
             required: true,
             message:
-              'Please enter full name',
+              'Vui lòng nhập họ và tên.',
           },
         ]}
       >
@@ -110,7 +110,7 @@ export default function UserForm({
             required: true,
             type: 'email',
             message:
-              'Please enter a valid email',
+              'Vui lòng nhập email hợp lệ.',
           },
         ]}
       >
@@ -127,7 +127,7 @@ export default function UserForm({
                   required: true,
                   min: 6,
                   message:
-                    'Password must be at least 6 characters',
+                    'Mật khẩu phải có ít nhất 6 ký tự.',
                 },
               ]
             : []
@@ -136,25 +136,25 @@ export default function UserForm({
         <Input.Password
           placeholder={
             mode === 'edit'
-              ? 'Leave blank to keep current password'
-              : 'Enter password'
+              ? 'Để trống nếu không muốn đổi mật khẩu'
+              : 'Nhập mật khẩu'
           }
         />
       </Form.Item>
 
       <Form.Item
-        label="Role"
+        label="Vai trò"
         name="roleId"
         rules={[
           {
             required: true,
             message:
-              'Please select a role',
+              'Vui lòng chọn vai trò.',
           },
         ]}
       >
         <Select
-          placeholder="Select role"
+          placeholder="Chọn vai trò"
           options={roles.map((role) => ({
             label: role.name,
             value: role.id,
@@ -171,8 +171,8 @@ export default function UserForm({
           disabled={loading}
         >
           {mode === 'create'
-            ? 'Create User'
-            : 'Update User'}
+            ? 'Tạo người dùng'
+            : 'Cập nhật người dùng'}
         </Button>
       </Form.Item>
     </Form>
