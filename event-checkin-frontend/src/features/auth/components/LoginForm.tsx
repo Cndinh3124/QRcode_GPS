@@ -34,7 +34,7 @@ export default function LoginForm() {
 
       <Form layout="vertical" onFinish={onFinish}>
         <Form.Item
-          label="Email"
+          label="Email quản trị"
           name="email"
           rules={[
             {
