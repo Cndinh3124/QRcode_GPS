@@ -3,14 +3,14 @@ import { LockOutlined, MailOutlined } from '@ant-design/icons';
 
 import { useAuth } from '../hooks/useAuth';
 
-import type { Đăng nhậpRequest } from '../types/auth.types';
+import type { LoginRequest } from '../types/auth.types';
 
 const { Title } = Typography;
 
-export default function Đăng nhậpForm() {
+export default function LoginForm() {
   const { login, isLoading } = useAuth();
 
-  const onFinish = (values: Đăng nhậpRequest) => {
+  const onFinish = (values: LoginRequest) => {
     login(values);
   };
 
@@ -29,7 +29,7 @@ export default function Đăng nhậpForm() {
           marginBottom: 32,
         }}
       >
-        QR Sự kiện Check-in
+        QR Event Check-in
       </Title>
 
       <Form layout="vertical" onFinish={onFinish}>
@@ -64,7 +64,7 @@ export default function Đăng nhậpForm() {
             },
           ]}
         >
-          <Input.Mật khẩu
+          <Input.Password
             prefix={<LockOutlined />}
             placeholder="********"
             size="large"
@@ -78,7 +78,7 @@ export default function Đăng nhậpForm() {
           size="large"
           loading={isLoading}
         >
-          Đăng nhập
+          Login
         </Button>
       </Form>
     </Card>
