@@ -14,9 +14,9 @@ import type { MenuProps } from 'antd';
 import {
   CalendarOutlined,
   CheckCircleOutlined,
-  Tổng quanOutlined,
+  DashboardOutlined,
   FileTextOutlined,
-  Đăng xuấtOutlined,
+  LogoutOutlined,
   SettingOutlined,
   UserOutlined,
 } from '@ant-design/icons';
@@ -190,7 +190,7 @@ export default function AdminLayout() {
 
     {
       key: 'logout',
-      icon: <Đăng xuấtOutlined />,
+      icon: <LogoutOutlined />,
       danger: true,
       label: 'Đăng xuất',
     },
@@ -230,7 +230,7 @@ export default function AdminLayout() {
 
     {
       key: 'dashboard',
-      icon: <Tổng quanOutlined />,
+      icon: <DashboardOutlined />,
       label: 'Tổng quan',
     },
 
@@ -281,7 +281,7 @@ export default function AdminLayout() {
         {
           key: 'settings',
           icon: <SettingOutlined />,
-          label: 'Cài đặt',
+          label: 'Settings',
         },
       ],
     },
@@ -312,8 +312,7 @@ export default function AdminLayout() {
         breakpoint="lg"
         style={{
           background: 'var(--color-surface)',
-          borderRight:
-            '1px solid #E1EAF3',
+          borderRight: '1px solid var(--color-border)',
         }}
       >
         {/* ===================================================
@@ -332,7 +331,7 @@ export default function AdminLayout() {
             alignItems: 'center',
 
             borderBottom:
-              '1px solid #E1EAF3',
+              '1px solid #f0f0f0',
           }}
         >
           {/* QR LOGO */}
@@ -348,9 +347,9 @@ export default function AdminLayout() {
 
               borderRadius: 8,
 
-              background: '#1769D2',
+              background: 'var(--color-primary)',
 
-              color: '#FFFFFF',
+              color: '#ffffff',
 
               fontSize: 17,
               fontWeight: 700,
@@ -374,20 +373,20 @@ export default function AdminLayout() {
                 style={{
                   fontSize: 17,
                   fontWeight: 700,
-                  color: '#24364B',
+                  color: '#1f1f1f',
                 }}
               >
-                QR Sự kiện
+                QR Event
               </div>
 
               <div
                 style={{
                   marginTop: 3,
                   fontSize: 12,
-                  color: '#71849A',
+                  color: '#8c8c8c',
                 }}
               >
-                Check-in Quản lý
+                Quản lý điểm danh
               </div>
             </div>
           )}
@@ -446,7 +445,7 @@ export default function AdminLayout() {
             background: 'var(--color-surface)',
 
             borderBottom:
-              '1px solid #E1EAF3',
+              '1px solid #e8eaed',
 
             lineHeight: 'normal',
           }}
@@ -530,7 +529,7 @@ export default function AdminLayout() {
                 style={{
                   background: '#e6f4ff',
 
-                  color: '#1769D2',
+                  color: '#1677ff',
 
                   border:
                     '1px solid #bae0ff',
