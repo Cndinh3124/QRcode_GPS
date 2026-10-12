@@ -14,9 +14,9 @@ import type { MenuProps } from 'antd';
 import {
   CalendarOutlined,
   CheckCircleOutlined,
-  DashboardOutlined,
+  Tổng quanOutlined,
   FileTextOutlined,
-  LogoutOutlined,
+  Đăng xuấtOutlined,
   SettingOutlined,
   UserOutlined,
 } from '@ant-design/icons';
@@ -175,13 +175,13 @@ export default function AdminLayout() {
     {
       key: 'profile',
       icon: <UserOutlined />,
-      label: 'My Profile',
+      label: 'Hồ sơ của tôi',
     },
 
     {
       key: 'settings',
       icon: <SettingOutlined />,
-      label: 'Settings',
+      label: 'Cài đặt',
     },
 
     {
@@ -190,9 +190,9 @@ export default function AdminLayout() {
 
     {
       key: 'logout',
-      icon: <LogoutOutlined />,
+      icon: <Đăng xuấtOutlined />,
       danger: true,
-      label: 'Logout',
+      label: 'Đăng xuất',
     },
   ];
 
@@ -230,8 +230,8 @@ export default function AdminLayout() {
 
     {
       key: 'dashboard',
-      icon: <DashboardOutlined />,
-      label: 'Dashboard',
+      icon: <Tổng quanOutlined />,
+      label: 'Tổng quan',
     },
 
     // -------------------------------------------------------
@@ -240,31 +240,31 @@ export default function AdminLayout() {
 
     {
       type: 'group',
-      label: 'Management',
+      label: 'Quản lý',
 
       children: [
         {
           key: 'users',
           icon: <UserOutlined />,
-          label: 'Users',
+          label: 'Người dùng',
         },
 
         {
           key: 'events',
           icon: <CalendarOutlined />,
-          label: 'Events',
+          label: 'Sự kiện',
         },
 
         {
           key: 'attendance',
           icon: <CheckCircleOutlined />,
-          label: 'Attendance',
+          label: 'Điểm danh',
         },
 
         {
           key: 'reports',
           icon: <FileTextOutlined />,
-          label: 'Reports',
+          label: 'Báo cáo',
         },
       ],
     },
@@ -275,13 +275,13 @@ export default function AdminLayout() {
 
     {
       type: 'group',
-      label: 'System',
+      label: 'Hệ thống',
 
       children: [
         {
           key: 'settings',
           icon: <SettingOutlined />,
-          label: 'Settings',
+          label: 'Cài đặt',
         },
       ],
     },
@@ -295,7 +295,7 @@ export default function AdminLayout() {
     <Layout
       style={{
         minHeight: '100vh',
-        background: '#f5f7fa',
+        background: 'var(--color-page)',
       }}
     >
       {/* =====================================================
@@ -311,9 +311,9 @@ export default function AdminLayout() {
         onCollapse={setCollapsed}
         breakpoint="lg"
         style={{
-          background: '#ffffff',
+          background: 'var(--color-surface)',
           borderRight:
-            '1px solid #e8eaed',
+            '1px solid #E1EAF3',
         }}
       >
         {/* ===================================================
@@ -332,7 +332,7 @@ export default function AdminLayout() {
             alignItems: 'center',
 
             borderBottom:
-              '1px solid #f0f0f0',
+              '1px solid #E1EAF3',
           }}
         >
           {/* QR LOGO */}
@@ -348,9 +348,9 @@ export default function AdminLayout() {
 
               borderRadius: 8,
 
-              background: '#1677ff',
+              background: '#1769D2',
 
-              color: '#ffffff',
+              color: '#FFFFFF',
 
               fontSize: 17,
               fontWeight: 700,
@@ -374,20 +374,20 @@ export default function AdminLayout() {
                 style={{
                   fontSize: 17,
                   fontWeight: 700,
-                  color: '#1f1f1f',
+                  color: '#24364B',
                 }}
               >
-                QR Event
+                QR Sự kiện
               </div>
 
               <div
                 style={{
                   marginTop: 3,
                   fontSize: 12,
-                  color: '#8c8c8c',
+                  color: '#71849A',
                 }}
               >
-                Check-in Management
+                Check-in Quản lý
               </div>
             </div>
           )}
@@ -426,7 +426,7 @@ export default function AdminLayout() {
       <Layout
         style={{
           minWidth: 0,
-          background: '#f5f7fa',
+          background: 'var(--color-page)',
         }}
       >
         {/* ===================================================
@@ -443,10 +443,10 @@ export default function AdminLayout() {
             alignItems: 'center',
             justifyContent: 'flex-end',
 
-            background: '#ffffff',
+            background: 'var(--color-surface)',
 
             borderBottom:
-              '1px solid #e8eaed',
+              '1px solid #E1EAF3',
 
             lineHeight: 'normal',
           }}
@@ -530,7 +530,7 @@ export default function AdminLayout() {
                 style={{
                   background: '#e6f4ff',
 
-                  color: '#1677ff',
+                  color: '#1769D2',
 
                   border:
                     '1px solid #bae0ff',
@@ -551,7 +551,7 @@ export default function AdminLayout() {
 
             padding: 28,
 
-            background: '#f5f7fa',
+            background: 'var(--color-page)',
           }}
         >
           <div
