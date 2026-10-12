@@ -15,7 +15,7 @@ import {
 
 import { useSự kiện } from '../hooks/useSự kiện';
 
-import { useCurrentLocation } from '../../checkin/hooks/useCurrentLocation';
+import { useCurrentĐịa điểm } from '../../checkin/hooks/useCurrentĐịa điểm';
 
 import type {
   CreateSự kiệnDto,
@@ -54,9 +54,9 @@ export default function Sự kiệnForm({
   } = useSự kiện();
 
   const {
-    loading: loadingLocation,
-    getCurrentLocation,
-  } = useCurrentLocation();
+    loading: loadingĐịa điểm,
+    getCurrentĐịa điểm,
+  } = useCurrentĐịa điểm();
 
   useEffect(() => {
     if (mode === 'edit' && event) {
@@ -77,10 +77,10 @@ export default function Sự kiệnForm({
     form.resetFields();
   }, [form, mode, event]);
 
-  async function handleGetLocation() {
+  async function handleGetĐịa điểm() {
     try {
       const position =
-        await getCurrentLocation();
+        await getCurrentĐịa điểm();
 
       form.setFieldsValue({
         latitude: Number(
@@ -96,7 +96,7 @@ export default function Sự kiệnForm({
       );
     } catch {
       // Error đã được xử lý bởi
-      // useCurrentLocation.
+      // useCurrentĐịa điểm.
     }
   }
 
@@ -174,7 +174,7 @@ export default function Sự kiệnForm({
       disabled={submitting}
     >
       <Form.Item
-        label="Title"
+        label="Tên sự kiện"
         name="title"
         rules={[
           {
@@ -198,7 +198,7 @@ export default function Sự kiệnForm({
       </Form.Item>
 
       <Form.Item
-        label="Description"
+        label="Mô tả"
         name="description"
       >
         <Input.TextArea
@@ -210,7 +210,7 @@ export default function Sự kiệnForm({
       </Form.Item>
 
       <Form.Item
-        label="Location"
+        label="Địa điểm"
         name="locationName"
         rules={[
           {
@@ -235,8 +235,8 @@ export default function Sự kiệnForm({
       <Form.Item>
         <Space>
           <Button
-            onClick={handleGetLocation}
-            loading={loadingLocation}
+            onClick={handleGetĐịa điểm}
+            loading={loadingĐịa điểm}
             disabled={submitting}
           >
             📍 Lấy vị trí hiện tại
@@ -245,7 +245,7 @@ export default function Sự kiệnForm({
       </Form.Item>
 
       <Form.Item
-        label="Latitude"
+        label="Vĩ độ"
         name="latitude"
         rules={[
           {
@@ -261,12 +261,12 @@ export default function Sự kiệnForm({
           min={-90}
           max={90}
           readOnly
-          placeholder="Latitude"
+          placeholder="Vĩ độ"
         />
       </Form.Item>
 
       <Form.Item
-        label="Longitude"
+        label="Kinh độ"
         name="longitude"
         rules={[
           {
@@ -282,12 +282,12 @@ export default function Sự kiệnForm({
           min={-180}
           max={180}
           readOnly
-          placeholder="Longitude"
+          placeholder="Kinh độ"
         />
       </Form.Item>
 
       <Form.Item
-        label="Radius (m)"
+        label="Bán kính điểm danh (m)"
         name="radius"
         rules={[
           {
@@ -300,7 +300,7 @@ export default function Sự kiệnForm({
             min: 1,
             max: 1000,
             message:
-              'Radius must be between 1 and 1000 meters.',
+              'Bán kính điểm danh must be between 1 and 1000 meters.',
           },
         ]}
       >
@@ -314,7 +314,7 @@ export default function Sự kiệnForm({
       </Form.Item>
 
       <Form.Item
-        label="Start Time"
+        label="Thời gian bắt đầu"
         name="startTime"
         rules={[
           {
@@ -332,7 +332,7 @@ export default function Sự kiệnForm({
       </Form.Item>
 
       <Form.Item
-        label="End Time"
+        label="Thời gian kết thúc"
         name="endTime"
         rules={[
           {
