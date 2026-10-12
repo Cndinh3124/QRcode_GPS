@@ -15,14 +15,14 @@ import type { AxiosError } from 'axios';
 
 import { getUser } from '../../auth/utils/auth.storage';
 
-import { useSự kiện } from '../hooks/useSự kiện';
+import { useEvents } from '../hooks/useEvents';
 
-import Sự kiệnTable from '../components/Sự kiệnTable';
-import Sự kiệnModal from '../components/Sự kiệnModal';
+import EventTable from '../components/EventTable';
+import EventModal from '../components/EventModal';
 
 import QrModal from '../../qr/components/QrModal';
 
-import type { Sự kiện } from '../types/events.types';
+import type { Event } from '../types/events.types';
 
 const { Title } = Typography;
 
@@ -32,11 +32,11 @@ interface ApiErrorResponse {
   statusCode?: number;
 }
 
-export default function Sự kiện() {
+export default function Events() {
   const {
     events,
-    deleteSự kiện,
-  } = useSự kiện();
+    deleteEvent,
+  } = useEvents();
 
   const [open, setOpen] =
     useState(false);
@@ -47,9 +47,9 @@ export default function Sự kiện() {
     );
 
   const [
-    selectedSự kiện,
-    setSelectedSự kiện,
-  ] = useState<Sự kiện | undefined>(
+    selectedEvent,
+    setSelectedEvent,
+  ] = useState<Event | undefined>(
     undefined,
   );
 
@@ -57,8 +57,8 @@ export default function Sự kiện() {
     useState(false);
 
   const [
-    selectedSự kiệnId,
-    setSelectedSự kiệnId,
+    selectedEventId,
+    setSelectedEventId,
   ] = useState<string | undefined>(
     undefined,
   );
@@ -74,7 +74,7 @@ export default function Sự kiện() {
 
   function handleCreate() {
     setMode('create');
-    setSelectedSự kiện(undefined);
+    setSelectedEvent(undefined);
     setOpen(true);
   }
 
@@ -82,9 +82,9 @@ export default function Sự kiện() {
   // EDIT
   // =========================================================
 
-  function handleEdit(event: Sự kiện) {
+  function handleEdit(event: Event) {
     setMode('edit');
-    setSelectedSự kiện(event);
+    setSelectedEvent(event);
     setOpen(true);
   }
 
@@ -96,7 +96,7 @@ export default function Sự kiện() {
     id: string,
   ) {
     try {
-      await deleteSự kiện.mutateAsync(id);
+      await deleteEvent.mutateAsync(id);
 
       message.success(
         'Đã xóa sự kiện.',
@@ -137,9 +137,9 @@ export default function Sự kiện() {
   // EVENT MODAL
   // =========================================================
 
-  function handleCloseSự kiệnModal() {
+  function handleCloseEventModal() {
     setOpen(false);
-    setSelectedSự kiện(undefined);
+    setSelectedEvent(undefined);
     setMode('create');
   }
 
@@ -148,13 +148,13 @@ export default function Sự kiện() {
   // =========================================================
 
   function handleOpenQr(id: string) {
-    setSelectedSự kiệnId(id);
+    setSelectedEventId(id);
     setQrOpen(true);
   }
 
   function handleCloseQr() {
     setQrOpen(false);
-    setSelectedSự kiệnId(undefined);
+    setSelectedEventId(undefined);
   }
 
   // =========================================================
@@ -188,7 +188,7 @@ export default function Sự kiện() {
         <Alert
           type="error"
           showIcon
-          message="Không thể tải danh sách sự kiện."
+          message="Cannot load events"
           description="Không thể tải dữ liệu sự kiện. Vui lòng thử lại."
         />
       </Card>
@@ -218,14 +218,13 @@ export default function Sự kiện() {
                 margin: 0,
               }}
             >
-              Sự kiện Quản lý
+              Quản lý sự kiện
             </Title>
 
             <Typography.Text
               type="secondary"
             >
-              Manage events and check-in
-              activities.
+              Quản lý sự kiện và hoạt động điểm danh.
             </Typography.Text>
           </div>
 
@@ -235,16 +234,16 @@ export default function Sự kiện() {
             onClick={handleCreate}
             disabled={!isAdmin}
           >
-            Thêm sự kiện
+            Add Event
           </Button>
         </div>
 
-        <Sự kiệnTable
+        <EventTable
           data={events.data ?? []}
           loading={
             events.isLoading ||
             events.isFetching ||
-            deleteSự kiện.isPending
+            deleteEvent.isPending
           }
           isAdmin={isAdmin}
           onEdit={handleEdit}
@@ -253,18 +252,18 @@ export default function Sự kiện() {
         />
       </Card>
 
-      <Sự kiệnModal
+      <EventModal
         open={open}
         mode={mode}
-        event={selectedSự kiện}
+        event={selectedEvent}
         onClose={
-          handleCloseSự kiệnModal
+          handleCloseEventModal
         }
       />
 
       <QrModal
         open={qrOpen}
-        eventId={selectedSự kiệnId}
+        eventId={selectedEventId}
         onClose={handleCloseQr}
       />
     </>
