@@ -24,10 +24,10 @@ export default function StatisticCard({
       style={{
         width: '100%',
         minHeight: 124,
-        borderRadius: 12,
-        border: '1px solid #f0f0f0',
+        borderRadius: 18,
+        border: '1px solid var(--color-border)',
         boxShadow:
-          '0 2px 8px rgba(0, 0, 0, 0.05)',
+          '0 10px 30px rgba(28, 78, 130, 0.08)',
       }}
       styles={{
         body: {
@@ -41,7 +41,7 @@ export default function StatisticCard({
             style={{
               fontSize: 15,
               fontWeight: 500,
-              color: '#595959',
+              color: '#71849A',
             }}
           >
             {title}
@@ -53,7 +53,7 @@ export default function StatisticCard({
             style={{
               fontSize: 30,
               marginRight: 4,
-              color: '#1677ff',
+              color: '#1769D2',
             }}
           >
             {icon}
@@ -63,7 +63,7 @@ export default function StatisticCard({
           fontSize: 32,
           lineHeight: 1.2,
           fontWeight: 700,
-          color: '#1f1f1f',
+          color: '#24364B',
         }}
       />
     </Card>
