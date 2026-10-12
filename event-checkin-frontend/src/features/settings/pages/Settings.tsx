@@ -42,7 +42,7 @@ export default function Settings() {
     if (!result.success) {
       message.error(
         result.error.issues[0]?.message ??
-          'Invalid password information.',
+          'Thông tin mật khẩu không hợp lệ.',
       );
 
       return false;
@@ -90,8 +90,8 @@ export default function Settings() {
       <Alert
         type="error"
         showIcon
-        message="Unable to load profile"
-        description="Please try again later."
+        message="Không thể tải hồ sơ."
+        description="Vui lòng thử lại sau."
       />
     );
   }
@@ -113,8 +113,7 @@ export default function Settings() {
         </Title>
 
         <Text type="secondary">
-          Manage your profile and account
-          security.
+          Quản lý hồ sơ và bảo mật tài khoản.
         </Text>
       </div>
 
