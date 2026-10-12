@@ -112,7 +112,7 @@ export default function CheckIn() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          background: '#f5f5f5',
+          background: 'var(--color-page)',
           padding: 20,
         }}
       >
@@ -129,7 +129,7 @@ export default function CheckIn() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          background: '#f5f5f5',
+          background: 'var(--color-page)',
           padding: 20,
         }}
       >
@@ -153,7 +153,7 @@ export default function CheckIn() {
                 size="small"
                 onClick={() => refetch()}
               >
-                Retry
+                Thử lại
               </Button>
             }
           />
@@ -186,7 +186,7 @@ export default function CheckIn() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        background: '#f5f5f5',
+        background: 'var(--color-page)',
         padding: 20,
       }}
     >
@@ -254,7 +254,7 @@ function CheckInSuccess({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        background: '#f5f5f5',
+        background: 'var(--color-page)',
         padding: 20,
       }}
     >
@@ -273,11 +273,11 @@ function CheckInSuccess({
               }}
             />
           }
-          title="Check-in Successful"
+          title="Điểm danh thành công"
           subTitle={
             isLate
-              ? 'Your attendance has been recorded as late.'
-              : 'Your attendance has been recorded successfully.'
+              ? 'Bạn đã điểm danh thành công nhưng được ghi nhận là đi muộn.'
+              : 'Thông tin điểm danh của bạn đã được ghi nhận.'
           }
         />
 
@@ -295,9 +295,7 @@ function CheckInSuccess({
             }}
           >
             <div>
-              <Text type="secondary">
-                Event
-              </Text>
+              <Text type="secondary">Sự kiện</Text>
 
               <div>
                 <Text strong>
@@ -307,9 +305,7 @@ function CheckInSuccess({
             </div>
 
             <div>
-              <Text type="secondary">
-                Participant
-              </Text>
+              <Text type="secondary">Người tham gia</Text>
 
               <div>
                 <Text strong>
@@ -319,9 +315,7 @@ function CheckInSuccess({
             </div>
 
             <div>
-              <Text type="secondary">
-                Participant Code
-              </Text>
+              <Text type="secondary">Mã tham gia</Text>
 
               <div>
                 <Text strong>
@@ -331,9 +325,7 @@ function CheckInSuccess({
             </div>
 
             <div>
-              <Text type="secondary">
-                Check-in Time
-              </Text>
+              <Text type="secondary">Thời gian điểm danh</Text>
 
               <div>
                 <ClockCircleOutlined
@@ -346,16 +338,14 @@ function CheckInSuccess({
                   {dayjs(
                     data.checkInTime,
                   ).format(
-                    'DD/MM/YYYY HH:mm:ss',
+                    'HH:mm:ss · DD/MM/YYYY',
                   )}
                 </Text>
               </div>
             </div>
 
             <div>
-              <Text type="secondary">
-                Distance
-              </Text>
+              <Text type="secondary">Khoảng cách</Text>
 
               <div>
                 <EnvironmentOutlined
@@ -374,9 +364,7 @@ function CheckInSuccess({
             </div>
 
             <div>
-              <Text type="secondary">
-                Status
-              </Text>
+              <Text type="secondary">Trạng thái</Text>
 
               <div
                 style={{
@@ -420,18 +408,18 @@ function getEventStatusMessage(
 ) {
   switch (status) {
     case 'DRAFT':
-      return 'This event is not available for check-in yet.';
+      return 'Sự kiện hiện chưa mở điểm danh.';
 
     case 'PUBLISHED':
-      return 'Check-in has not started yet.';
+      return 'Sự kiện chưa đến thời gian điểm danh.';
 
     case 'FINISHED':
-      return 'Check-in for this event has ended.';
+      return 'Sự kiện đã kết thúc thời gian điểm danh.';
 
     case 'CANCELLED':
-      return 'This event has been cancelled.';
+      return 'Sự kiện này đã bị hủy.';
 
     default:
-      return 'Check-in is currently unavailable.';
+      return 'Hiện chưa thể điểm danh cho sự kiện này.';
   }
 }
