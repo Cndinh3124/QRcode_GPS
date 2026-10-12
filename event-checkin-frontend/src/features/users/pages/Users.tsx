@@ -138,7 +138,7 @@ export default function Người dùng() {
             icon={<PlusOutlined />}
             onClick={handleCreate}
           >
-            Add User
+            Thêm người dùng
           </Button>
         </div>
 
