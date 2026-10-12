@@ -188,7 +188,7 @@ export default function Events() {
         <Alert
           type="error"
           showIcon
-          message="Cannot load events"
+          message="Không thể tải danh sách sự kiện"
           description="Không thể tải dữ liệu sự kiện. Vui lòng thử lại."
         />
       </Card>
