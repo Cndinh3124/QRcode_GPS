@@ -143,7 +143,7 @@ export default function Attendance() {
           marginBottom: 20,
         }}
       >
-        Attendance Management
+        Quản lý điểm danh
       </Title>
 
       {/* =====================================================
@@ -159,7 +159,7 @@ export default function Attendance() {
         {/* Search */}
 
         <Input.Search
-          placeholder="Search participant..."
+          placeholder="Tìm người tham gia..."
           allowClear
           style={{
             width: 250,
@@ -173,7 +173,7 @@ export default function Attendance() {
 
         <Select
           allowClear
-          placeholder="Event"
+          placeholder="Chọn sự kiện"
           style={{
             width: 220,
           }}
@@ -198,7 +198,7 @@ export default function Attendance() {
 
         <Select
           allowClear
-          placeholder="Status"
+          placeholder="Trạng thái"
           style={{
             width: 180,
           }}
@@ -234,7 +234,7 @@ export default function Attendance() {
 
       {attendance.isError ? (
         <Empty
-          description="Unable to load attendance data"
+          description="Không thể tải dữ liệu điểm danh."
         />
       ) : (
         <AttendanceTable
@@ -279,7 +279,7 @@ export default function Attendance() {
             <Typography.Text
               type="secondary"
             >
-              Total:{' '}
+              Tổng số:{' '}
               {
                 attendance.data
                   .total

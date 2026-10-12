@@ -60,11 +60,11 @@ export default function EventInfoCard({
         size="small"
         bordered
       >
-        <Descriptions.Item label="Location">
+        <Descriptions.Item label="Địa điểm">
           📍 {event.locationName}
         </Descriptions.Item>
 
-        <Descriptions.Item label="Start Time">
+        <Descriptions.Item label="Thời gian bắt đầu">
           {dayjs(
             event.startTime,
           ).format(
@@ -72,7 +72,7 @@ export default function EventInfoCard({
           )}
         </Descriptions.Item>
 
-        <Descriptions.Item label="End Time">
+        <Descriptions.Item label="Thời gian kết thúc">
           {dayjs(
             event.endTime,
           ).format(
@@ -80,11 +80,11 @@ export default function EventInfoCard({
           )}
         </Descriptions.Item>
 
-        <Descriptions.Item label="Check-in Radius">
+        <Descriptions.Item label="Bán kính điểm danh">
           {Number(event.radius).toFixed(0)} m
         </Descriptions.Item>
 
-        <Descriptions.Item label="Status">
+        <Descriptions.Item label="Trạng thái">
           <Tag
             color={
               STATUS_COLOR[event.status]

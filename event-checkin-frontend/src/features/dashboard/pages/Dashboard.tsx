@@ -69,8 +69,8 @@ export default function Dashboard() {
       <Alert
         type="error"
         showIcon
-        message="Unable to load dashboard"
-        description="Some dashboard data could not be loaded. Please try again."
+        message="Không thể tải bảng điều khiển"
+        description="Một số dữ liệu chưa tải được. Vui lòng thử lại."
       />
     );
   }
@@ -105,8 +105,7 @@ export default function Dashboard() {
             fontSize: 15,
           }}
         >
-          Overview of your event check-in
-          system.
+          Tổng quan hệ thống điểm danh sự kiện.
         </Text>
       </div>
 
@@ -121,7 +120,7 @@ export default function Dashboard() {
           xl={6}
         >
           <StatisticCard
-            title="Users"
+            title="Người dùng"
             value={
               data?.totalUsers ?? 0
             }
@@ -135,7 +134,7 @@ export default function Dashboard() {
           xl={6}
         >
           <StatisticCard
-            title="Events"
+            title="Sự kiện"
             value={
               data?.totalEvents ?? 0
             }
@@ -149,7 +148,7 @@ export default function Dashboard() {
           xl={6}
         >
           <StatisticCard
-            title="Attendance"
+            title="Lượt điểm danh"
             value={
               data?.totalAttendance ?? 0
             }
@@ -165,7 +164,7 @@ export default function Dashboard() {
           xl={6}
         >
           <StatisticCard
-            title="Today Check-in"
+            title="Điểm danh hôm nay"
             value={
               data?.todayAttendance ?? 0
             }
@@ -192,7 +191,7 @@ export default function Dashboard() {
           xl={6}
         >
           <StatisticCard
-            title="Present"
+            title="Có mặt"
             value={
               data?.presentCount ?? 0
             }
@@ -208,7 +207,7 @@ export default function Dashboard() {
           xl={6}
         >
           <StatisticCard
-            title="Late"
+            title="Đi muộn"
             value={
               data?.lateCount ?? 0
             }
@@ -222,7 +221,7 @@ export default function Dashboard() {
           xl={6}
         >
           <StatisticCard
-            title="Checking In"
+            title="Đang mở điểm danh"
             value={
               data?.checkingInEvents ?? 0
             }
@@ -238,7 +237,7 @@ export default function Dashboard() {
           xl={6}
         >
           <StatisticCard
-            title="Published"
+            title="Đã công bố"
             value={
               data?.publishedEvents ?? 0
             }
@@ -264,7 +263,7 @@ export default function Dashboard() {
           xl={12}
         >
           <Card
-            title="Check-in by Day"
+            title="Điểm danh theo ngày"
             styles={{
               body: {
                 padding: '20px 16px',
@@ -284,7 +283,7 @@ export default function Dashboard() {
           xl={12}
         >
           <Card
-            title="Check-in by Event"
+            title="Điểm danh theo sự kiện"
             styles={{
               body: {
                 padding: '20px 16px',
@@ -311,7 +310,7 @@ export default function Dashboard() {
       >
         <Col span={24}>
           <Card
-            title="Recent Attendance"
+            title="Điểm danh gần đây"
             styles={{
               body: {
                 padding: 0,

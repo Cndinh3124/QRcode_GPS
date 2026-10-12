@@ -17,8 +17,9 @@ export default function LoginForm() {
   return (
     <Card
       style={{
-        width: 420,
-        borderRadius: 12,
+        width: 'min(420px, calc(100vw - 32px))',
+        borderRadius: 20,
+        boxShadow: '0 18px 54px rgba(28, 78, 130, 0.12)',
       }}
     >
       <Title
@@ -33,16 +34,16 @@ export default function LoginForm() {
 
       <Form layout="vertical" onFinish={onFinish}>
         <Form.Item
-          label="Email"
+          label="Email quản trị"
           name="email"
           rules={[
             {
               required: true,
-              message: 'Please enter your email',
+              message: 'Vui lòng nhập email.',
             },
             {
               type: 'email',
-              message: 'Invalid email',
+              message: 'Email không hợp lệ.',
             },
           ]}
         >
@@ -54,12 +55,12 @@ export default function LoginForm() {
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label="Mật khẩu"
           name="password"
           rules={[
             {
               required: true,
-              message: 'Please enter your password',
+              message: 'Vui lòng nhập mật khẩu.',
             },
           ]}
         >

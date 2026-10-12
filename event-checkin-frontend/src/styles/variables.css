@@ -1,0 +1,24 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --color-primary: #1769d2;
+  --color-primary-hover: #1258b4;
+  --color-tech-cyan: #079ac7;
+  --color-ice-blue: #ddf6fc;
+  --color-page: #f4f8fc;
+  --color-surface: #ffffff;
+  --color-text: #24364b;
+  --color-text-muted: #71849a;
+  --color-border: #e1eaf3;
+  --color-success: #21865b;
+  --color-success-bg: #e0f5ea;
+  --color-warning-bg: #fff5df;
+  --color-error-bg: #ffeded;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-card: 0 10px 30px rgba(28, 78, 130, 0.08);
+  --shadow-card-hover: 0 14px 36px rgba(28, 78, 130, 0.13);
+}

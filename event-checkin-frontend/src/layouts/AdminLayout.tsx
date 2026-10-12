@@ -175,13 +175,13 @@ export default function AdminLayout() {
     {
       key: 'profile',
       icon: <UserOutlined />,
-      label: 'My Profile',
+      label: 'Hồ sơ của tôi',
     },
 
     {
       key: 'settings',
       icon: <SettingOutlined />,
-      label: 'Settings',
+      label: 'Cài đặt',
     },
 
     {
@@ -192,7 +192,7 @@ export default function AdminLayout() {
       key: 'logout',
       icon: <LogoutOutlined />,
       danger: true,
-      label: 'Logout',
+      label: 'Đăng xuất',
     },
   ];
 
@@ -231,7 +231,7 @@ export default function AdminLayout() {
     {
       key: 'dashboard',
       icon: <DashboardOutlined />,
-      label: 'Dashboard',
+      label: 'Tổng quan',
     },
 
     // -------------------------------------------------------
@@ -240,31 +240,31 @@ export default function AdminLayout() {
 
     {
       type: 'group',
-      label: 'Management',
+      label: 'Quản lý',
 
       children: [
         {
           key: 'users',
           icon: <UserOutlined />,
-          label: 'Users',
+          label: 'Người dùng',
         },
 
         {
           key: 'events',
           icon: <CalendarOutlined />,
-          label: 'Events',
+          label: 'Sự kiện',
         },
 
         {
           key: 'attendance',
           icon: <CheckCircleOutlined />,
-          label: 'Attendance',
+          label: 'Điểm danh',
         },
 
         {
           key: 'reports',
           icon: <FileTextOutlined />,
-          label: 'Reports',
+          label: 'Báo cáo',
         },
       ],
     },
@@ -275,7 +275,7 @@ export default function AdminLayout() {
 
     {
       type: 'group',
-      label: 'System',
+      label: 'Hệ thống',
 
       children: [
         {
@@ -295,7 +295,7 @@ export default function AdminLayout() {
     <Layout
       style={{
         minHeight: '100vh',
-        background: '#f5f7fa',
+        background: 'var(--color-page)',
       }}
     >
       {/* =====================================================
@@ -311,9 +311,8 @@ export default function AdminLayout() {
         onCollapse={setCollapsed}
         breakpoint="lg"
         style={{
-          background: '#ffffff',
-          borderRight:
-            '1px solid #e8eaed',
+          background: 'var(--color-surface)',
+          borderRight: '1px solid var(--color-border)',
         }}
       >
         {/* ===================================================
@@ -332,7 +331,7 @@ export default function AdminLayout() {
             alignItems: 'center',
 
             borderBottom:
-              '1px solid #f0f0f0',
+              '1px solid var(--color-border)',
           }}
         >
           {/* QR LOGO */}
@@ -348,7 +347,7 @@ export default function AdminLayout() {
 
               borderRadius: 8,
 
-              background: '#1677ff',
+              background: 'var(--color-primary)',
 
               color: '#ffffff',
 
@@ -387,7 +386,7 @@ export default function AdminLayout() {
                   color: '#8c8c8c',
                 }}
               >
-                Check-in Management
+                Quản lý điểm danh
               </div>
             </div>
           )}
@@ -426,7 +425,7 @@ export default function AdminLayout() {
       <Layout
         style={{
           minWidth: 0,
-          background: '#f5f7fa',
+          background: 'var(--color-page)',
         }}
       >
         {/* ===================================================
@@ -443,10 +442,10 @@ export default function AdminLayout() {
             alignItems: 'center',
             justifyContent: 'flex-end',
 
-            background: '#ffffff',
+            background: 'var(--color-surface)',
 
             borderBottom:
-              '1px solid #e8eaed',
+              '1px solid var(--color-border)',
 
             lineHeight: 'normal',
           }}
@@ -485,7 +484,7 @@ export default function AdminLayout() {
               }}
               onMouseEnter={(event) => {
                 event.currentTarget.style.background =
-                  '#f5f5f5';
+                  '#F0F7FF';
               }}
               onMouseLeave={(event) => {
                 event.currentTarget.style.background =
@@ -504,7 +503,7 @@ export default function AdminLayout() {
                   style={{
                     fontSize: 15,
                     fontWeight: 600,
-                    color: '#262626',
+                    color: 'var(--color-text)',
                   }}
                 >
                   Nguyen Cong Dinh
@@ -528,12 +527,12 @@ export default function AdminLayout() {
                   <UserOutlined />
                 }
                 style={{
-                  background: '#e6f4ff',
+                  background: '#DDF6FC',
 
-                  color: '#1677ff',
+                  color: 'var(--color-primary)',
 
                   border:
-                    '1px solid #bae0ff',
+                    '1px solid #B7EAF6',
                 }}
               />
             </div>
@@ -549,9 +548,9 @@ export default function AdminLayout() {
             minHeight:
               'calc(100vh - 72px)',
 
-            padding: 28,
+            padding: 'clamp(16px, 2.2vw, 28px)',
 
-            background: '#f5f7fa',
+            background: 'var(--color-page)',
           }}
         >
           <div

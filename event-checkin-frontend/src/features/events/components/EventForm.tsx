@@ -13,23 +13,23 @@ import {
   message,
 } from 'antd';
 
-import { useEvents } from '../hooks/useEvents';
+import { useSự kiện } from '../hooks/useSự kiện';
 
-import { useCurrentLocation } from '../../checkin/hooks/useCurrentLocation';
+import { useCurrentĐịa điểm } from '../../checkin/hooks/useCurrentĐịa điểm';
 
 import type {
-  CreateEventDto,
-  Event,
-  UpdateEventDto,
+  CreateSự kiệnDto,
+  Sự kiện,
+  UpdateSự kiệnDto,
 } from '../types/events.types';
 
-interface EventFormProps {
+interface Sự kiệnFormProps {
   mode: 'create' | 'edit';
-  event?: Event;
+  event?: Sự kiện;
   onSuccess: () => void;
 }
 
-interface EventFormValues {
+interface Sự kiệnFormValues {
   title: string;
   description?: string;
   locationName: string;
@@ -40,23 +40,23 @@ interface EventFormValues {
   endTime: Dayjs;
 }
 
-export default function EventForm({
+export default function Sự kiệnForm({
   mode,
   event,
   onSuccess,
-}: EventFormProps) {
+}: Sự kiệnFormProps) {
   const [form] =
-    Form.useForm<EventFormValues>();
+    Form.useForm<Sự kiệnFormValues>();
 
   const {
-    createEvent,
-    updateEvent,
-  } = useEvents();
+    createSự kiện,
+    updateSự kiện,
+  } = useSự kiện();
 
   const {
-    loading: loadingLocation,
-    getCurrentLocation,
-  } = useCurrentLocation();
+    loading: loadingĐịa điểm,
+    getCurrentĐịa điểm,
+  } = useCurrentĐịa điểm();
 
   useEffect(() => {
     if (mode === 'edit' && event) {
@@ -77,10 +77,10 @@ export default function EventForm({
     form.resetFields();
   }, [form, mode, event]);
 
-  async function handleGetLocation() {
+  async function handleGetĐịa điểm() {
     try {
       const position =
-        await getCurrentLocation();
+        await getCurrentĐịa điểm();
 
       form.setFieldsValue({
         latitude: Number(
@@ -92,16 +92,16 @@ export default function EventForm({
       });
 
       message.success(
-        'Current location loaded successfully.',
+        'Đã lấy vị trí hiện tại.',
       );
     } catch {
       // Error đã được xử lý bởi
-      // useCurrentLocation.
+      // useCurrentĐịa điểm.
     }
   }
 
   async function handleFinish(
-    values: EventFormValues,
+    values: Sự kiệnFormValues,
   ) {
     if (
       values.endTime.isBefore(
@@ -109,13 +109,13 @@ export default function EventForm({
       )
     ) {
       message.error(
-        'End time must be after start time.',
+        'Thời gian kết thúc phải sau thời gian bắt đầu.',
       );
 
       return;
     }
 
-    const payload: CreateEventDto = {
+    const payload: CreateSự kiệnDto = {
       title: values.title.trim(),
 
       description:
@@ -140,13 +140,13 @@ export default function EventForm({
 
     try {
       if (mode === 'create') {
-        await createEvent.mutateAsync(
+        await createSự kiện.mutateAsync(
           payload,
         );
       } else if (event) {
-        await updateEvent.mutateAsync({
+        await updateSự kiện.mutateAsync({
           id: event.id,
-          data: payload as UpdateEventDto,
+          data: payload as UpdateSự kiệnDto,
         });
       }
 
@@ -156,78 +156,78 @@ export default function EventForm({
     } catch {
       message.error(
         mode === 'create'
-          ? 'Unable to create event.'
-          : 'Unable to update event.',
+          ? 'Không thể tạo sự kiện.'
+          : 'Không thể cập nhật sự kiện.',
       );
     }
   }
 
   const submitting =
-    createEvent.isPending ||
-    updateEvent.isPending;
+    createSự kiện.isPending ||
+    updateSự kiện.isPending;
 
   return (
-    <Form<EventFormValues>
+    <Form<Sự kiệnFormValues>
       form={form}
       layout="vertical"
       onFinish={handleFinish}
       disabled={submitting}
     >
       <Form.Item
-        label="Title"
+        label="Tên sự kiện"
         name="title"
         rules={[
           {
             required: true,
             whitespace: true,
             message:
-              'Please enter title.',
+              'Vui lòng nhập tên sự kiện.',
           },
           {
             max: 255,
             message:
-              'Title cannot exceed 255 characters.',
+              'Tên sự kiện không được vượt quá 255 ký tự.',
           },
         ]}
       >
         <Input
-          placeholder="Enter event title"
+          placeholder="Nhập tên sự kiện"
           maxLength={255}
           showCount
         />
       </Form.Item>
 
       <Form.Item
-        label="Description"
+        label="Mô tả"
         name="description"
       >
         <Input.TextArea
           rows={3}
-          placeholder="Enter event description"
+          placeholder="Nhập mô tả sự kiện"
           maxLength={1000}
           showCount
         />
       </Form.Item>
 
       <Form.Item
-        label="Location"
+        label="Địa điểm"
         name="locationName"
         rules={[
           {
             required: true,
             whitespace: true,
             message:
-              'Please enter location.',
+              'Vui lòng nhập địa điểm.',
           },
           {
             max: 255,
             message:
-              'Location cannot exceed 255 characters.',
+              'Địa điểm không được vượt quá 255 ký tự.',
           },
         ]}
       >
         <Input
-          placeholder="Enter event location"
+          placeholder="Nhập địa điểm tổ chức"
           maxLength={255}
         />
       </Form.Item>
@@ -235,23 +235,23 @@ export default function EventForm({
       <Form.Item>
         <Space>
           <Button
-            onClick={handleGetLocation}
-            loading={loadingLocation}
+            onClick={handleGetĐịa điểm}
+            loading={loadingĐịa điểm}
             disabled={submitting}
           >
-            📍 Get Current Location
+            📍 Lấy vị trí hiện tại
           </Button>
         </Space>
       </Form.Item>
 
       <Form.Item
-        label="Latitude"
+        label="Vĩ độ"
         name="latitude"
         rules={[
           {
             required: true,
             message:
-              'Please get or enter latitude.',
+              'Vui lòng lấy hoặc nhập vĩ độ.',
           },
         ]}
       >
@@ -261,18 +261,18 @@ export default function EventForm({
           min={-90}
           max={90}
           readOnly
-          placeholder="Latitude"
+          placeholder="Vĩ độ"
         />
       </Form.Item>
 
       <Form.Item
-        label="Longitude"
+        label="Kinh độ"
         name="longitude"
         rules={[
           {
             required: true,
             message:
-              'Please get or enter longitude.',
+              'Vui lòng lấy hoặc nhập kinh độ.',
           },
         ]}
       >
@@ -282,12 +282,12 @@ export default function EventForm({
           min={-180}
           max={180}
           readOnly
-          placeholder="Longitude"
+          placeholder="Kinh độ"
         />
       </Form.Item>
 
       <Form.Item
-        label="Radius (m)"
+        label="Bán kính điểm danh (m)"
         name="radius"
         rules={[
           {
@@ -300,7 +300,7 @@ export default function EventForm({
             min: 1,
             max: 1000,
             message:
-              'Radius must be between 1 and 1000 meters.',
+              'Bán kính điểm danh must be between 1 and 1000 meters.',
           },
         ]}
       >
@@ -314,7 +314,7 @@ export default function EventForm({
       </Form.Item>
 
       <Form.Item
-        label="Start Time"
+        label="Thời gian bắt đầu"
         name="startTime"
         rules={[
           {
@@ -332,7 +332,7 @@ export default function EventForm({
       </Form.Item>
 
       <Form.Item
-        label="End Time"
+        label="Thời gian kết thúc"
         name="endTime"
         rules={[
           {
@@ -356,8 +356,8 @@ export default function EventForm({
         loading={submitting}
       >
         {mode === 'create'
-          ? 'Create Event'
-          : 'Update Event'}
+          ? 'Create Sự kiện'
+          : 'Update Sự kiện'}
       </Button>
     </Form>
   );

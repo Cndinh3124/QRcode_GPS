@@ -135,7 +135,7 @@ export default function Reports() {
       );
 
       message.success(
-        'Report exported successfully.',
+        'Đã xuất báo cáo thành công.',
       );
     } catch (error) {
       console.error(
@@ -144,7 +144,7 @@ export default function Reports() {
       );
 
       message.error(
-        'Unable to export report.',
+        'Không thể xuất báo cáo.',
       );
     } finally {
       setExporting(false);
@@ -178,8 +178,8 @@ export default function Reports() {
       <Alert
         type="error"
         showIcon
-        message="Unable to load reports"
-        description="Please check the backend Reports API."
+        message="Không thể tải báo cáo."
+        description="Vui lòng kiểm tra API báo cáo phía backend."
       />
     );
   }
@@ -201,7 +201,7 @@ export default function Reports() {
         </Title>
 
         <Text type="secondary">
-          Attendance and event statistics
+          Thống kê điểm danh và sự kiện
         </Text>
       </div>
 
@@ -212,7 +212,7 @@ export default function Reports() {
       )}
 
       <Card
-        title="Report Filters"
+        title="Bộ lọc báo cáo"
         style={{
           marginTop: 20,
         }}
@@ -230,7 +230,7 @@ export default function Reports() {
           <Space wrap>
             <Select
               allowClear
-              placeholder="Select Event"
+              placeholder="Chọn sự kiện"
               style={{
                 width: 280,
               }}

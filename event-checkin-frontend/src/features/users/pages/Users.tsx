@@ -9,7 +9,7 @@ import {
 
 import { PlusOutlined } from '@ant-design/icons';
 
-import { useUsers } from '../hooks/useUsers';
+import { useNgười dùng } from '../hooks/useNgười dùng';
 
 import UserModal from '../components/UserModal';
 import UserTable from '../components/UserTable';
@@ -22,17 +22,17 @@ import type {
 
 const { Title } = Typography;
 
-export default function Users() {
+export default function Người dùng() {
   const {
     users,
     createUser,
     updateUser,
     deleteUser,
-  } = useUsers();
+  } = useNgười dùng();
 
   /**
    * TODO:
-   * Thay bằng useRoles() khi hoàn thành module Roles.
+   * Thay bằng useVai tròs() khi hoàn thành module Vai tròs.
    */
   const roles = [
     {
@@ -130,7 +130,7 @@ export default function Users() {
               margin: 0,
             }}
           >
-            Users Management
+            Người dùng Quản lý
           </Title>
 
           <Button
@@ -138,7 +138,7 @@ export default function Users() {
             icon={<PlusOutlined />}
             onClick={handleCreate}
           >
-            Add User
+            Thêm người dùng
           </Button>
         </div>
 

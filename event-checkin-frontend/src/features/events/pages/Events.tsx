@@ -99,7 +99,7 @@ export default function Events() {
       await deleteEvent.mutateAsync(id);
 
       message.success(
-        'Event deleted successfully.',
+        'Đã xóa sự kiện.',
       );
     } catch (error) {
       const axiosError =
@@ -109,7 +109,7 @@ export default function Events() {
         axiosError.response?.data;
 
       let errorMessage =
-        'Unable to delete event.';
+        'Không thể xóa sự kiện.';
 
       if (
         Array.isArray(
@@ -188,8 +188,8 @@ export default function Events() {
         <Alert
           type="error"
           showIcon
-          message="Cannot load events"
-          description="Unable to load event data. Please try again."
+          message="Không thể tải danh sách sự kiện"
+          description="Không thể tải dữ liệu sự kiện. Vui lòng thử lại."
         />
       </Card>
     );
@@ -218,14 +218,13 @@ export default function Events() {
                 margin: 0,
               }}
             >
-              Events Management
+              Quản lý sự kiện
             </Title>
 
             <Typography.Text
               type="secondary"
             >
-              Manage events and check-in
-              activities.
+              Quản lý sự kiện và hoạt động điểm danh.
             </Typography.Text>
           </div>
 

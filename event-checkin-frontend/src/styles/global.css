@@ -1,0 +1,141 @@
+@import "./variables.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--color-page);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(7, 154, 199, 0.07), transparent 28rem),
+    var(--color-page);
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+.ant-select,
+.ant-typography {
+  font-family: inherit;
+}
+
+::selection {
+  color: #123b6a;
+  background: #c8effa;
+}
+
+a {
+  color: var(--color-primary);
+  transition: color 160ms ease;
+}
+
+.ant-card {
+  border-color: var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+.ant-card-head {
+  border-bottom-color: var(--color-border);
+}
+
+.ant-btn {
+  min-height: 40px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.ant-btn-primary {
+  box-shadow: 0 5px 14px rgba(23, 105, 210, 0.18);
+}
+
+.ant-btn-primary:not(:disabled):hover {
+  box-shadow: 0 8px 18px rgba(23, 105, 210, 0.24);
+  transform: translateY(-1px);
+}
+
+.ant-input,
+.ant-input-affix-wrapper,
+.ant-select-selector {
+  border-radius: 10px !important;
+}
+
+.ant-input,
+.ant-input-affix-wrapper {
+  min-height: 42px;
+}
+
+.ant-input-affix-wrapper .ant-input {
+  min-height: auto;
+}
+
+.ant-input:focus,
+.ant-input-focused,
+.ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper-focused {
+  box-shadow: 0 0 0 3px rgba(7, 154, 199, 0.12);
+}
+
+.ant-tag {
+  border-radius: 999px;
+}
+
+@keyframes soft-tech-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.soft-tech-enter {
+  animation: soft-tech-enter 360ms ease-out both;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ant-card-hoverable:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    background: var(--color-page);
+  }
+
+  .ant-card {
+    border-radius: 16px;
+  }
+
+  .ant-btn {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
