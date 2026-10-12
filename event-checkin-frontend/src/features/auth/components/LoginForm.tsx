@@ -3,22 +3,23 @@ import { LockOutlined, MailOutlined } from '@ant-design/icons';
 
 import { useAuth } from '../hooks/useAuth';
 
-import type { LoginRequest } from '../types/auth.types';
+import type { Đăng nhậpRequest } from '../types/auth.types';
 
 const { Title } = Typography;
 
-export default function LoginForm() {
+export default function Đăng nhậpForm() {
   const { login, isLoading } = useAuth();
 
-  const onFinish = (values: LoginRequest) => {
+  const onFinish = (values: Đăng nhậpRequest) => {
     login(values);
   };
 
   return (
     <Card
       style={{
-        width: 420,
-        borderRadius: 12,
+        width: 'min(420px, calc(100vw - 32px))',
+        borderRadius: 20,
+        boxShadow: '0 18px 54px rgba(28, 78, 130, 0.12)',
       }}
     >
       <Title
@@ -28,7 +29,7 @@ export default function LoginForm() {
           marginBottom: 32,
         }}
       >
-        QR Event Check-in
+        QR Sự kiện Check-in
       </Title>
 
       <Form layout="vertical" onFinish={onFinish}>
@@ -38,11 +39,11 @@ export default function LoginForm() {
           rules={[
             {
               required: true,
-              message: 'Please enter your email',
+              message: 'Vui lòng nhập email.',
             },
             {
               type: 'email',
-              message: 'Invalid email',
+              message: 'Email không hợp lệ.',
             },
           ]}
         >
@@ -54,16 +55,16 @@ export default function LoginForm() {
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label="Mật khẩu"
           name="password"
           rules={[
             {
               required: true,
-              message: 'Please enter your password',
+              message: 'Vui lòng nhập mật khẩu.',
             },
           ]}
         >
-          <Input.Password
+          <Input.Mật khẩu
             prefix={<LockOutlined />}
             placeholder="********"
             size="large"
@@ -77,7 +78,7 @@ export default function LoginForm() {
           size="large"
           loading={isLoading}
         >
-          Login
+          Đăng nhập
         </Button>
       </Form>
     </Card>
