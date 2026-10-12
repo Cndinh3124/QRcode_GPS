@@ -331,7 +331,7 @@ export default function AdminLayout() {
             alignItems: 'center',
 
             borderBottom:
-              '1px solid #f0f0f0',
+              '1px solid var(--color-border)',
           }}
         >
           {/* QR LOGO */}
@@ -445,7 +445,7 @@ export default function AdminLayout() {
             background: 'var(--color-surface)',
 
             borderBottom:
-              '1px solid #e8eaed',
+              '1px solid var(--color-border)',
 
             lineHeight: 'normal',
           }}
@@ -484,7 +484,7 @@ export default function AdminLayout() {
               }}
               onMouseEnter={(event) => {
                 event.currentTarget.style.background =
-                  '#f5f5f5';
+                  '#F0F7FF';
               }}
               onMouseLeave={(event) => {
                 event.currentTarget.style.background =
@@ -503,7 +503,7 @@ export default function AdminLayout() {
                   style={{
                     fontSize: 15,
                     fontWeight: 600,
-                    color: '#262626',
+                    color: 'var(--color-text)',
                   }}
                 >
                   Nguyen Cong Dinh
@@ -527,12 +527,12 @@ export default function AdminLayout() {
                   <UserOutlined />
                 }
                 style={{
-                  background: '#e6f4ff',
+                  background: '#DDF6FC',
 
-                  color: '#1677ff',
+                  color: 'var(--color-primary)',
 
                   border:
-                    '1px solid #bae0ff',
+                    '1px solid #B7EAF6',
                 }}
               />
             </div>
@@ -548,7 +548,7 @@ export default function AdminLayout() {
             minHeight:
               'calc(100vh - 72px)',
 
-            padding: 28,
+            padding: 'clamp(16px, 2.2vw, 28px)',
 
             background: 'var(--color-page)',
           }}
