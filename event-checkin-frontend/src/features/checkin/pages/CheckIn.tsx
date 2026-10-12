@@ -269,7 +269,7 @@ function CheckInSuccess({
           icon={
             <CheckCircleOutlined
               style={{
-                color: '#52c41a',
+                color: '#21865B',
               }}
             />
           }
@@ -379,8 +379,8 @@ function CheckInSuccess({
                   }
                 >
                   {isLate
-                    ? 'LATE'
-                    : 'PRESENT'}
+                    ? 'Đi muộn'
+                    : 'Có mặt'}
                 </Tag>
               </div>
             </div>
