@@ -1,0 +1,18 @@
+aws_region       = "ap-southeast-1"
+project_name     = "qr-event"
+environment      = "production"
+instance_type    = "t3.small"
+db_instance_class = "db.t3.micro"
+db_name          = "qr_event_checkin"
+
+# Điền cả hai giá trị để Terraform tạo DNS record và chứng chỉ ACM.
+# Domain phải thuộc public hosted zone trong Route 53.
+domain_name    = ""
+route53_zone_id = ""
+
+# Chi phí thấp hơn khi false; bật nếu cần standby ở Availability Zone khác.
+rds_multi_az = false
+
+# Giữ bảo vệ xóa và snapshot cuối cho môi trường có dữ liệu cần giữ.
+rds_deletion_protection = true
+rds_skip_final_snapshot = false
