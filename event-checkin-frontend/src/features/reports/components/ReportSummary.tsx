@@ -61,7 +61,7 @@ export default function ReportSummary({
       <Col xs={24} sm={12} lg={4}>
         <Card>
           <Statistic
-            title="Present"
+            title="Có mặt"
             value={
               data.attendanceByStatus
                 .present
@@ -76,7 +76,7 @@ export default function ReportSummary({
       <Col xs={24} sm={12} lg={4}>
         <Card>
           <Statistic
-            title="Late"
+            title="Đi muộn"
             value={
               data.attendanceByStatus
                 .late
@@ -91,7 +91,7 @@ export default function ReportSummary({
       <Col xs={24} sm={12} lg={4}>
         <Card>
           <Statistic
-            title="Rejected"
+            title="Bị từ chối"
             value={
               data.attendanceByStatus
                 .rejected
