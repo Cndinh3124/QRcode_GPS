@@ -203,13 +203,7 @@ export default function Events() {
     <>
       <Card>
         <div
-          style={{
-            display: 'flex',
-            justifyContent:
-              'space-between',
-            alignItems: 'center',
-            marginBottom: 20,
-          }}
+          className="page-heading"
         >
           <div>
             <Title
@@ -234,7 +228,7 @@ export default function Events() {
             onClick={handleCreate}
             disabled={!isAdmin}
           >
-            Add Event
+            Tạo sự kiện
           </Button>
         </div>
 
