@@ -221,8 +221,14 @@ export class EventsService {
 
   // Kiem tra thoi gian truoc khi luu su kien.
   private validateEventWindow(startTime: Date | string, endTime: Date | string) {
-    const start = new Date(startTime).getTime();
-    const end = new Date(endTime).getTime();
+    const start =
+      startTime instanceof Date
+        ? startTime.getTime()
+        : new Date(startTime).getTime();
+    const end =
+      endTime instanceof Date
+        ? endTime.getTime()
+        : new Date(endTime).getTime();
 
     if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) {
       throw new BadRequestException(
