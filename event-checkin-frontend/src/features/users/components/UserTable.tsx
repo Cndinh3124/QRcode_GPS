@@ -95,7 +95,7 @@ export default function UserTable({
             icon={<EditOutlined />}
             onClick={() => onEdit(record)}
           >
-            Edit
+            Sửa
           </Button>
 
           <Popconfirm
