@@ -58,9 +58,13 @@ Kiem tra:
     sudo docker compose -f docker-compose.aws.yml logs --tail=100
     curl http://127.0.0.1/healthz
 
-## Luu y truoc khi dung du lieu that
+## Migration va luu y truoc khi dung du lieu that
 
-TypeORM hien dang co synchronize: true, co the tu thay doi bang du lieu khi backend khoi dong. Khong dung voi du lieu that cho den khi da tao va chay migration, sau do chuyen sang synchronize: false. Gioi han CORS chi cho phep domain frontend va dung JWT secret manh.
+Backend da tat `synchronize` va tu chay migration khi khoi dong. Migration ban dau tao cac bang va cac role `ADMIN`, `ORGANIZER`, `PARTICIPANT` neu database chua co. Neu database cu da duoc tao bang `synchronize`, migration chi ghi nhan va khong sua lai cac bang dang ton tai. Hay sao luu database va doi chieu schema truoc khi nang cap moi truong co du lieu that.
+
+Sau khi chay ung dung lan dau, can tao tai khoan quan tri theo quy trinh cua du an; khong co tai khoan/mat khau mac dinh duoc seed san. Gioi han CORS chi cho phep domain frontend va dung JWT secret manh.
+
+Check-in sinh vien van la API cong khai theo lua chon cua chu du an. Gioi han request va GPS chi lam giam spam; client cong khai co the khai ma sinh vien va toa do gia, nen he thong chua the xac minh danh tinh hoac chong gia mao GPS. Can xac nhan danh tinh bang mot co che rieng truoc khi dung ket qua lam bang chung diem danh.
 
 RDS khong co dia chi cong khai. Security Group chi cho phep EC2 ket noi MySQL cong 3306. Ung dung hien chay tren mot EC2; neu may gap su co, website se dung.
 
