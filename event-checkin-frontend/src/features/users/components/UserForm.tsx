@@ -112,9 +112,13 @@ export default function UserForm({
             message:
               'Vui lòng nhập email hợp lệ.',
           },
+          {
+            max: 100,
+            message: 'Email khong duoc vuot qua 100 ky tu.',
+          },
         ]}
       >
-        <Input />
+        <Input maxLength={100} />
       </Form.Item>
 
       <Form.Item
