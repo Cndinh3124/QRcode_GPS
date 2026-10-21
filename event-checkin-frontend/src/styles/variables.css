@@ -7,6 +7,8 @@
   --color-tech-cyan: #079ac7;
   --color-ice-blue: #ddf6fc;
   --color-page: #f4f8fc;
+  --color-sidebar: #ffffff;
+  --color-primary-soft: #e7f0ff;
   --color-surface: #ffffff;
   --color-text: #24364b;
   --color-text-muted: #71849a;
@@ -21,4 +23,5 @@
   --radius-lg: 20px;
   --shadow-card: 0 10px 30px rgba(28, 78, 130, 0.08);
   --shadow-card-hover: 0 14px 36px rgba(28, 78, 130, 0.13);
+  --content-width: 1600px;
 }
