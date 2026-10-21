@@ -470,3 +470,64 @@ a {
 .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):focus {
   box-shadow: 0 0 0 3px rgba(159, 48, 56, 0.12) !important;
 }
+
+
+/* Sidebar sang mau sang de menu de doc hon. */
+.admin-desktop-sider,
+.admin-desktop-sider .ant-layout-sider-children,
+.admin-drawer .ant-drawer-content {
+  background: #ffffff !important;
+}
+
+.admin-desktop-sider .ant-menu,
+.admin-drawer .ant-menu {
+  color: #334155;
+  background: #ffffff !important;
+}
+
+.admin-desktop-sider .ant-menu-item-group-title,
+.admin-drawer .ant-menu-item-group-title {
+  color: #64748b !important;
+}
+
+.admin-desktop-sider .ant-menu-item,
+.admin-drawer .ant-menu-item {
+  color: #334155 !important;
+  border-radius: 10px;
+}
+
+.admin-desktop-sider .ant-menu-item-selected,
+.admin-drawer .ant-menu-item-selected {
+  color: #1558b0 !important;
+  background: #e8f0fe !important;
+  font-weight: 600;
+}
+
+.admin-desktop-sider .ant-menu-item:hover,
+.admin-drawer .ant-menu-item:hover {
+  color: #1558b0 !important;
+  background: #f1f6ff !important;
+}
+
+.admin-drawer .ant-drawer-header {
+  color: #1f2937;
+  background: #ffffff;
+  border-bottom-color: var(--color-border);
+}
+
+.admin-drawer .ant-drawer-title,
+.admin-drawer .ant-drawer-close {
+  color: #1f2937;
+}
+
+.ant-tag-red {
+  color: #8f1d24 !important;
+  background: #fef2f2 !important;
+  border-color: #e2a0a5 !important;
+}
+
+.ant-alert-error {
+  color: #8f1d24;
+  background: #fef2f2 !important;
+  border-color: #e2a0a5 !important;
+}
