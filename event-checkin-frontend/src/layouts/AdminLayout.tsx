@@ -29,6 +29,7 @@ import {
 } from 'react-router-dom';
 
 import { useAuth } from '../features/auth/hooks/useAuth';
+import { getUser } from '../features/auth/utils/auth.storage';
 
 import { ROUTES } from '../constants/routes';
 
@@ -46,6 +47,7 @@ export default function AdminLayout() {
   const location = useLocation();
 
   const { logout } = useAuth();
+  const user = getUser();
 
   const [collapsed, setCollapsed] =
     useState(false);
@@ -296,7 +298,7 @@ export default function AdminLayout() {
         {
           key: 'settings',
           icon: <SettingOutlined />,
-          label: 'Settings',
+          label: 'Cài đặt',
         },
       ],
     },
@@ -521,7 +523,7 @@ export default function AdminLayout() {
                     color: 'var(--color-text)',
                   }}
                 >
-                  Nguyen Cong Dinh
+                  {user?.fullName || 'Người dùng'}
                 </div>
 
                 <Text
@@ -530,7 +532,11 @@ export default function AdminLayout() {
                     fontSize: 13,
                   }}
                 >
-                  Administrator
+                  {user?.role === 'ADMIN'
+                    ? 'Quản trị viên'
+                    : user?.role === 'ORGANIZER'
+                      ? 'Ban tổ chức'
+                      : 'Người tham gia'}
                 </Text>
               </div>
 
