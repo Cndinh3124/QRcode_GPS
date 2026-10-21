@@ -115,7 +115,7 @@ export default function EventDetail({
         >
           <Card>
             <Statistic
-              title="Total Attendance"
+              title="Tổng lượt điểm danh"
               value={
                 totalAttendance
               }
@@ -282,7 +282,7 @@ export default function EventDetail({
         }}
       >
         <Statistic
-          title="Attendance Rate"
+          title="Tỷ lệ điểm danh"
           value={
             attendanceRate
           }
