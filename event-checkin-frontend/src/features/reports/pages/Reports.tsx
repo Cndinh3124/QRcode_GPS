@@ -118,7 +118,7 @@ export default function Reports() {
       link.href = url;
 
       link.download =
-        'attendance-report.xlsx';
+        'bao-cao-diem-danh.xlsx';
 
       document.body.appendChild(
         link,
@@ -139,7 +139,7 @@ export default function Reports() {
       );
     } catch (error) {
       console.error(
-        'Export report failed:',
+        'Xuất báo cáo thất bại:',
         error,
       );
 
