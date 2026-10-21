@@ -341,3 +341,86 @@ a {
     padding: 16px;
   }
 }
+
+
+/* Mau nen moi, giu nguyen xanh duong lam mau thuong hieu. */
+.admin-main-layout,
+.admin-main-layout > .ant-layout {
+  background: #f2f5f9 !important;
+}
+
+.admin-desktop-sider,
+.admin-desktop-sider .ant-layout-sider-children,
+.admin-drawer .ant-drawer-content {
+  background: #123b52 !important;
+}
+
+.admin-desktop-sider .ant-menu-dark,
+.admin-drawer .ant-menu-dark {
+  background: #123b52 !important;
+}
+
+.admin-desktop-sider .ant-menu-dark .ant-menu-item-group-title,
+.admin-drawer .ant-menu-dark .ant-menu-item-group-title {
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.admin-desktop-sider .ant-menu-dark .ant-menu-item,
+.admin-drawer .ant-menu-dark .ant-menu-item {
+  color: rgba(255, 255, 255, 0.78);
+  border-radius: 10px;
+}
+
+.admin-desktop-sider .ant-menu-dark .ant-menu-item-selected,
+.admin-drawer .ant-menu-dark .ant-menu-item-selected {
+  color: #fff !important;
+  background: var(--color-primary) !important;
+  font-weight: 600;
+}
+
+.admin-desktop-sider .ant-menu-dark .ant-menu-item:hover,
+.admin-drawer .ant-menu-dark .ant-menu-item:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.admin-drawer .ant-drawer-header {
+  color: #fff;
+  background: #123b52;
+  border-bottom-color: rgba(255,255,255,0.12);
+}
+
+.admin-drawer .ant-drawer-title,
+.admin-drawer .ant-drawer-close {
+  color: #fff;
+}
+
+.login-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 8px 0 30px;
+  text-align: center;
+}
+
+.login-brand-logo {
+  margin-bottom: 14px;
+}
+
+.login-brand-title.ant-typography {
+  margin: 0 0 4px !important;
+  color: var(--color-text);
+  font-size: 28px;
+}
+
+.login-brand-description {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.login-brand-caption {
+  margin-top: 20px;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 600;
+}
