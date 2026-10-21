@@ -1,5 +1,7 @@
 import { Button, Card, Form, Input, Typography } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
+import BrandLogo from '../../../components/brand/BrandLogo';
+import { BRAND } from '../../../constants/brand';
 
 import { useAuth } from '../hooks/useAuth';
 
@@ -22,15 +24,14 @@ export default function LoginForm() {
         boxShadow: '0 18px 54px rgba(28, 78, 130, 0.12)',
       }}
     >
-      <Title
-        level={3}
-        style={{
-          textAlign: 'center',
-          marginBottom: 32,
-        }}
-      >
-        QR Event Check-in
-      </Title>
+      <div className="login-brand">
+        <BrandLogo size={64} className="login-brand-logo" />
+        <Title level={2} className="login-brand-title">
+          {BRAND.name}
+        </Title>
+        <div className="login-brand-description">{BRAND.description}</div>
+        <div className="login-brand-caption">Đăng nhập để tiếp tục</div>
+      </div>
 
       <Form layout="vertical" onFinish={onFinish}>
         <Form.Item
