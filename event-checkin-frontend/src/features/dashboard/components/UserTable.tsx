@@ -62,7 +62,7 @@ export default function UserTable({
     },
 
     {
-      title: 'Status',
+      title: 'Trạng thái',
       dataIndex: 'status',
       render: (status: string) => (
         <Tag
@@ -78,7 +78,7 @@ export default function UserTable({
     },
 
     {
-      title: 'Action',
+      title: 'Thao tác',
       key: 'action',
       render: () => (
         <Space>
