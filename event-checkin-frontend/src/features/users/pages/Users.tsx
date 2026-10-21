@@ -9,7 +9,7 @@ import {
 
 import { PlusOutlined } from '@ant-design/icons';
 
-import { useNgười dùng } from '../hooks/useNgười dùng';
+import { useUsers } from '../hooks/useUsers';
 
 import UserModal from '../components/UserModal';
 import UserTable from '../components/UserTable';
@@ -22,17 +22,17 @@ import type {
 
 const { Title } = Typography;
 
-export default function Người dùng() {
+export default function Users() {
   const {
     users,
     createUser,
     updateUser,
     deleteUser,
-  } = useNgười dùng();
+  } = useUsers();
 
   /**
    * TODO:
-   * Thay bằng useVai tròs() khi hoàn thành module Vai tròs.
+   * Cac role duoc tao san trong migration database.
    */
   const roles = [
     {
@@ -42,7 +42,12 @@ export default function Người dùng() {
     },
     {
       id: 2,
-      name: 'USER',
+      name: 'ORGANIZER',
+      description: '',
+    },
+    {
+      id: 3,
+      name: 'PARTICIPANT',
       description: '',
     },
   ];
@@ -74,7 +79,7 @@ export default function Người dùng() {
     setOpen(true);
   }
 
-  function handleDelete(id: number) {
+  function handleDelete(id: string) {
     deleteUser.mutate(id);
   }
 
