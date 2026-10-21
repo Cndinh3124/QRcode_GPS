@@ -39,7 +39,11 @@ import { AiFraudModule } from './ai-fraud/ai-fraud.module';
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_DATABASE'),
         autoLoadEntities: true,
-        synchronize: true,
+        // Khong de ung dung tu sua schema khi khoi dong.
+        synchronize: false,
+        migrationsRun: true,
+        migrations: [__dirname + '/migrations/*{.ts,.js}'],
+        migrationsTableName: 'typeorm_migrations',
         logging: config.get<string>('NODE_ENV') !== 'production',
       }),
     }),
