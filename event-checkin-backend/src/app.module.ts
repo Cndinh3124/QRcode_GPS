@@ -25,7 +25,7 @@ import { AiFraudModule } from './ai-fraud/ai-fraud.module';
     ThrottlerModule.forRoot([
       {
         ttl: 60_000,
-        limit: 60,
+        limit: 120,
       },
     ]),
 
