@@ -27,7 +27,7 @@ import {
 
 const { Title, Text } = Typography;
 
-export default function Settings() {
+export default function Cài đặt() {
   const profileQuery = useProfile();
 
   const changePasswordMutation =
@@ -109,7 +109,7 @@ export default function Settings() {
             marginBottom: 4,
           }}
         >
-          Settings
+          Cài đặt
         </Title>
 
         <Text type="secondary">
