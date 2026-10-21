@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import {
   Avatar,
+  Button,
+  Drawer,
   Dropdown,
   Layout,
   Menu,
@@ -17,6 +19,7 @@ import {
   DashboardOutlined,
   FileTextOutlined,
   LogoutOutlined,
+  MenuOutlined,
   SettingOutlined,
   SafetyOutlined,
   UserOutlined,
@@ -50,6 +53,8 @@ export default function AdminLayout() {
   const user = getUser();
 
   const [collapsed, setCollapsed] =
+    useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] =
     useState(false);
 
   // =========================================================
@@ -144,6 +149,8 @@ export default function AdminLayout() {
   function handleMenuClick(
     key: string,
   ) {
+    // Dong menu sau khi chon muc tren dien thoai.
+    setMobileMenuOpen(false);
     switch (key) {
       case 'dashboard':
         navigate('/dashboard');
@@ -310,6 +317,7 @@ export default function AdminLayout() {
 
   return (
     <Layout
+      className="admin-main-layout"
       style={{
         minHeight: '100vh',
         background: 'var(--color-page)',
@@ -320,6 +328,7 @@ export default function AdminLayout() {
       ===================================================== */}
 
       <Sider
+        className="admin-desktop-sider"
         theme="light"
         width={248}
         collapsedWidth={72}
@@ -435,6 +444,25 @@ export default function AdminLayout() {
         />
       </Sider>
 
+      {/* Menu truot danh cho man hinh nho. */}
+      <Drawer
+        className="admin-drawer"
+        title="QR Event - Quản lý điểm danh"
+        placement="left"
+        width={280}
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        styles={{ body: { padding: 0 } }}
+      >
+        <Menu
+          mode="inline"
+          theme="light"
+          selectedKeys={[getSelectedMenuKey()]}
+          items={menuItems}
+          onClick={({ key }) => handleMenuClick(key)}
+        />
+      </Drawer>
+
       {/* =====================================================
           MAIN LAYOUT
       ===================================================== */}
@@ -450,6 +478,7 @@ export default function AdminLayout() {
         =================================================== */}
 
         <Header
+          className="admin-header"
           style={{
             height: 72,
 
@@ -457,7 +486,7 @@ export default function AdminLayout() {
 
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'flex-end',
+            justifyContent: 'space-between',
 
             background: 'var(--color-surface)',
 
@@ -467,6 +496,12 @@ export default function AdminLayout() {
             lineHeight: 'normal',
           }}
         >
+          <Button
+            className="admin-mobile-menu-button"
+            aria-label="Mở menu điều hướng"
+            icon={<MenuOutlined />}
+            onClick={() => setMobileMenuOpen(true)}
+          />
           <Dropdown
             trigger={['click']}
             placement="bottomRight"
@@ -483,6 +518,7 @@ export default function AdminLayout() {
             }}
           >
             <div
+              className="admin-user-trigger"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -517,6 +553,7 @@ export default function AdminLayout() {
                 }}
               >
                 <div
+                  className="admin-header-user-name"
                   style={{
                     fontSize: 15,
                     fontWeight: 600,
@@ -527,6 +564,7 @@ export default function AdminLayout() {
                 </div>
 
                 <Text
+                  className="admin-header-user-role"
                   type="secondary"
                   style={{
                     fontSize: 13,
@@ -565,6 +603,7 @@ export default function AdminLayout() {
         =================================================== */}
 
         <Content
+          className="admin-content"
           style={{
             minHeight:
               'calc(100vh - 72px)',
