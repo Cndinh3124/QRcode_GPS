@@ -280,7 +280,7 @@ export default function AttendanceTable({
             total,
             range,
           ) =>
-            `${range[0]}-${range[1]} of ${total} records`,
+            `${range[0]}-${range[1]} trên tổng số ${total} bản ghi`,
 
           onChange: (
             page,
@@ -299,7 +299,7 @@ export default function AttendanceTable({
       ===================================================== */}
 
       <Drawer
-        title="Attendance Detail"
+        title="Chi tiết điểm danh"
         placement="right"
         width={480}
         open={drawerOpen}
@@ -424,7 +424,7 @@ export default function AttendanceTable({
                 size="small"
               >
                 <Descriptions.Item
-                  label="Status"
+                  label="Trạng thái"
                 >
                   {selectedStatus && (
                     <Tag
@@ -440,7 +440,7 @@ export default function AttendanceTable({
                 </Descriptions.Item>
 
                 <Descriptions.Item
-                  label="Check-in Time"
+                  label="Thời gian điểm danh"
                 >
                   {formatDate(
                     selectedAttendance.checkInTime,
