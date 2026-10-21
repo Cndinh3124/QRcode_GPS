@@ -3,8 +3,8 @@ import { DownloadOutlined } from '@ant-design/icons';
 import { useParams } from 'react-router-dom';
 
 import {
-  useNgười tham gia,
-} from '../hooks/useNgười tham gia';
+  useParticipants,
+} from '../hooks/useParticipants';
 
 import {
   exportAttendance,
@@ -20,7 +20,7 @@ export default function ParticipantsPage() {
   const {
     data,
     isLoading,
-  } = useNgười tham gia(id ?? '');
+  } = useParticipants(id ?? '');
 
   const handleExport = async () => {
     if (!id) return;
