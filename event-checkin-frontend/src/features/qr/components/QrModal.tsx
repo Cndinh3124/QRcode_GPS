@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Empty,
   Image,
@@ -37,6 +38,7 @@ export default function QrModal({
     data,
     isLoading,
     isError,
+    refetch,
     regenerate,
     isRegenerating,
   } = useEventQr(eventId);
@@ -52,11 +54,11 @@ export default function QrModal({
       );
 
       message.success(
-        'Link copied successfully.',
+        'Đã sao chép đường dẫn check-in.',
       );
     } catch {
       message.error(
-        'Unable to copy link.',
+        'Không thể sao chép đường dẫn.',
       );
     }
   }
@@ -88,30 +90,35 @@ export default function QrModal({
     );
   }
 
-  function handleRegenerate() {
-    regenerate();
-  }
-
   function renderContent() {
     if (isLoading) {
       return (
         <div
-          style={{
-            minHeight: 300,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+          className="qr-modal-loading"
         >
           <Spin size="large" />
+          <Text type="secondary">
+            Đang tải mã QR...
+          </Text>
         </div>
       );
     }
 
     if (isError) {
       return (
-        <Empty
-          description="Unable to load event QR code."
+        <Alert
+          type="error"
+          showIcon
+          message="Không tải được mã QR"
+          description="Kiểm tra backend đang chạy và tài khoản của bạn còn đăng nhập, sau đó thử lại."
+          action={
+            <Button
+              size="small"
+              onClick={() => refetch()}
+            >
+              Thử lại
+            </Button>
+          }
         />
       );
     }
@@ -119,7 +126,7 @@ export default function QrModal({
     if (!data) {
       return (
         <Empty
-          description="QR code not found."
+          description="Sự kiện này chưa có dữ liệu mã QR."
         />
       );
     }
@@ -130,22 +137,18 @@ export default function QrModal({
           level={4}
           style={{
             textAlign: 'center',
-            marginBottom: 24,
+            marginBottom: 20,
           }}
         >
           {data.title}
         </Title>
 
         <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginBottom: 24,
-          }}
+          className="qr-modal-image"
         >
           <Image
             src={data.qrImage}
-            alt={`QR code for ${data.title}`}
+            alt={`Mã QR check-in cho ${data.title}`}
             width={250}
             preview
           />
@@ -158,7 +161,7 @@ export default function QrModal({
             marginBottom: 8,
           }}
         >
-          Check-in URL
+          Đường dẫn check-in
         </Text>
 
         <Input
@@ -168,11 +171,7 @@ export default function QrModal({
 
         <Space
           wrap
-          style={{
-            width: '100%',
-            justifyContent: 'center',
-            marginTop: 20,
-          }}
+          className="qr-modal-actions"
         >
           <Button
             icon={
@@ -182,7 +181,7 @@ export default function QrModal({
               handleCopyLink
             }
           >
-            Copy Link
+            Sao chép đường dẫn
           </Button>
 
           <Button
@@ -194,18 +193,16 @@ export default function QrModal({
               handleDownloadQr
             }
           >
-            Download QR
+            Tải mã QR
           </Button>
 
           <Popconfirm
-            title="Regenerate QR code?"
-            description={
-              'The current QR code will become invalid.'
-            }
-            okText="Regenerate"
-            cancelText="Cancel"
+            title="Tạo lại mã QR?"
+            description="Mã QR hiện tại sẽ không còn sử dụng được."
+            okText="Tạo lại"
+            cancelText="Hủy"
             onConfirm={
-              handleRegenerate
+              regenerate
             }
             okButtonProps={{
               loading:
@@ -221,7 +218,7 @@ export default function QrModal({
                 isRegenerating
               }
             >
-              Regenerate QR
+              Tạo lại mã QR
             </Button>
           </Popconfirm>
         </Space>
@@ -232,7 +229,7 @@ export default function QrModal({
   return (
     <Modal
       open={open}
-      title="Event QR Code"
+      title="Mã QR sự kiện"
       footer={null}
       centered
       width={520}
