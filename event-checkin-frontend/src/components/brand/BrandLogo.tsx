@@ -1,3 +1,5 @@
+import { BRAND } from '../../constants/brand';
+
 interface BrandLogoProps {
   size?: number;
   className?: string;
@@ -10,8 +12,8 @@ export default function BrandLogo({
   return (
     <img
       className={className}
-      src="/brand-logo.svg"
-      alt="QR Event"
+      src={BRAND.logoPath}
+      alt={`${BRAND.name} logo`}
       width={size}
       height={size}
       style={{
