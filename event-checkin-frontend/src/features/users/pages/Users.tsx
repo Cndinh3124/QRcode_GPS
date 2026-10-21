@@ -109,7 +109,7 @@ export default function Users() {
       console.error(error);
 
       message.error(
-        'Unable to save user.',
+        'Không thể lưu người dùng.',
       );
     }
   }
@@ -132,7 +132,7 @@ export default function Users() {
               margin: 0,
             }}
           >
-            Người dùng Quản lý
+            Quản lý người dùng
           </Title>
 
           <Button
