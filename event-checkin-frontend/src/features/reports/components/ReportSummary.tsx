@@ -30,7 +30,7 @@ export default function ReportSummary({
         <Card>
           <Statistic
             title="Người dùng"
-            value={data.totalNgười dùng}
+            value={data.totalUsers}
             prefix={<UserOutlined />}
           />
         </Card>
@@ -40,7 +40,7 @@ export default function ReportSummary({
         <Card>
           <Statistic
             title="Sự kiện"
-            value={data.totalSự kiện}
+            value={data.totalEvents}
             prefix={<CalendarOutlined />}
           />
         </Card>
