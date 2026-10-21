@@ -21,19 +21,19 @@ function getStatusConfig(status: string) {
     case 'PRESENT':
       return {
         color: 'success',
-        label: 'Present',
+        label: 'Có mặt',
       };
 
     case 'LATE':
       return {
         color: 'warning',
-        label: 'Late',
+        label: 'Đi muộn',
       };
 
     case 'REJECTED':
       return {
         color: 'error',
-        label: 'Rejected',
+        label: 'Bị từ chối',
       };
 
     default:
@@ -82,7 +82,7 @@ export default function RecentAttendanceTable({
     },
 
     {
-      title: 'Student Code',
+      title: 'Mã sinh viên',
       dataIndex: 'participantCode',
       key: 'participantCode',
       width: 130,
