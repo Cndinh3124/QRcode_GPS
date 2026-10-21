@@ -9,6 +9,7 @@ export default function Login() {
         justifyContent: 'center',
         alignItems: 'center',
         background: 'var(--color-page)',
+        padding: 16,
       }}
     >
       <LoginForm />
