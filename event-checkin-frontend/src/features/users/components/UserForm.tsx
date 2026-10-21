@@ -9,7 +9,7 @@ import {
 
 import type {
   CreateUserDto,
-  Vai trò,
+  Role,
   UpdateUserDto,
   User,
 } from '../types/user.types';
@@ -39,7 +39,7 @@ export default function UserForm({
         studentCode: user.studentCode,
         fullName: user.fullName,
         email: user.email,
-        roleId: user.role.id,
+        role: user.role.name,
       });
     } else {
       form.resetFields();
@@ -79,7 +79,7 @@ export default function UserForm({
               'Vui lòng nhập mã sinh viên.',
           },
           {
-            max: 20,
+            max: 50,
             message:
               'Mã sinh viên không được vượt quá 20 ký tự.',
           },
@@ -144,7 +144,7 @@ export default function UserForm({
 
       <Form.Item
         label="Vai trò"
-        name="roleId"
+        name="role"
         rules={[
           {
             required: true,
@@ -157,7 +157,7 @@ export default function UserForm({
           placeholder="Chọn vai trò"
           options={roles.map((role) => ({
             label: role.name,
-            value: role.id,
+            value: role.name,
           }))}
         />
       </Form.Item>
