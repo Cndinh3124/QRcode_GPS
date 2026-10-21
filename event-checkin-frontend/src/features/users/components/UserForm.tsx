@@ -134,7 +134,7 @@ export default function UserForm({
                   min: 6,
                   max: 255,
                   message:
-                    'Mật khẩu phải có ít nhất 6 ký tự.',
+                    'Mat khau phai tu 6 den 255 ky tu.',
                 },
               ]
             : []
