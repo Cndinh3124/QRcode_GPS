@@ -331,7 +331,7 @@ export default function AdminLayout() {
 
       <Sider
         className="admin-desktop-sider"
-        theme="dark"
+        theme="light"
         width={248}
         collapsedWidth={72}
         collapsible
@@ -377,7 +377,7 @@ export default function AdminLayout() {
                 style={{
                   fontSize: 17,
                   fontWeight: 700,
-                  color: '#ffffff',
+                  color: '#1f2937',
                 }}
               >
                 {BRAND.name}
@@ -387,7 +387,7 @@ export default function AdminLayout() {
                 style={{
                   marginTop: 3,
                   fontSize: 12,
-                  color: 'rgba(255,255,255,0.68)',
+                  color: '#526579',
                 }}
               >
                 {BRAND.description}
@@ -402,7 +402,7 @@ export default function AdminLayout() {
 
         <Menu
           mode="inline"
-          theme="dark"
+          theme="light"
           selectedKeys={[
             getSelectedMenuKey(),
           ]}
@@ -434,7 +434,7 @@ export default function AdminLayout() {
       >
         <Menu
           mode="inline"
-          theme="dark"
+          theme="light"
           selectedKeys={[getSelectedMenuKey()]}
           items={menuItems}
           onClick={({ key }) => handleMenuClick(key)}
