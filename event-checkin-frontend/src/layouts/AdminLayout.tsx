@@ -380,7 +380,7 @@ export default function AdminLayout() {
                   color: '#ffffff',
                 }}
               >
-                QR Event
+                {BRAND.name}
               </div>
 
               <div
@@ -390,7 +390,7 @@ export default function AdminLayout() {
                   color: 'rgba(255,255,255,0.68)',
                 }}
               >
-                Quản lý điểm danh
+                {BRAND.description}
               </div>
             </div>
           )}
