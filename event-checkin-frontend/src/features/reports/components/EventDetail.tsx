@@ -133,7 +133,7 @@ export default function EventDetail({
         >
           <Card>
             <Statistic
-              title="Present"
+              title="Có mặt"
               value={present}
               prefix={
                 <CheckCircleOutlined />
@@ -149,7 +149,7 @@ export default function EventDetail({
         >
           <Card>
             <Statistic
-              title="Late"
+              title="Đi muộn"
               value={
                 attendanceByStatus.late
               }
@@ -167,7 +167,7 @@ export default function EventDetail({
         >
           <Card>
             <Statistic
-              title="Rejected"
+              title="Bị từ chối"
               value={
                 attendanceByStatus.rejected
               }
