@@ -424,3 +424,49 @@ a {
   font-size: 16px;
   font-weight: 600;
 }
+
+
+/* Mau canh bao va thao tac nguy hiem diu mat nhung van ro chu. */
+:root {
+  --color-danger: #9f3038;
+  --color-danger-border: #d99a9f;
+  --color-danger-background: #fff1f2;
+}
+
+.ant-btn-dangerous:not(.ant-btn-primary) {
+  color: var(--color-danger) !important;
+  border-color: var(--color-danger-border) !important;
+}
+
+.ant-btn-primary.ant-btn-dangerous {
+  color: #fff !important;
+  background: var(--color-danger) !important;
+  border-color: var(--color-danger) !important;
+}
+
+.ant-tag-red {
+  color: #81262d !important;
+  background: #fdebed !important;
+  border-color: #edc3c6 !important;
+}
+
+.ant-alert-error {
+  color: #81262d;
+  background: #fff5f5 !important;
+  border-color: #edc3c6 !important;
+}
+
+.ant-form-item-explain-error,
+.ant-form-item-label > label.ant-form-item-required::before {
+  color: var(--color-danger) !important;
+}
+
+.ant-input-status-error:not(.ant-input-disabled),
+.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled) {
+  border-color: var(--color-danger-border) !important;
+}
+
+.ant-input-status-error:not(.ant-input-disabled):focus,
+.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):focus {
+  box-shadow: 0 0 0 3px rgba(159, 48, 56, 0.12) !important;
+}
