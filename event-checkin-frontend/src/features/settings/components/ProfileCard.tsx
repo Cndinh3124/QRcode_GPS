@@ -83,7 +83,7 @@ export default function ProfileCard({
           </Tag>
         </Descriptions.Item>
 
-        <Descriptions.Item label="Account Status">
+        <Descriptions.Item label="Trạng thái tài khoản">
           {profile.isActive ? (
             <Tag color="green">
               Active
