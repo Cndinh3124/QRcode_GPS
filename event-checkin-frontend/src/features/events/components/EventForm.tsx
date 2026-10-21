@@ -293,7 +293,7 @@ export default function EventForm({
           {
             required: true,
             message:
-              'Please enter check-in radius.',
+              'Vui lòng nhập bán kính điểm danh.',
           },
           {
             type: 'number',
@@ -320,7 +320,7 @@ export default function EventForm({
           {
             required: true,
             message:
-              'Please select start time.',
+              'Vui lòng chọn thời gian bắt đầu.',
           },
         ]}
       >
@@ -338,7 +338,7 @@ export default function EventForm({
           {
             required: true,
             message:
-              'Please select end time.',
+              'Vui lòng chọn thời gian kết thúc.',
           },
         ]}
       >
@@ -356,8 +356,8 @@ export default function EventForm({
         loading={submitting}
       >
         {mode === 'create'
-          ? 'Create Event'
-          : 'Update Event'}
+          ? 'Tạo sự kiện'
+          : 'Cập nhật sự kiện'}
       </Button>
     </Form>
   );
