@@ -27,7 +27,7 @@ import {
 
 const { Title, Text } = Typography;
 
-export default function Cài đặt() {
+export default function Settings() {
   const profileQuery = useProfile();
 
   const changePasswordMutation =
