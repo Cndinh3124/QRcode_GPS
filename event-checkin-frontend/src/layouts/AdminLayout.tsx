@@ -18,6 +18,7 @@ import {
   FileTextOutlined,
   LogoutOutlined,
   SettingOutlined,
+  SafetyOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 
@@ -112,6 +113,10 @@ export default function AdminLayout() {
       return 'reports';
     }
 
+    if (pathname === '/ai-fraud' || pathname.startsWith('/ai-fraud/')) {
+      return 'ai-fraud';
+    }
+
     // -------------------------------------------------------
     // SETTINGS
     // -------------------------------------------------------
@@ -156,6 +161,10 @@ export default function AdminLayout() {
 
       case 'reports':
         navigate('/reports');
+        break;
+
+      case 'ai-fraud':
+        navigate('/ai-fraud');
         break;
 
       case 'settings':
@@ -265,6 +274,12 @@ export default function AdminLayout() {
           key: 'reports',
           icon: <FileTextOutlined />,
           label: 'Báo cáo',
+        },
+
+        {
+          key: 'ai-fraud',
+          icon: <SafetyOutlined />,
+          label: 'AI điểm danh',
         },
       ],
     },

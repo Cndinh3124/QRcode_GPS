@@ -1,4 +1,16 @@
 services:
+  ai-fraud:
+    build:
+      context: ../ai-fraud-service
+    restart: unless-stopped
+    environment:
+      AI_SERVICE_TOKEN: ${AI_SERVICE_TOKEN:?Set AI_SERVICE_TOKEN in .env}
+      MODEL_PATH: /var/lib/ai-fraud/model.joblib
+    ports:
+      - "127.0.0.1:8001:8001"
+    volumes:
+      - ai_fraud_model:/var/lib/ai-fraud
+
   mysql:
     image: mysql:8.4
     container_name: event_checkin_mysql
@@ -27,3 +39,4 @@ services:
 
 volumes:
   mysql_data:
+  ai_fraud_model:
