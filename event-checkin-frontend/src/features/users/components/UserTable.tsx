@@ -18,7 +18,7 @@ interface UserTableProps {
   data: User[];
   loading: boolean;
   onEdit: (user: User) => void;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 }
 
 export default function UserTable({
@@ -29,20 +29,20 @@ export default function UserTable({
 }: UserTableProps) {
   const columns: ColumnsType<User> = [
     {
-      title: 'No.',
+      title: 'STT',
       key: 'index',
       width: 70,
       align: 'center',
       render: (_, __, index) => index + 1,
     },
     {
-      title: 'Student Code',
+      title: 'Mã sinh viên',
       dataIndex: 'studentCode',
       key: 'studentCode',
       width: 150,
     },
     {
-      title: 'Full Name',
+      title: 'Họ và tên',
       dataIndex: 'fullName',
       key: 'fullName',
       width: 220,
@@ -54,7 +54,7 @@ export default function UserTable({
       ellipsis: true,
     },
     {
-      title: 'Role',
+      title: 'Vai trò',
       key: 'role',
       width: 120,
       align: 'center',
@@ -65,7 +65,7 @@ export default function UserTable({
       ),
     },
     {
-      title: 'Status',
+      title: 'Trạng thái',
       key: 'status',
       width: 120,
       align: 'center',
@@ -78,13 +78,13 @@ export default function UserTable({
           }
         >
           {record.isActive
-            ? 'ACTIVE'
-            : 'INACTIVE'}
+            ? 'Đang hoạt động'
+            : 'Đã khóa'}
         </Tag>
       ),
     },
     {
-      title: 'Action',
+      title: 'Thao tác',
       key: 'action',
       width: 180,
       align: 'center',
@@ -99,10 +99,10 @@ export default function UserTable({
           </Button>
 
           <Popconfirm
-            title="Delete user"
-            description="Are you sure you want to delete this user?"
-            okText="Yes"
-            cancelText="No"
+            title="Xóa người dùng"
+            description="Bạn có chắc muốn xóa người dùng này không?"
+            okText="Đồng ý"
+            cancelText="Hủy"
             onConfirm={() =>
               onDelete(record.id)
             }
@@ -130,7 +130,7 @@ export default function UserTable({
         pageSize: 10,
         showSizeChanger: true,
         showTotal: (total) =>
-          `Total ${total} users`,
+          `Tổng cộng ${total} người dùng`,
       }}
     />
   );

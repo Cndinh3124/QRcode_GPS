@@ -38,7 +38,7 @@ export function useUsers() {
       id,
       data,
     }: {
-      id: number;
+      id: string;
       data: UpdateUserDto;
     }) => updateUser(id, data),
 

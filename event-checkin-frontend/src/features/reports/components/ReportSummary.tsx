@@ -29,8 +29,8 @@ export default function ReportSummary({
       <Col xs={24} sm={12} lg={4}>
         <Card>
           <Statistic
-            title="Users"
-            value={data.totalUsers}
+            title="Người dùng"
+            value={data.totalNgười dùng}
             prefix={<UserOutlined />}
           />
         </Card>
@@ -39,8 +39,8 @@ export default function ReportSummary({
       <Col xs={24} sm={12} lg={4}>
         <Card>
           <Statistic
-            title="Events"
-            value={data.totalEvents}
+            title="Sự kiện"
+            value={data.totalSự kiện}
             prefix={<CalendarOutlined />}
           />
         </Card>
@@ -49,7 +49,7 @@ export default function ReportSummary({
       <Col xs={24} sm={12} lg={4}>
         <Card>
           <Statistic
-            title="Total Check-ins"
+            title="Tổng lượt điểm danh"
             value={data.totalAttendance}
             prefix={
               <CheckCircleOutlined />

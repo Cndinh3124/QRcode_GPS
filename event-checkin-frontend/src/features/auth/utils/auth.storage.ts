@@ -26,7 +26,13 @@ export function getUser(): AuthUser | null {
     return null;
   }
 
-  return JSON.parse(storedUser) as AuthUser;
+  try {
+    return JSON.parse(storedUser) as AuthUser;
+  } catch {
+    // Xoa phien loi de ung dung khong bi crash khi tai trang.
+    clearAuth();
+    return null;
+  }
 }
 
 export function setUser(user: AuthUser): void {

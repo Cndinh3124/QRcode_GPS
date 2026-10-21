@@ -141,7 +141,7 @@ export default function RecentAttendanceTable({
     },
 
     {
-      title: 'Status',
+      title: 'Trạng thái',
       dataIndex: 'status',
       key: 'status',
       width: 110,
@@ -167,7 +167,7 @@ export default function RecentAttendanceTable({
     },
 
     {
-      title: 'Check-in Time',
+      title: 'Thời gian điểm danh',
       dataIndex: 'checkInTime',
       key: 'checkInTime',
       width: 190,
@@ -195,7 +195,7 @@ export default function RecentAttendanceTable({
       }}
       locale={{
         emptyText:
-          'No recent attendance records',
+          'Chưa có lượt điểm danh gần đây',
       }}
       rowClassName={() =>
         'recent-attendance-row'

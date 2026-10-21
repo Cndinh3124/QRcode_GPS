@@ -13,23 +13,23 @@ import {
   message,
 } from 'antd';
 
-import { useSự kiện } from '../hooks/useSự kiện';
+import { useEvents } from '../hooks/useEvents';
 
-import { useCurrentĐịa điểm } from '../../checkin/hooks/useCurrentĐịa điểm';
+import { useCurrentLocation } from '../../checkin/hooks/useCurrentLocation';
 
 import type {
-  CreateSự kiệnDto,
-  Sự kiện,
-  UpdateSự kiệnDto,
+  CreateEventDto,
+  Event,
+  UpdateEventDto,
 } from '../types/events.types';
 
-interface Sự kiệnFormProps {
+interface EventFormProps {
   mode: 'create' | 'edit';
-  event?: Sự kiện;
+  event?: Event;
   onSuccess: () => void;
 }
 
-interface Sự kiệnFormValues {
+interface EventFormValues {
   title: string;
   description?: string;
   locationName: string;
@@ -40,23 +40,23 @@ interface Sự kiệnFormValues {
   endTime: Dayjs;
 }
 
-export default function Sự kiệnForm({
+export default function EventForm({
   mode,
   event,
   onSuccess,
-}: Sự kiệnFormProps) {
+}: EventFormProps) {
   const [form] =
-    Form.useForm<Sự kiệnFormValues>();
+    Form.useForm<EventFormValues>();
 
   const {
-    createSự kiện,
-    updateSự kiện,
-  } = useSự kiện();
+    createEvent,
+    updateEvent,
+  } = useEvents();
 
   const {
-    loading: loadingĐịa điểm,
-    getCurrentĐịa điểm,
-  } = useCurrentĐịa điểm();
+    loading: loadingLocation,
+    getCurrentLocation,
+  } = useCurrentLocation();
 
   useEffect(() => {
     if (mode === 'edit' && event) {
@@ -77,10 +77,10 @@ export default function Sự kiệnForm({
     form.resetFields();
   }, [form, mode, event]);
 
-  async function handleGetĐịa điểm() {
+  async function handleGetLocation() {
     try {
       const position =
-        await getCurrentĐịa điểm();
+        await getCurrentLocation();
 
       form.setFieldsValue({
         latitude: Number(
@@ -96,12 +96,12 @@ export default function Sự kiệnForm({
       );
     } catch {
       // Error đã được xử lý bởi
-      // useCurrentĐịa điểm.
+      // useCurrentLocation.
     }
   }
 
   async function handleFinish(
-    values: Sự kiệnFormValues,
+    values: EventFormValues,
   ) {
     if (
       values.endTime.isBefore(
@@ -115,7 +115,7 @@ export default function Sự kiệnForm({
       return;
     }
 
-    const payload: CreateSự kiệnDto = {
+    const payload: CreateEventDto = {
       title: values.title.trim(),
 
       description:
@@ -140,13 +140,13 @@ export default function Sự kiệnForm({
 
     try {
       if (mode === 'create') {
-        await createSự kiện.mutateAsync(
+        await createEvent.mutateAsync(
           payload,
         );
       } else if (event) {
-        await updateSự kiện.mutateAsync({
+        await updateEvent.mutateAsync({
           id: event.id,
-          data: payload as UpdateSự kiệnDto,
+          data: payload as UpdateEventDto,
         });
       }
 
@@ -163,11 +163,11 @@ export default function Sự kiệnForm({
   }
 
   const submitting =
-    createSự kiện.isPending ||
-    updateSự kiện.isPending;
+    createEvent.isPending ||
+    updateEvent.isPending;
 
   return (
-    <Form<Sự kiệnFormValues>
+    <Form<EventFormValues>
       form={form}
       layout="vertical"
       onFinish={handleFinish}
@@ -184,15 +184,15 @@ export default function Sự kiệnForm({
               'Vui lòng nhập tên sự kiện.',
           },
           {
-            max: 255,
+            max: 200,
             message:
-              'Tên sự kiện không được vượt quá 255 ký tự.',
+              'Ten su kien khong duoc vuot qua 200 ky tu.',
           },
         ]}
       >
         <Input
           placeholder="Nhập tên sự kiện"
-          maxLength={255}
+          maxLength={200}
           showCount
         />
       </Form.Item>
@@ -235,8 +235,8 @@ export default function Sự kiệnForm({
       <Form.Item>
         <Space>
           <Button
-            onClick={handleGetĐịa điểm}
-            loading={loadingĐịa điểm}
+            onClick={handleGetLocation}
+            loading={loadingLocation}
             disabled={submitting}
           >
             📍 Lấy vị trí hiện tại
@@ -293,23 +293,23 @@ export default function Sự kiệnForm({
           {
             required: true,
             message:
-              'Please enter check-in radius.',
+              'Vui lòng nhập bán kính điểm danh.',
           },
           {
             type: 'number',
             min: 1,
-            max: 1000,
+            max: 100000,
             message:
-              'Bán kính điểm danh must be between 1 and 1000 meters.',
+              'Ban kinh diem danh phai tu 1 den 100000 met.',
           },
         ]}
       >
         <InputNumber
           style={{ width: '100%' }}
           min={1}
-          max={1000}
+          max={100000}
           precision={0}
-          placeholder="Enter radius"
+          placeholder="Nhập bán kính điểm danh (m)"
         />
       </Form.Item>
 
@@ -320,7 +320,7 @@ export default function Sự kiệnForm({
           {
             required: true,
             message:
-              'Please select start time.',
+              'Vui lòng chọn thời gian bắt đầu.',
           },
         ]}
       >
@@ -338,7 +338,7 @@ export default function Sự kiệnForm({
           {
             required: true,
             message:
-              'Please select end time.',
+              'Vui lòng chọn thời gian kết thúc.',
           },
         ]}
       >
@@ -356,8 +356,8 @@ export default function Sự kiệnForm({
         loading={submitting}
       >
         {mode === 'create'
-          ? 'Create Sự kiện'
-          : 'Update Sự kiện'}
+          ? 'Tạo sự kiện'
+          : 'Cập nhật sự kiện'}
       </Button>
     </Form>
   );

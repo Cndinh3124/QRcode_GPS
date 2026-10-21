@@ -30,7 +30,7 @@ export default function AttendanceByEvent({
     },
 
     {
-      title: 'Start Time',
+      title: 'Thời gian bắt đầu',
       dataIndex: 'startTime',
       key: 'startTime',
       width: 170,
@@ -41,7 +41,7 @@ export default function AttendanceByEvent({
     },
 
     {
-      title: 'Total',
+      title: 'Tổng lượt',
       dataIndex: 'totalAttendance',
       key: 'totalAttendance',
       width: 90,
@@ -88,7 +88,7 @@ export default function AttendanceByEvent({
     },
 
     {
-      title: 'Attendance Rate',
+      title: 'Tỷ lệ điểm danh',
       dataIndex: 'attendanceRate',
       key: 'attendanceRate',
       width: 150,
@@ -111,7 +111,7 @@ export default function AttendanceByEvent({
 
   return (
     <Card
-      title="Attendance by Event"
+      title="Điểm danh theo sự kiện"
       style={{
         marginTop: 20,
       }}
@@ -133,7 +133,7 @@ export default function AttendanceByEvent({
             '50',
           ],
           showTotal: (total) =>
-            `Total: ${total} events`,
+            `Tổng cộng ${total} sự kiện`,
         }}
       />
     </Card>

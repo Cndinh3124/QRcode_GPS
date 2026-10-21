@@ -62,7 +62,7 @@ export default function ParticipantsTable({
     },
 
     {
-      title: 'Check-in Time',
+      title: 'Thời gian điểm danh',
       dataIndex: 'checkInTime',
       key: 'checkInTime',
       width: 180,
@@ -81,7 +81,7 @@ export default function ParticipantsTable({
     },
 
     {
-      title: 'Status',
+      title: 'Trạng thái',
       dataIndex: 'status',
       key: 'status',
       width: 120,
@@ -117,7 +117,7 @@ export default function ParticipantsTable({
           '50',
         ],
         showTotal: (total) =>
-          `Total: ${total} participants`,
+          `Tổng cộng ${total} người tham gia`,
       }}
     />
   );

@@ -22,8 +22,8 @@ export default function EventModal({
       open={open}
       title={
         mode === 'create'
-          ? 'Create Event'
-          : 'Update Event'
+          ? 'Tạo sự kiện'
+          : 'Cập nhật sự kiện'
       }
       footer={null}
       onCancel={onClose}

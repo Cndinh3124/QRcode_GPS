@@ -21,7 +21,7 @@ export default function AttendanceByDay({
   if (loading) {
     return (
       <Card
-        title="Attendance by Day"
+        title="Điểm danh theo ngày"
         style={{
           marginTop: 20,
         }}
@@ -33,12 +33,12 @@ export default function AttendanceByDay({
   if (!data.length) {
     return (
       <Card
-        title="Attendance by Day"
+        title="Điểm danh theo ngày"
         style={{
           marginTop: 20,
         }}
       >
-        <Empty description="No attendance data" />
+        <Empty description="Chưa có dữ liệu điểm danh" />
       </Card>
     );
   }
@@ -52,7 +52,7 @@ export default function AttendanceByDay({
 
   return (
     <Card
-      title="Attendance by Day"
+      title="Điểm danh theo ngày"
       style={{
         marginTop: 20,
       }}
@@ -96,7 +96,7 @@ export default function AttendanceByDay({
               </div>
 
               <div
-                title={`${item.totalAttendance} check-ins`}
+                title={`${item.totalAttendance} lượt điểm danh`}
                 style={{
                   width: 42,
                   height: Math.max(

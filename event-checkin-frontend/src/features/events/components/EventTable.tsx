@@ -47,7 +47,7 @@ export default function EventTable({
 
   const columns: ColumnsType<Event> = [
     {
-      title: 'No.',
+      title: 'STT',
       key: 'index',
       width: 70,
       align: 'center',
@@ -55,7 +55,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Title',
+      title: 'Tên sự kiện',
       key: 'title',
       dataIndex: 'title',
       width: 220,
@@ -63,7 +63,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Location',
+      title: 'Địa điểm',
       key: 'locationName',
       dataIndex: 'locationName',
       width: 220,
@@ -71,7 +71,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Start Time',
+      title: 'Bắt đầu',
       key: 'startTime',
       dataIndex: 'startTime',
       width: 170,
@@ -82,7 +82,7 @@ export default function EventTable({
     },
 
     {
-      title: 'End Time',
+      title: 'Kết thúc',
       key: 'endTime',
       dataIndex: 'endTime',
       width: 170,
@@ -93,7 +93,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Status',
+      title: 'Trạng thái',
       key: 'status',
       width: 140,
       align: 'center',
@@ -109,9 +109,10 @@ export default function EventTable({
     },
 
     {
-      title: 'Actions',
+      title: 'Thao tác',
       key: 'actions',
       width: 300,
+      fixed: 'right',
       align: 'center',
       render: (_, record) => (
         <Space>
@@ -134,7 +135,7 @@ export default function EventTable({
               )
             }
           >
-            Participants
+            Người tham gia
           </Button>
 
           <Button
@@ -145,14 +146,14 @@ export default function EventTable({
               onEdit(record)
             }
           >
-            Edit
+            Sửa
           </Button>
 
           <Popconfirm
-            title="Delete Event"
-            description="Are you sure you want to delete this event?"
-            okText="Delete"
-            cancelText="Cancel"
+            title="Xóa sự kiện"
+            description="Bạn có chắc muốn xóa sự kiện này không?"
+            okText="Xóa"
+            cancelText="Hủy"
             disabled={!isAdmin}
             onConfirm={() =>
               onDelete(record.id)
@@ -164,7 +165,7 @@ export default function EventTable({
               icon={<DeleteOutlined />}
               disabled={!isAdmin}
             >
-              Delete
+              Xoa
             </Button>
           </Popconfirm>
         </Space>
@@ -188,7 +189,7 @@ export default function EventTable({
           '50',
         ],
         showTotal: (total) =>
-          `Total ${total} events`,
+          `Tổng cộng ${total} su kien`,
       }}
     />
   );

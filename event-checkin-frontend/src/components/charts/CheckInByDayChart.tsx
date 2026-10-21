@@ -105,7 +105,7 @@ export default function CheckInByDayChart({
         <Tooltip
           formatter={(value) => [
             Number(value),
-            'Check-ins',
+            'Lượt điểm danh',
           ]}
           labelFormatter={(label) =>
             `Date: ${label}`
@@ -115,7 +115,7 @@ export default function CheckInByDayChart({
         <Line
           type="monotone"
           dataKey="total"
-          name="Check-ins"
+          name="Lượt điểm danh"
           stroke="#1677ff"
           strokeWidth={3}
           dot={{

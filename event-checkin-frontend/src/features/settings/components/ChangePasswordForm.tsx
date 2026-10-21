@@ -72,53 +72,53 @@ export default function ChangePasswordForm({
         disabled={loading}
         autoComplete="off"
       >
-        {/* Current Password */}
+        {/* Mật khẩu hiện tại */}
 
         <Form.Item
-          label="Current Password"
+          label="Mật khẩu hiện tại"
           name="currentPassword"
           rules={[
             {
               required: true,
               message:
-                'Please enter your current password.',
+                'Vui lòng nhập mật khẩu hiện tại.',
             },
           ]}
         >
           <Input.Password
             prefix={<LockOutlined />}
-            placeholder="Enter current password"
+            placeholder="Nhập mật khẩu hiện tại"
             autoComplete="current-password"
           />
         </Form.Item>
 
-        {/* New Password */}
+        {/* Mật khẩu mới */}
 
         <Form.Item
-          label="New Password"
+          label="Mật khẩu mới"
           name="newPassword"
           rules={[
             {
               required: true,
               message:
-                'Please enter your new password.',
+                'Vui lòng nhập mật khẩu mới.',
             },
             {
               min: 6,
               message:
-                'Password must be at least 6 characters.',
+                'Mật khẩu phải có ít nhất 6 ký tự.',
             },
             {
               max: 100,
               message:
-                'Password cannot exceed 100 characters.',
+                'Mật khẩu không được vượt quá 100 ký tự.',
             },
           ]}
           hasFeedback
         >
           <Input.Password
             prefix={<LockOutlined />}
-            placeholder="Enter new password"
+            placeholder="Nhập mật khẩu mới"
             autoComplete="new-password"
           />
         </Form.Item>
@@ -126,7 +126,7 @@ export default function ChangePasswordForm({
         {/* Confirm Password */}
 
         <Form.Item
-          label="Confirm New Password"
+          label="Confirm Mật khẩu mới"
           name="confirmPassword"
           dependencies={['newPassword']}
           hasFeedback
@@ -134,7 +134,7 @@ export default function ChangePasswordForm({
             {
               required: true,
               message:
-                'Please confirm your new password.',
+                'Vui lòng xác nhận mật khẩu mới.',
             },
             ({ getFieldValue }) => ({
               validator(_, value) {
@@ -149,7 +149,7 @@ export default function ChangePasswordForm({
 
                 return Promise.reject(
                   new Error(
-                    'The two passwords do not match.',
+                    'Hai mật khẩu không khớp.',
                   ),
                 );
               },
@@ -158,7 +158,7 @@ export default function ChangePasswordForm({
         >
           <Input.Password
             prefix={<LockOutlined />}
-            placeholder="Confirm new password"
+            placeholder="Xác nhận mật khẩu mới"
             autoComplete="new-password"
           />
         </Form.Item>

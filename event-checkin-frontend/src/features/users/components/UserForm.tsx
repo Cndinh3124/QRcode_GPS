@@ -9,7 +9,7 @@ import {
 
 import type {
   CreateUserDto,
-  Vai trò,
+  Role,
   UpdateUserDto,
   User,
 } from '../types/user.types';
@@ -17,7 +17,7 @@ import type {
 interface UserFormProps {
   mode: 'create' | 'edit';
   user?: User;
-  roles: Vai trò[];
+  roles: Role[];
   loading: boolean;
   onSubmit: (
     values: CreateUserDto | UpdateUserDto,
@@ -39,7 +39,7 @@ export default function UserForm({
         studentCode: user.studentCode,
         fullName: user.fullName,
         email: user.email,
-        roleId: user.role.id,
+        role: user.role.name,
       });
     } else {
       form.resetFields();
@@ -59,8 +59,6 @@ export default function UserForm({
     }
 
     await onSubmit(payload);
-
-    form.resetFields();
   };
 
   return (
@@ -79,13 +77,13 @@ export default function UserForm({
               'Vui lòng nhập mã sinh viên.',
           },
           {
-            max: 20,
+            max: 50,
             message:
-              'Mã sinh viên không được vượt quá 20 ký tự.',
+              'Ma sinh vien khong duoc vuot qua 50 ky tu.',
           },
         ]}
       >
-        <Input />
+        <Input maxLength={50} />
       </Form.Item>
 
       <Form.Item
@@ -97,9 +95,13 @@ export default function UserForm({
             message:
               'Vui lòng nhập họ và tên.',
           },
+          {
+            max: 100,
+            message: 'Ho va ten khong duoc vuot qua 100 ky tu.',
+          },
         ]}
       >
-        <Input />
+        <Input maxLength={100} />
       </Form.Item>
 
       <Form.Item
@@ -112,13 +114,17 @@ export default function UserForm({
             message:
               'Vui lòng nhập email hợp lệ.',
           },
+          {
+            max: 100,
+            message: 'Email không được vượt quá 100 ký tự.',
+          },
         ]}
       >
-        <Input />
+        <Input maxLength={100} />
       </Form.Item>
 
       <Form.Item
-        label="Password"
+        label="Mật khẩu"
         name="password"
         rules={
           mode === 'create'
@@ -126,8 +132,9 @@ export default function UserForm({
                 {
                   required: true,
                   min: 6,
+                  max: 255,
                   message:
-                    'Mật khẩu phải có ít nhất 6 ký tự.',
+                    'Mat khau phai tu 6 den 255 ky tu.',
                 },
               ]
             : []
@@ -144,7 +151,7 @@ export default function UserForm({
 
       <Form.Item
         label="Vai trò"
-        name="roleId"
+        name="role"
         rules={[
           {
             required: true,
@@ -157,7 +164,7 @@ export default function UserForm({
           placeholder="Chọn vai trò"
           options={roles.map((role) => ({
             label: role.name,
-            value: role.id,
+            value: role.name,
           }))}
         />
       </Form.Item>

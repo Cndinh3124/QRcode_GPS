@@ -1,7 +1,6 @@
 import {
   createContext,
   useContext,
-  useEffect,
   useState,
 } from 'react';
 
@@ -13,7 +12,7 @@ import type {
 
 import type { AuthUser } from '../types/auth.types';
 
-import { getUser } from '../utils/auth.storage';
+import { getAccessToken, getUser } from '../utils/auth.storage';
 
 interface AuthContextValue {
   user: AuthUser | null;
@@ -33,16 +32,10 @@ const AuthContext = createContext<
 export function AuthProvider({
   children,
 }: AuthProviderProps) {
-  const [user, setUser] =
-    useState<AuthUser | null>(null);
-
-  useEffect(() => {
-    const storedUser = getUser();
-
-    if (storedUser) {
-      setUser(storedUser);
-    }
-  }, []);
+  // Nap phien truoc lan render dau de route bao ve khong redirect nham.
+  const [user, setUser] = useState<AuthUser | null>(() =>
+    getAccessToken() ? getUser() : null,
+  );
 
   return (
     <AuthContext.Provider

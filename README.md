@@ -81,7 +81,7 @@ docker compose up -d --build ai-fraud
 
 Sau khi có ít nhất 30 lượt điểm danh `PRESENT` hoặc `LATE`, đăng nhập bằng ADMIN, mở **AI điểm danh**, rồi chọn **Huấn luyện baseline**. Baseline lấy tối đa 2.000 lượt gần nhất. Màn hình gọi score “mức bất thường tương đối”, không phải xác suất gian lận. Dữ liệu GPS/device hiện do client gửi nên có thể bị giả mạo; dùng kết quả để ưu tiên xem xét thủ công, không coi là bằng chứng.
 
-Các entity mới được TypeORM tự tạo trong cấu hình hiện tại (`synchronize: true`). Trước khi tắt `synchronize` ở production, cần sinh và áp dụng migration cho `attendance_risk_assessments` và `attendance_risk_reviews`; không bật synchronize trên database production.
+Backend hien tat `synchronize` va tu chay migration `InitialSchema1761010000000` khi khoi dong. Migration tao schema ban dau va cac role cho database moi. Voi database da co bang tu truoc, migration khong tu dong sua schema cu; hay sao luu va doi chieu schema truoc khi deploy. Khong bat `synchronize` tren database production.
 
 ---
 

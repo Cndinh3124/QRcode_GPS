@@ -211,7 +211,7 @@ export default function Attendance() {
           }
         />
 
-        {/* Refresh */}
+        {/* Làm mới */}
 
         <Button
           icon={
@@ -224,7 +224,7 @@ export default function Attendance() {
             attendance.isFetching
           }
         >
-          Refresh
+          Làm mới
         </Button>
       </Space>
 
@@ -284,7 +284,7 @@ export default function Attendance() {
                 attendance.data
                   .total
               }{' '}
-              records
+              bản ghi
             </Typography.Text>
           </div>
         )}

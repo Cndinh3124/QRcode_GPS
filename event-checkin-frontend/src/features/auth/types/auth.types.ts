@@ -4,7 +4,8 @@ export interface LoginRequest {
 }
 
 export interface AuthUser {
-  id: number;
+  id: string;
+  studentCode: string;
   fullName: string;
   email: string;
   role: string;
@@ -16,7 +17,7 @@ export interface LoginResponse {
 }
 
 export interface JwtPayload {
-  sub: number;
+  sub: string;
   email: string;
   role: string;
   iat: number;

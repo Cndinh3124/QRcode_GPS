@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="QR Event">
+  <rect width="64" height="64" rx="14" fill="#1769d2"/>
+  <g fill="#fff">
+    <path d="M10 10h18v18H10zm5 5v8h8v-8zM36 10h18v18H36zm5 5v8h8v-8zM10 36h18v18H10zm5 5v8h8v-8z"/>
+    <path d="M36 36h7v7h-7zm11 0h7v7h-7zm-11 11h7v7h-7zm11 0h7v7h-7z"/>
+  </g>
+</svg>

@@ -28,7 +28,7 @@ import {
   useAttendanceByEvent,
   useAttendanceByDay,
   useEventReport,
-} from '../hooks/useReports';
+} from '../hooks/useBáo cáo';
 
 import { useEvents } from '../../events/hooks/useEvents';
 
@@ -43,7 +43,7 @@ const {
   RangePicker,
 } = DatePicker;
 
-export default function Reports() {
+export default function Báo cáo() {
   const summary =
     useReportSummary();
 
@@ -118,7 +118,7 @@ export default function Reports() {
       link.href = url;
 
       link.download =
-        'attendance-report.xlsx';
+        'bao-cao-diem-danh.xlsx';
 
       document.body.appendChild(
         link,
@@ -139,7 +139,7 @@ export default function Reports() {
       );
     } catch (error) {
       console.error(
-        'Export report failed:',
+        'Xuất báo cáo thất bại:',
         error,
       );
 
@@ -197,7 +197,7 @@ export default function Reports() {
             marginBottom: 4,
           }}
         >
-          Reports
+          Báo cáo
         </Title>
 
         <Text type="secondary">
@@ -289,7 +289,7 @@ export default function Reports() {
               handleExport
             }
           >
-            Export Excel
+            Xuất Excel
           </Button>
         </div>
       </Card>

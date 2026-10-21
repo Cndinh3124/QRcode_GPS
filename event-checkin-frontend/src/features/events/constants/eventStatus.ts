@@ -21,9 +21,9 @@ export const STATUS_LABEL: Record<
   EventStatus,
   string
 > = {
-  [EventStatus.DRAFT]: 'Draft',
-  [EventStatus.PUBLISHED]: 'Published',
-  [EventStatus.CHECKING_IN]: 'Checking In',
-  [EventStatus.FINISHED]: 'Finished',
-  [EventStatus.CANCELLED]: 'Cancelled',
+  [EventStatus.DRAFT]: 'Bản nháp',
+  [EventStatus.PUBLISHED]: 'Đã công bố',
+  [EventStatus.CHECKING_IN]: 'Đang điểm danh',
+  [EventStatus.FINISHED]: 'Đã kết thúc',
+  [EventStatus.CANCELLED]: 'Đã hủy',
 };

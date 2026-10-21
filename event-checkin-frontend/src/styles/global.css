@@ -93,6 +93,43 @@ a {
   border-radius: 999px;
 }
 
+.page-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.qr-modal-loading {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.qr-modal-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 22px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+}
+
+.qr-modal-actions {
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.ant-table-cell-fix-right {
+  background: var(--color-surface) !important;
+}
+
 @keyframes soft-tech-enter {
   from {
     opacity: 0;
@@ -127,6 +164,24 @@ a {
   .ant-btn {
     min-height: 44px;
   }
+
+  .page-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .page-heading > .ant-btn {
+    width: 100%;
+  }
+
+  .qr-modal-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .qr-modal-actions .ant-btn {
+    width: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -138,4 +193,234 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+
+/* Bo cuc thong nhat cho cac trang quan tri. */
+.admin-main-layout {
+  min-height: 100vh;
+  background: var(--color-page);
+}
+
+.admin-desktop-sider {
+  position: sticky !important;
+  top: 0;
+  height: 100vh;
+  overflow: auto;
+  flex: 0 0 248px !important;
+  max-width: 248px !important;
+  min-width: 248px !important;
+  width: 248px !important;
+}
+
+.admin-mobile-menu-button {
+  display: none;
+}
+
+.admin-user-trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 8px 7px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.admin-user-trigger:hover {
+  background: var(--color-primary-soft);
+}
+
+.admin-page {
+  width: 100%;
+  animation: soft-tech-enter 260ms ease-out both;
+}
+
+.admin-page-heading {
+  margin-bottom: 22px;
+}
+
+.admin-page-heading h1,
+.admin-page-heading h2,
+.admin-page-heading h3 {
+  margin-top: 0;
+  margin-bottom: 4px;
+  color: var(--color-text);
+}
+
+.admin-page-subtitle {
+  color: var(--color-text-muted);
+}
+
+.admin-table-card {
+  overflow: hidden;
+}
+
+.admin-drawer .ant-drawer-body {
+  padding: 0;
+}
+
+.admin-drawer .ant-menu {
+  border-inline-end: 0;
+}
+
+.checkin-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: var(--color-page);
+}
+
+@media (max-width: 767px) {
+  .admin-desktop-sider {
+    display: none !important;
+  }
+
+  .admin-mobile-menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: auto;
+  }
+
+  .admin-header {
+    height: 64px !important;
+    padding: 0 14px !important;
+  }
+
+  .admin-header-user-name,
+  .admin-header-user-role {
+    display: none;
+  }
+
+  .admin-content {
+    min-height: calc(100vh - 64px) !important;
+    padding: 16px 12px !important;
+  }
+
+  .admin-page-heading {
+    margin-bottom: 16px;
+  }
+
+  .admin-page-heading h1,
+  .admin-page-heading h2 {
+    font-size: 23px !important;
+  }
+
+  .admin-table-card .ant-table {
+    font-size: 13px;
+  }
+
+  .checkin-page {
+    align-items: flex-start;
+    padding: 16px 12px;
+  }
+
+  .checkin-page > * {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-content {
+    padding: 12px 8px !important;
+  }
+
+  .ant-modal {
+    max-width: calc(100vw - 20px);
+    margin: 10px auto;
+  }
+
+  .ant-modal .ant-modal-content {
+    padding: 18px;
+  }
+
+  .ant-card-body {
+    padding: 16px;
+  }
+}
+
+
+/* Mau nen moi, giu nguyen xanh duong lam mau thuong hieu. */
+.admin-main-layout,
+.admin-main-layout > .ant-layout {
+  background: #f2f5f9 !important;
+}
+
+.admin-desktop-sider,
+.admin-desktop-sider .ant-layout-sider-children,
+.admin-drawer .ant-drawer-content {
+  background: #123b52 !important;
+}
+
+.admin-desktop-sider .ant-menu-dark,
+.admin-drawer .ant-menu-dark {
+  background: #123b52 !important;
+}
+
+.admin-desktop-sider .ant-menu-dark .ant-menu-item-group-title,
+.admin-drawer .ant-menu-dark .ant-menu-item-group-title {
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.admin-desktop-sider .ant-menu-dark .ant-menu-item,
+.admin-drawer .ant-menu-dark .ant-menu-item {
+  color: rgba(255, 255, 255, 0.78);
+  border-radius: 10px;
+}
+
+.admin-desktop-sider .ant-menu-dark .ant-menu-item-selected,
+.admin-drawer .ant-menu-dark .ant-menu-item-selected {
+  color: #fff !important;
+  background: var(--color-primary) !important;
+  font-weight: 600;
+}
+
+.admin-desktop-sider .ant-menu-dark .ant-menu-item:hover,
+.admin-drawer .ant-menu-dark .ant-menu-item:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.admin-drawer .ant-drawer-header {
+  color: #fff;
+  background: #123b52;
+  border-bottom-color: rgba(255,255,255,0.12);
+}
+
+.admin-drawer .ant-drawer-title,
+.admin-drawer .ant-drawer-close {
+  color: #fff;
+}
+
+.login-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 8px 0 30px;
+  text-align: center;
+}
+
+.login-brand-logo {
+  margin-bottom: 14px;
+}
+
+.login-brand-title.ant-typography {
+  margin: 0 0 4px !important;
+  color: var(--color-text);
+  font-size: 28px;
+}
+
+.login-brand-description {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.login-brand-caption {
+  margin-top: 20px;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 600;
 }

@@ -107,7 +107,7 @@ export default function CheckInByEventChart({
         <Tooltip
           formatter={(value) => [
             Number(value),
-            'Participants',
+            'Người tham gia',
           ]}
           labelFormatter={(_, payload) => {
             const event =
@@ -119,7 +119,7 @@ export default function CheckInByEventChart({
 
         <Bar
           dataKey="totalCheckIn"
-          name="Participants"
+          name="Người tham gia"
           fill="#1677ff"
           radius={[
             6,

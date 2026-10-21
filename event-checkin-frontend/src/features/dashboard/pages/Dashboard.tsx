@@ -25,17 +25,17 @@ import CheckInByEventChart from '../../../components/charts/CheckInByEventChart'
 
 import RecentAttendanceTable from '../../../components/tables/RecentAttendanceTable';
 
-import { useDashboard } from '../hooks/useDashboard';
+import { useTổng quan } from '../hooks/useTổng quan';
 
 const { Title, Text } = Typography;
 
-export default function Dashboard() {
+export default function Tổng quan() {
   const {
     summary,
     byDay,
     byEvent,
     recentAttendance,
-  } = useDashboard();
+  } = useTổng quan();
 
   const isLoading =
     summary.isLoading ||
@@ -96,7 +96,7 @@ export default function Dashboard() {
             fontWeight: 700,
           }}
         >
-          Dashboard
+          Tổng quan
         </Title>
 
         <Text
