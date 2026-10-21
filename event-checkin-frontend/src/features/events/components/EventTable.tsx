@@ -109,7 +109,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Thao tac',
+      title: 'Thao tác',
       key: 'actions',
       width: 300,
       fixed: 'right',
