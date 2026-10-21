@@ -18,7 +18,7 @@ interface UserTableProps {
   data: User[];
   loading: boolean;
   onEdit: (user: User) => void;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 }
 
 export default function UserTable({
