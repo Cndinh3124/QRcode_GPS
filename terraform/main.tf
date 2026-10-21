@@ -163,6 +163,14 @@ resource "aws_lb" "app" {
   security_groups    = [aws_security_group.alb.id]
   subnets            = aws_subnet.public[*].id
 
+  # Production phai co ten mien va TLS; chi moi truong dev moi duoc dung HTTP.
+  lifecycle {
+    precondition {
+      condition     = var.environment != "production" || local.enable_tls
+      error_message = "Moi truong production phai khai bao domain_name va route53_zone_id de bat HTTPS."
+    }
+  }
+
   tags = { Name = "${local.name}-alb" }
 }
 
