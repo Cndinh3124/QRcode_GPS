@@ -31,7 +31,7 @@ export class InitialSchema1761010000000 implements MigrationInterface {
         PRIMARY KEY (\`id\`),
         UNIQUE KEY \`UQ_users_studentCode\` (\`studentCode\`),
         UNIQUE KEY \`UQ_users_email\` (\`email\`),
-        KEY \`IDX_users_roleId\` (\`roleId\`),
+        KEY \`IDX_users_role_id\` (\`roleId\`),
         CONSTRAINT \`FK_users_role\` FOREIGN KEY (\`roleId\`) REFERENCES \`roles\` (\`id\`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     `);
