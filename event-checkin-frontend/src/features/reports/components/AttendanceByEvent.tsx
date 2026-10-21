@@ -49,7 +49,7 @@ export default function AttendanceByEvent({
     },
 
     {
-      title: 'Present',
+      title: 'Có mặt',
       dataIndex: 'present',
       key: 'present',
       width: 100,
@@ -62,7 +62,7 @@ export default function AttendanceByEvent({
     },
 
     {
-      title: 'Late',
+      title: 'Đi muộn',
       dataIndex: 'late',
       key: 'late',
       width: 90,
@@ -75,7 +75,7 @@ export default function AttendanceByEvent({
     },
 
     {
-      title: 'Rejected',
+      title: 'Bị từ chối',
       dataIndex: 'rejected',
       key: 'rejected',
       width: 100,
