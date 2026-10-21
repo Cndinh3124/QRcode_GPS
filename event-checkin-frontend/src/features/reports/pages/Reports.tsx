@@ -28,7 +28,7 @@ import {
   useAttendanceByEvent,
   useAttendanceByDay,
   useEventReport,
-} from '../hooks/useBáo cáo';
+} from '../hooks/useReports';
 
 import { useEvents } from '../../events/hooks/useEvents';
 
@@ -43,7 +43,7 @@ const {
   RangePicker,
 } = DatePicker;
 
-export default function Báo cáo() {
+export default function Reports() {
   const summary =
     useReportSummary();
 
