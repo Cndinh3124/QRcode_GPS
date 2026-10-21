@@ -35,8 +35,8 @@ export default function UserModal({
       open={open}
       title={
         mode === 'create'
-          ? 'Create User'
-          : 'Edit User'
+          ? 'Tạo người dùng'
+          : 'Chỉnh sửa người dùng'
       }
       footer={null}
       onCancel={onClose}
