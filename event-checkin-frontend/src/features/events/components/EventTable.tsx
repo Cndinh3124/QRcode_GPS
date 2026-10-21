@@ -165,7 +165,7 @@ export default function EventTable({
               icon={<DeleteOutlined />}
               disabled={!isAdmin}
             >
-              Xoa
+              Xóa
             </Button>
           </Popconfirm>
         </Space>
