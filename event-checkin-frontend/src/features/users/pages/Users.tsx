@@ -30,10 +30,7 @@ export default function Users() {
     deleteUser,
   } = useUsers();
 
-  /**
-   * TODO:
-   * Cac role duoc tao san trong migration database.
-   */
+  // Cac role duoc tao san trong migration database.
   const roles = [
     {
       id: 1,
