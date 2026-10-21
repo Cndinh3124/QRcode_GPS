@@ -1,7 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="QR Event">
   <rect width="64" height="64" rx="14" fill="#1769d2"/>
+  <g>
+    <g transform="translate(9 9)">
+      <rect width="19" height="19" rx="2" fill="#fff"/>
+      <rect x="4" y="4" width="11" height="11" fill="#1769d2"/>
+      <rect x="7" y="7" width="5" height="5" fill="#fff"/>
+    </g>
+    <g transform="translate(36 9)">
+      <rect width="19" height="19" rx="2" fill="#fff"/>
+      <rect x="4" y="4" width="11" height="11" fill="#1769d2"/>
+      <rect x="7" y="7" width="5" height="5" fill="#fff"/>
+    </g>
+    <g transform="translate(9 36)">
+      <rect width="19" height="19" rx="2" fill="#fff"/>
+      <rect x="4" y="4" width="11" height="11" fill="#1769d2"/>
+      <rect x="7" y="7" width="5" height="5" fill="#fff"/>
+    </g>
+  </g>
   <g fill="#fff">
-    <path d="M10 10h18v18H10zm5 5v8h8v-8zM36 10h18v18H36zm5 5v8h8v-8zM10 36h18v18H10zm5 5v8h8v-8z"/>
-    <path d="M36 36h7v7h-7zm11 0h7v7h-7zm-11 11h7v7h-7zm11 0h7v7h-7z"/>
+    <rect x="36" y="36" width="7" height="7" rx="1"/>
+    <rect x="47" y="36" width="7" height="7" rx="1"/>
+    <rect x="36" y="47" width="7" height="7" rx="1"/>
+    <rect x="47" y="47" width="7" height="7" rx="1"/>
   </g>
 </svg>
