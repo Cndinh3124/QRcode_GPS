@@ -1,7 +1,9 @@
 # Khu vuc AWS va ten nhom tai nguyen.
 aws_region        = "ap-southeast-1"
 project_name      = "qr-event"
-environment       = "production"
+# De chay thu nghiem khong TLS, dung dev.
+# Production bat buoc khai bao domain_name va route53_zone_id.
+environment       = "dev"
 
 # Cau hinh may ung dung va may co so du lieu.
 instance_type     = "t3.small"
