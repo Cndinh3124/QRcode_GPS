@@ -1,15 +1,10 @@
 export interface CheckInRequest {
   qrToken: string;
-
+  participantCode: string;
   fullName: string;
-  email: string | null;
-
   email?: string;
-
   latitude: number;
-
   longitude: number;
-
   device: string;
 }
 
@@ -18,24 +13,15 @@ export interface CheckInData {
   eventId: string;
   eventTitle: string;
   participantCode: string;
-
-  participantCode: string;
-
   fullName: string;
-
-  distance: number;
-
+  email: string | null;
   checkInTime: string;
-
-  eventTitle?: string;
-
-  status: 'PRESENT' | 'LATE' | 'REJECTED' | string;
+  distance: number;
+  status: 'PRESENT' | 'LATE';
 }
 
 export interface CheckInResponse {
   success: boolean;
-
   message: string;
-
   data: CheckInData;
 }
