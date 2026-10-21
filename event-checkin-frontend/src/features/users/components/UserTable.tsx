@@ -65,7 +65,7 @@ export default function UserTable({
       ),
     },
     {
-      title: 'Status',
+      title: 'Trạng thái',
       key: 'status',
       width: 120,
       align: 'center',
@@ -84,7 +84,7 @@ export default function UserTable({
       ),
     },
     {
-      title: 'Action',
+      title: 'Thao tác',
       key: 'action',
       width: 180,
       align: 'center',
@@ -99,8 +99,8 @@ export default function UserTable({
           </Button>
 
           <Popconfirm
-            title="Delete user"
-            description="Are you sure you want to delete this user?"
+            title="Xóa người dùng"
+            description="Bạn có chắc muốn xóa người dùng này không?"
             okText="Yes"
             cancelText="No"
             onConfirm={() =>
@@ -130,7 +130,7 @@ export default function UserTable({
         pageSize: 10,
         showSizeChanger: true,
         showTotal: (total) =>
-          `Total ${total} users`,
+          `Tổng cộng ${total} người dùng`,
       }}
     />
   );
