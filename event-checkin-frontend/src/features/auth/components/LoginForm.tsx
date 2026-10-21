@@ -79,7 +79,7 @@ export default function LoginForm() {
           size="large"
           loading={isLoading}
         >
-          Login
+          Đăng nhập
         </Button>
       </Form>
     </Card>
