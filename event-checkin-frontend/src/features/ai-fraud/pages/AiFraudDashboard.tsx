@@ -58,7 +58,7 @@ export default function AiFraudDashboard() {
     { title: 'Người tham gia', key: 'person', render: (_, r) => <><Text strong>{r.attendance?.fullName || '—'}</Text><br/><Text type="secondary">{r.attendance?.participantCode}</Text></> },
     { title: 'Sự kiện', dataIndex: ['attendance', 'eventTitle'], key: 'event', render: (v) => v || '—' },
     { title: 'Thời điểm', key: 'time', render: (_, r) => r.attendance?.checkInTime ? new Date(r.attendance.checkInTime).toLocaleString('vi-VN') : '—' },
-    { title: 'Rủi ro', key: 'risk', render: (_, r) => r.analysisStatus === 'SCORED' ? <Tag color={riskColor[r.riskLevel || 'LOW']}>{r.riskLevel} · {r.anomalyScore == null ? '—' : `${(r.anomalyScore * 100).toFixed(1)}%`}</Tag> : <Tag>{r.analysisStatus}</Tag> },
+    { title: 'Rủi ro', key: 'risk', render: (_, r) => r.analysisStatus === 'SCORED' ? <Tag color={riskColor[r.riskLevel || 'LOW']}>{({ HIGH: 'Cao', MEDIUM: 'Trung bình', LOW: 'Thấp' } as Record<string, string>)[r.riskLevel || 'LOW']} · {r.anomalyScore == null ? '—' : `${(r.anomalyScore * 100).toFixed(1)}%`}</Tag> : <Tag>{({ PENDING: 'Đang chờ', SCORED: 'Đã phân tích', FAILED: 'Lỗi phân tích', SKIPPED: 'Đã bỏ qua' } as Record<string, string>)[r.analysisStatus] || r.analysisStatus}</Tag> },
     { title: 'Tín hiệu', key: 'reasons', render: (_, r) => r.reasonCodes?.length ? r.reasonCodes.map((reason) => <Tag key={reason}>{reason}</Tag>) : <Text type="secondary">Chưa có</Text> },
     { title: 'Xác minh', key: 'review', render: (_, r) => r.reviewDecision ? <Tag color="blue">{reviewLabels[r.reviewDecision]}</Tag> : r.analysisStatus === 'SCORED' && r.riskLevel !== 'LOW' ? <Button size="small" onClick={() => { setSelected(r); setDecision(null); setNote(''); }}>Xác minh</Button> : '—' },
   ];
