@@ -116,7 +116,7 @@ export default function UserForm({
           },
           {
             max: 100,
-            message: 'Email khong duoc vuot qua 100 ky tu.',
+            message: 'Email không được vượt quá 100 ký tự.',
           },
         ]}
       >
@@ -124,7 +124,7 @@ export default function UserForm({
       </Form.Item>
 
       <Form.Item
-        label="Password"
+        label="Mật khẩu"
         name="password"
         rules={
           mode === 'create'
