@@ -116,7 +116,7 @@ export default function AttendanceTable({
       },
 
       {
-        title: 'Full Name',
+        title: 'Họ và tên',
         dataIndex:
           'fullName',
         key:
@@ -343,7 +343,7 @@ export default function AttendanceTable({
                 </Descriptions.Item>
 
                 <Descriptions.Item
-                  label="Full Name"
+                  label="Họ và tên"
                 >
                   {
                     selectedAttendance.fullName
