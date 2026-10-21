@@ -27,6 +27,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 
 import { Roles } from '../auth/decorators/roles.decorator';
+import { Throttle } from '@nestjs/throttler';
 
 @ApiTags('Attendance')
 @Controller('attendance')
@@ -40,6 +41,7 @@ export class AttendanceController {
   // ==========================================
 
   @Post('check-in')
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   async checkIn(
     @Body() dto: CheckInDto,
   ) {
