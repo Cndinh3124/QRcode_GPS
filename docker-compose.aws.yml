@@ -4,9 +4,9 @@ services:
     build:
       context: ./ai-fraud-service
     restart: unless-stopped
-    env_file:
-      - ./event-checkin-backend/.env
     environment:
+      # Dich vu AI chi nhan token cua no, khong nhan mat khau database hay JWT secret.
+      AI_SERVICE_TOKEN: ${AI_SERVICE_TOKEN:?Hay dat AI_SERVICE_TOKEN trong file .env}
       # Luu mo hinh da hoc trong volume de giu lai khi container khoi dong lai.
       MODEL_PATH: /var/lib/ai-fraud/model.joblib
     volumes:
