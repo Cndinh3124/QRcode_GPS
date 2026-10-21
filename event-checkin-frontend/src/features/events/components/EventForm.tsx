@@ -309,7 +309,7 @@ export default function EventForm({
           min={1}
           max={100000}
           precision={0}
-          placeholder="Enter radius"
+          placeholder="Nhập bán kính điểm danh (m)"
         />
       </Form.Item>
 
