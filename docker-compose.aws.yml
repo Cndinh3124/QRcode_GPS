@@ -1,0 +1,42 @@
+services:
+  # Dich vu AI noi bo. Backend goi dich vu nay trong mang Docker.
+  ai-fraud:
+    build:
+      context: ./ai-fraud-service
+    restart: unless-stopped
+    environment:
+      # Dich vu AI chi nhan token cua no, khong nhan mat khau database hay JWT secret.
+      AI_SERVICE_TOKEN: ${AI_SERVICE_TOKEN:?Hay dat AI_SERVICE_TOKEN trong file .env}
+      # Luu mo hinh da hoc trong volume de giu lai khi container khoi dong lai.
+      MODEL_PATH: /var/lib/ai-fraud/model.joblib
+    volumes:
+      - ai_fraud_model:/var/lib/ai-fraud
+
+  # API NestJS. Cong 3000 chi mo tren localhost cua may EC2.
+  backend:
+    build:
+      context: ./event-checkin-backend
+    restart: unless-stopped
+    env_file:
+      - ./event-checkin-backend/.env
+    environment:
+      # Ten ai-fraud la ten service trong mang noi bo cua Docker Compose.
+      AI_FRAUD_SERVICE_URL: http://ai-fraud:8001
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - ai-fraud
+
+  # Giao dien web. Nginx tren EC2 nhan request tu ALB va chuyen vao cong nay.
+  frontend:
+    build:
+      context: ./event-checkin-frontend
+      args:
+        VITE_API_URL: /api
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
+
+# Volume nay giu tep mo hinh AI khi container duoc tao lai.
+volumes:
+  ai_fraud_model:

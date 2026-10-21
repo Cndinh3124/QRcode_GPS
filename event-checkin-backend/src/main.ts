@@ -1,15 +1,29 @@
-import { ValidationPipe } from '@nestjs/common';
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-
+import helmet from 'helmet';
 import { AppModule } from './app.module';
-import { ClassSerializerInterceptor } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const isProduction = process.env.NODE_ENV === 'production';
 
-  app.enableCors();
+  // Production phai khai bao domain frontend ro rang.
+  const defaultFrontendUrl = isProduction ? '' : 'http://localhost:5173';
+  const frontendUrls = (process.env.FRONTEND_URL ?? defaultFrontendUrl)
+    .split(',')
+    .map((url) => url.trim())
+    .filter(Boolean);
+
+  // Ung dung nam sau ALB va Nginx: tin dung dung hai proxy hop nay.
+  app.set('trust proxy', 2);
+  app.use(helmet());
+  app.enableCors({
+    origin: frontendUrls,
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -19,26 +33,23 @@ async function bootstrap() {
     }),
   );
   app.useGlobalInterceptors(
-    new ClassSerializerInterceptor(
-      app.get(Reflector),
-    ),
+    new ClassSerializerInterceptor(app.get(Reflector)),
   );
 
-  const config = new DocumentBuilder()
-    .setTitle('QR Event Check-in API')
-    .setDescription('Backend API for QR + GPS Event Check-in System')
-    .setVersion('1.0.0')
-    .addBearerAuth()
-    .build();
+  // Chi mo Swagger khi phat trien, khong de lo tai lieu API tren production.
+  if (!isProduction) {
+    const config = new DocumentBuilder()
+      .setTitle('QR Event Check-in API')
+      .setDescription('Backend API for QR + GPS Event Check-in System')
+      .setVersion('1.0.0')
+      .addBearerAuth()
+      .build();
 
-  const document = SwaggerModule.createDocument(app, config);
-
-  SwaggerModule.setup('api', app, document);
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api', app, document);
+  }
 
   await app.listen(process.env.PORT ?? 3000);
-
-  console.log(`🚀 Server: http://localhost:3000`);
-  console.log(`📚 Swagger: http://localhost:3000/api`);
 }
 
 bootstrap();

@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -37,6 +38,11 @@ export class EventsService {
   async create(
     createEventDto: CreateEventDto,
   ): Promise<Event> {
+    this.validateEventWindow(
+      createEventDto.startTime,
+      createEventDto.endTime,
+    );
+
     const event =
       this.eventRepository.create({
         ...createEventDto,
@@ -112,6 +118,8 @@ export class EventsService {
       event,
       dto,
     );
+
+    this.validateEventWindow(event.startTime, event.endTime);
 
     return this.eventRepository.save(
       event,
@@ -209,6 +217,24 @@ export class EventsService {
     return this.eventRepository.save(
       event,
     );
+  }
+
+  // Kiem tra thoi gian truoc khi luu su kien.
+  private validateEventWindow(startTime: Date | string, endTime: Date | string) {
+    const start =
+      startTime instanceof Date
+        ? startTime.getTime()
+        : new Date(startTime).getTime();
+    const end =
+      endTime instanceof Date
+        ? endTime.getTime()
+        : new Date(endTime).getTime();
+
+    if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) {
+      throw new BadRequestException(
+        'Thoi gian ket thuc phai sau thoi gian bat dau.',
+      );
+    }
   }
 
   // =========================================================

@@ -1,58 +1,75 @@
-# QR Event Check-in: AWS infrastructure with Terraform
+# Huong dan tao ha tang AWS bang Terraform
 
-This Terraform configuration provisions:
+## Ha tang duoc tao
 
-- A VPC with two public subnets and two private database subnets.
-- An internet-facing Application Load Balancer (ALB).
-- One Amazon Linux 2023 EC2 instance for the application host.
-- Amazon RDS for MySQL with public access disabled and an RDS-managed master secret.
-- Security groups that allow public web traffic only to the ALB, ALB traffic to the EC2 host, and MySQL traffic only from the application host.
-- AWS Systems Manager access to EC2 without opening SSH.
-- Optional Route 53 DNS and ACM HTTPS when both `domain_name` and `route53_zone_id` are supplied.
+Terraform tao VPC, hai subnet cong khai, hai subnet rieng cho RDS, ALB, mot EC2 Amazon Linux 2023, va co so du lieu MySQL tren RDS. Database khong mo ra Internet. Security Group chi cho phep ket noi web qua ALB, tu ALB den EC2, va tu EC2 den RDS.
 
-The EC2 bootstrap installs Docker and Nginx. Nginx forwards `/api/` to `127.0.0.1:3000` and other paths to `127.0.0.1:8080`. The Terraform stack does **not** build or start the application containers.
+EC2 cai Docker va Nginx. Nginx chuyen /api/ den backend cong 3000 va cac duong dan khac den frontend cong 8080. Docker Compose chay frontend, backend va dich vu cham diem AI. Cac cong ung dung chi mo tren localhost cua EC2. Backend goi dich vu AI qua mang rieng Docker.
 
-## Important application readiness work
+Neu dien ca domain_name va route53_zone_id, Terraform tao DNS Route 53, chung chi ACM va HTTPS. Neu khong, ALB chi dung HTTP.
 
-The source repository currently has no production Dockerfiles. Its backend `docker-compose.yml` starts a local MySQL container and phpMyAdmin with sample credentials. Do not expose phpMyAdmin or use those sample credentials in production. Before deploying the application, create production Docker images (or another repeatable deployment process) for the React frontend and NestJS backend, and bind them to localhost ports 8080 and 3000 respectively.
+## Chuan bi
 
-The current backend TypeORM configuration has `synchronize: true` and `logging: true`, and CORS is enabled broadly. Review and change these settings before using production data: use migrations instead of automatic schema changes, restrict CORS to the public frontend origin, and use a strong JWT secret. These are application changes and are not made by this infrastructure configuration.
+Can co Terraform 1.6 tro len va AWS CLI da dang nhap voi quyen tao cac tai nguyen AWS nay. Can co ten mien va public hosted zone Route 53 neu muon dung HTTPS. Khong ghi AWS access key vao file Terraform.
 
-## Prerequisites
+## Tao ha tang
 
-- Terraform 1.6 or later.
-- AWS CLI credentials with permission to create the listed networking, EC2, IAM, ELB, RDS, ACM, and Route 53 resources.
-- A Route 53 public hosted zone and a domain name if HTTPS and a custom domain are required.
+Chay:
 
-Terraform authentication follows the AWS CLI credential chain. Do not put AWS access keys in `.tf` or `.tfvars` files.
+    cd terraform
+    cp terraform.tfvars.example terraform.tfvars
 
-## Deploy
+Mo terraform.tfvars va dieu chinh cau hinh. Dien ca domain_name va route53_zone_id neu can HTTPS. Sau do chay:
 
-```bash
-cd terraform
-cp terraform.tfvars.example terraform.tfvars
-# Edit terraform.tfvars. Set domain_name and route53_zone_id to enable HTTPS.
-terraform init
-terraform fmt -recursive
-terraform validate
-terraform plan
-terraform apply
-```
+    terraform init
+    terraform fmt -recursive
+    terraform validate
+    terraform plan
 
-The plan creates billable AWS resources, including an ALB, EC2 instance, and RDS instance. Review the plan and expected AWS charges before applying it.
+ALB, EC2 va RDS co the phat sinh chi phi. Doc ky ket qua plan va danh gia chi phi truoc khi chay terraform apply.
 
-If no domain is configured, the ALB exposes HTTP only. With both domain settings configured, Terraform creates a DNS-validated ACM certificate, an HTTPS listener, an HTTP-to-HTTPS redirect, and a Route 53 alias record.
+Lay URL ung dung va lenh ket noi EC2 bang:
 
-Use the `application_url` output to open the ALB endpoint. Use the `ssm_connect_command` output to open an EC2 shell through Session Manager. The database endpoint is private and should only be used by the application host.
+    terraform output -raw application_url
+    terraform output -raw ssm_connect_command
 
-## Tear down
+Dung AWS Systems Manager Session Manager de mo terminal EC2. RDS la mang rieng, chi EC2 moi ket noi duoc.
 
-For a disposable environment, first set `rds_deletion_protection = false` and `rds_skip_final_snapshot = true`, apply those changes, then run `terraform destroy`. This permanently deletes the database and its data. Keep deletion protection and a final snapshot for environments whose data must be retained.
+## Cai ung dung len EC2
 
-## Architecture and limitations
+Sau khi ket noi den EC2 bang Session Manager, tai ma nguon:
 
-- The ALB spans two Availability Zones, but the application runs on one EC2 instance; the application tier is therefore a single point of failure.
-- RDS Multi-AZ is optional and disabled by default to limit cost.
-- No NAT Gateway is created. The EC2 host is in a public subnet and uses its public IPv4 address for outbound package and image downloads. Its security group does not allow direct inbound application traffic; web traffic enters through the ALB.
-- The application security group permits port 80 only from the ALB security group. RDS is not publicly accessible and accepts port 3306 only from the application security group.
-- Terraform state may contain infrastructure metadata. Store remote state in a restricted, encrypted backend before sharing this configuration with a team.
+    sudo dnf install -y git jq awscli-2 openssl
+    sudo install -d -m 0755 /opt/qr-event
+    sudo git clone --branch feat/ai-checkin-fraud-detection --single-branch https://github.com/Cndinh3124/QRcode_GPS.git /opt/qr-event/app
+
+Can co Docker Compose v2. Neu lenh docker compose version khong chay, cai Docker Compose plugin theo huong dan: https://docs.docker.com/compose/install/linux/
+
+Tao file event-checkin-backend/.env tren EC2 voi cac bien DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, JWT_SECRET, JWT_EXPIRES, AI_FRAUD_SERVICE_URL va AI_SERVICE_TOKEN. Lay thong tin database tu Terraform outputs va AWS Secrets Manager. Tao tai khoan MySQL rieng cho ung dung; khong dung tai khoan quan tri RDS trong backend. File .env chua bi mat, han che quyen doc va khong commit file nay len Git.
+
+Khoi dong cac dich vu:
+
+    cd /opt/qr-event/app
+    sudo docker compose --env-file event-checkin-backend/.env -f docker-compose.aws.yml up -d --build
+
+Kiem tra:
+
+    sudo docker compose -f docker-compose.aws.yml ps
+    sudo docker compose -f docker-compose.aws.yml logs --tail=100
+    curl http://127.0.0.1/healthz
+
+## Migration va luu y truoc khi dung du lieu that
+
+Backend da tat `synchronize` va tu chay migration khi khoi dong. Migration ban dau tao cac bang va cac role `ADMIN`, `ORGANIZER`, `PARTICIPANT` neu database chua co. Neu database cu da duoc tao bang `synchronize`, migration chi ghi nhan va khong sua lai cac bang dang ton tai. Hay sao luu database va doi chieu schema truoc khi nang cap moi truong co du lieu that.
+
+Sau khi chay ung dung lan dau, can tao tai khoan quan tri theo quy trinh cua du an; khong co tai khoan/mat khau mac dinh duoc seed san. Gioi han CORS chi cho phep domain frontend va dung JWT secret manh.
+
+Check-in sinh vien van la API cong khai theo lua chon cua chu du an. Gioi han request va GPS chi lam giam spam; client cong khai co the khai ma sinh vien va toa do gia, nen he thong chua the xac minh danh tinh hoac chong gia mao GPS. Can xac nhan danh tinh bang mot co che rieng truoc khi dung ket qua lam bang chung diem danh.
+
+RDS khong co dia chi cong khai. Security Group chi cho phep EC2 ket noi MySQL cong 3306. Ung dung hien chay tren mot EC2; neu may gap su co, website se dung.
+
+## Xoa moi truong thu nghiem
+
+Chi voi moi truong co the xoa du lieu: dat rds_deletion_protection = false va rds_skip_final_snapshot = true, chay terraform apply de cap nhat, roi chay terraform destroy. Thao tac nay xoa vinh vien database va du lieu. Moi truong can giu du lieu nen bat bao ve xoa va giu snapshot cuoi.
+
+Terraform state co the chua thong tin ha tang. Neu lam viec theo nhom, luu state trong backend ma hoa va gioi han quyen truy cap.
