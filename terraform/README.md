@@ -1,122 +1,71 @@
-# QR Event Check-in: AWS infrastructure with Terraform
+# Huong dan tao ha tang AWS bang Terraform
 
-This Terraform configuration provisions:
+## Ha tang duoc tao
 
-- A VPC with two public subnets and two private database subnets.
-- An internet-facing Application Load Balancer (ALB).
-- One Amazon Linux 2023 EC2 instance for the application host.
-- Amazon RDS for MySQL with public access disabled and an RDS-managed master secret.
-- Security groups that allow public web traffic only to the ALB, ALB traffic to the EC2 host, and MySQL traffic only from the application host.
-- AWS Systems Manager access to EC2 without opening SSH.
-- Optional Route 53 DNS and ACM HTTPS when both `domain_name` and `route53_zone_id` are supplied.
+Terraform tao VPC, hai subnet cong khai, hai subnet rieng cho RDS, ALB, mot EC2 Amazon Linux 2023, va co so du lieu MySQL tren RDS. Database khong mo ra Internet. Security Group chi cho phep ket noi web qua ALB, tu ALB den EC2, va tu EC2 den RDS.
 
-The EC2 bootstrap installs Docker and Nginx. Nginx forwards `/api/` to `127.0.0.1:3000` and other paths to `127.0.0.1:8080`. `docker-compose.aws.yml` builds the frontend, backend, and Python AI scorer on EC2 and binds their ports to loopback only. The AI scorer is reachable only on the private Docker network. The Terraform stack creates infrastructure; application deployment is a separate step after `terraform apply`.
+EC2 cai Docker va Nginx. Nginx chuyen /api/ den backend cong 3000 va cac duong dan khac den frontend cong 8080. Docker Compose chay frontend, backend va dich vu cham diem AI. Cac cong ung dung chi mo tren localhost cua EC2. Backend goi dich vu AI qua mang rieng Docker.
 
-## Important application readiness work
+Neu dien ca domain_name va route53_zone_id, Terraform tao DNS Route 53, chung chi ACM va HTTPS. Neu khong, ALB chi dung HTTP.
 
-The backend and frontend production Dockerfiles are separate from the development Compose stack. The backend `docker-compose.yml` starts a local MySQL container and phpMyAdmin with sample credentials. Do not expose phpMyAdmin or use those sample credentials in production. Use `docker-compose.aws.yml` with the private RDS endpoint instead.
+## Chuan bi
 
-The current backend TypeORM configuration has `synchronize: true` and `logging: true`, and CORS is enabled broadly. Review and change these settings before using production data: use migrations instead of automatic schema changes, restrict CORS to the public frontend origin, and use a strong JWT secret. These are application changes and are not made by this infrastructure configuration.
+Can co Terraform 1.6 tro len va AWS CLI da dang nhap voi quyen tao cac tai nguyen AWS nay. Can co ten mien va public hosted zone Route 53 neu muon dung HTTPS. Khong ghi AWS access key vao file Terraform.
 
-## Prerequisites
+## Tao ha tang
 
-- Terraform 1.6 or later.
-- AWS CLI credentials with permission to create the listed networking, EC2, IAM, ELB, RDS, ACM, and Route 53 resources.
-- A Route 53 public hosted zone and a domain name if HTTPS and a custom domain are required.
+Chay:
 
-Terraform authentication follows the AWS CLI credential chain. Do not put AWS access keys in `.tf` or `.tfvars` files.
+    cd terraform
+    cp terraform.tfvars.example terraform.tfvars
 
-## Deploy infrastructure
+Mo terraform.tfvars va dieu chinh cau hinh. Dien ca domain_name va route53_zone_id neu can HTTPS. Sau do chay:
 
-```bash
-cd terraform
-cp terraform.tfvars.example terraform.tfvars
-# Edit terraform.tfvars. Set domain_name and route53_zone_id to enable HTTPS.
-terraform init
-terraform fmt -recursive
-terraform validate
-terraform plan
-terraform apply
-```
+    terraform init
+    terraform fmt -recursive
+    terraform validate
+    terraform plan
 
-The plan creates billable AWS resources, including an ALB, EC2 instance, and RDS instance. Review the plan and expected AWS charges before applying it. Do not run `terraform apply` until you have reviewed the plan and explicitly approved the AWS spend.
+ALB, EC2 va RDS co the phat sinh chi phi. Doc ky ket qua plan va danh gia chi phi truoc khi chay terraform apply.
 
-If no domain is configured, the ALB exposes HTTP only. With both domain settings configured, Terraform creates a DNS-validated ACM certificate, an HTTPS listener, an HTTP-to-HTTPS redirect, and a Route 53 alias record.
+Lay URL ung dung va lenh ket noi EC2 bang:
 
-Use the `application_url` output to open the ALB endpoint. Use the `ssm_connect_command` output to open an EC2 shell through Session Manager. The database endpoint is private and should only be used by the application host.
+    terraform output -raw application_url
+    terraform output -raw ssm_connect_command
 
-## Deploy the app after Terraform
+Dung AWS Systems Manager Session Manager de mo terminal EC2. RDS la mang rieng, chi EC2 moi ket noi duoc.
 
-The stack intentionally does not fetch source code or put database credentials in EC2 user data. Connect through Systems Manager Session Manager using the `ec2_instance_id` output, then deploy the public GitHub branch:
+## Cai ung dung len EC2
 
-```bash
-sudo dnf install -y git jq awscli-2
-sudo install -d -m 0755 /opt/qr-event
-sudo git clone --branch feat/ai-checkin-fraud-detection --single-branch \
-  https://github.com/Cndinh3124/QRcode_GPS.git /opt/qr-event/app
-```
+Sau khi ket noi den EC2 bang Session Manager, tai ma nguon:
 
-Install the Docker Compose v2 plugin if `docker compose version` is unavailable. The official Linux instructions are at <https://docs.docker.com/compose/install/linux/>. Retrieve the RDS-managed secret on the EC2 host with its instance role (the Terraform role is scoped to that secret). The following writes credentials directly to a mode-`0600` file without printing the secret values; replace the three placeholders with `terraform output` values:
+    sudo dnf install -y git jq awscli-2 openssl
+    sudo install -d -m 0755 /opt/qr-event
+    sudo git clone --branch feat/ai-checkin-fraud-detection --single-branch https://github.com/Cndinh3124/QRcode_GPS.git /opt/qr-event/app
 
-```bash
-sudo dnf install -y git jq awscli-2 openssl
-sudo bash -s -- '<rds_master_secret_arn>' '<rds_endpoint>' '<rds_database_name>' <<'SCRIPT'
-set -euo pipefail
-secret_arn="$1"
-db_host="$2"
-db_name="$3"
-[[ "$db_name" =~ ^[A-Za-z0-9_]+$ ]] || { echo 'Unsafe database name' >&2; exit 1; }
-secret_json="$(aws secretsmanager get-secret-value --secret-id "$secret_arn" --query SecretString --output text)"
-master_user="$(jq -r .username <<<"$secret_json")"
-master_password="$(jq -r .password <<<"$secret_json")"
-db_user=qr_app
-db_password="$(openssl rand -hex 32)"
-jwt_secret="$(openssl rand -hex 32)"
-ai_token="$(openssl rand -hex 32)"
-docker run --rm --network host -e MYSQL_PWD="$master_password" mysql:8.4 \
-  mysql --connect-timeout=10 --host="$db_host" --port=3306 --user="$master_user" \
-  --execute="CREATE USER IF NOT EXISTS '$db_user'@'%' IDENTIFIED BY '$db_password'; ALTER USER '$db_user'@'%' IDENTIFIED BY '$db_password'; GRANT ALL PRIVILEGES ON \`$db_name\`.* TO '$db_user'@'%'; FLUSH PRIVILEGES;"
-env_file=/opt/qr-event/app/event-checkin-backend/.env
-umask 077
-printf '%s\n' \
-  'APP_NAME=QR Event Checkin' \
-  'NODE_ENV=production' \
-  'PORT=3000' \
-  "DB_HOST=$db_host" \
-  'DB_PORT=3306' \
-  "DB_USERNAME=$db_user" \
-  "DB_PASSWORD=$db_password" \
-  "DB_DATABASE=$db_name" \
-  "JWT_SECRET=$jwt_secret" \
-  'JWT_EXPIRES=1d' \
-  'AI_FRAUD_SERVICE_URL=http://ai-fraud:8001' \
-  "AI_SERVICE_TOKEN=$ai_token" > "$env_file"
-unset secret_json master_user master_password db_user db_password jwt_secret ai_token
-SCRIPT
-```
+Can co Docker Compose v2. Neu lenh docker compose version khong chay, cai Docker Compose plugin theo huong dan: https://docs.docker.com/compose/install/linux/
 
-The script creates a restricted `qr_app` MySQL user and gives it access only to the application database; the backend never receives the RDS master password. Do not commit the generated file or paste its contents into logs. If Docker Compose reports the backend cannot connect to RDS, first verify the database security group allows TCP 3306 from the app security group and check the `DB_HOST` endpoint.
+Tao file event-checkin-backend/.env tren EC2 voi cac bien DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, JWT_SECRET, JWT_EXPIRES, AI_FRAUD_SERVICE_URL va AI_SERVICE_TOKEN. Lay thong tin database tu Terraform outputs va AWS Secrets Manager. Tao tai khoan MySQL rieng cho ung dung; khong dung tai khoan quan tri RDS trong backend. File .env chua bi mat, han che quyen doc va khong commit file nay len Git.
 
-Then start the three application containers:
+Khoi dong cac dich vu:
 
-```bash
-cd /opt/qr-event/app
-sudo docker compose --env-file event-checkin-backend/.env \
-  -f docker-compose.aws.yml up -d --build
-```
+    cd /opt/qr-event/app
+    sudo docker compose --env-file event-checkin-backend/.env -f docker-compose.aws.yml up -d --build
 
-The frontend uses `/api` as its API base; the host Nginx removes that prefix before forwarding requests to NestJS. Check `sudo docker compose -f docker-compose.aws.yml ps`, `sudo docker compose -f docker-compose.aws.yml logs --tail=100`, and `curl http://127.0.0.1/healthz` on EC2. The ALB URL is available from `terraform output -raw application_url`.
+Kiem tra:
 
-For a disposable demo only, TypeORM currently has `synchronize: true`, which creates the new risk tables when the backend connects. Do not point this setting at production data: switch to `synchronize: false` only after adding and applying migrations for the existing application schema and the two AI tables.
+    sudo docker compose -f docker-compose.aws.yml ps
+    sudo docker compose -f docker-compose.aws.yml logs --tail=100
+    curl http://127.0.0.1/healthz
 
-## Tear down
+## Luu y truoc khi dung du lieu that
 
-For a disposable environment, first set `rds_deletion_protection = false` and `rds_skip_final_snapshot = true`, apply those changes, then run `terraform destroy`. This permanently deletes the database and its data. Keep deletion protection and a final snapshot for environments whose data must be retained.
+TypeORM hien dang co synchronize: true, co the tu thay doi bang du lieu khi backend khoi dong. Khong dung voi du lieu that cho den khi da tao va chay migration, sau do chuyen sang synchronize: false. Gioi han CORS chi cho phep domain frontend va dung JWT secret manh.
 
-## Architecture and limitations
+RDS khong co dia chi cong khai. Security Group chi cho phep EC2 ket noi MySQL cong 3306. Ung dung hien chay tren mot EC2; neu may gap su co, website se dung.
 
-- The ALB spans two Availability Zones, but the application runs on one EC2 instance; the application tier is therefore a single point of failure.
-- RDS Multi-AZ is optional and disabled by default to limit cost.
-- No NAT Gateway is created. The EC2 host is in a public subnet and uses its public IPv4 address for outbound package and image downloads. Its security group does not allow direct inbound application traffic; web traffic enters through the ALB.
-- The application security group permits port 80 only from the ALB security group. RDS is not publicly accessible and accepts port 3306 only from the application security group.
-- Terraform state may contain infrastructure metadata. Store remote state in a restricted, encrypted backend before sharing this configuration with a team.
+## Xoa moi truong thu nghiem
+
+Chi voi moi truong co the xoa du lieu: dat rds_deletion_protection = false va rds_skip_final_snapshot = true, chay terraform apply de cap nhat, roi chay terraform destroy. Thao tac nay xoa vinh vien database va du lieu. Moi truong can giu du lieu nen bat bao ve xoa va giu snapshot cuoi.
+
+Terraform state co the chua thong tin ha tang. Neu lam viec theo nhom, luu state trong backend ma hoa va gioi han quyen truy cap.
