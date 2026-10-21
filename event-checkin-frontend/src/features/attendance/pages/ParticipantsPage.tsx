@@ -10,11 +10,11 @@ import {
   exportAttendance,
 } from '../api/attendance.api';
 
-import Người tham giaTable from '../components/Người tham giaTable';
+import ParticipantsTable from '../components/ParticipantsTable';
 
 const { Title } = Typography;
 
-export default function Người tham giaPage() {
+export default function ParticipantsPage() {
   const { id } = useParams();
 
   const {
