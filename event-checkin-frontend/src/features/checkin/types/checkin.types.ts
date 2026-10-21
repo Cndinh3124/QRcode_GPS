@@ -1,9 +1,8 @@
 export interface CheckInRequest {
   qrToken: string;
 
-  participantCode: string;
-
   fullName: string;
+  email: string | null;
 
   email?: string;
 
@@ -15,7 +14,10 @@ export interface CheckInRequest {
 }
 
 export interface CheckInData {
-  attendanceId: string;
+  id: string;
+  eventId: string;
+  eventTitle: string;
+  participantCode: string;
 
   participantCode: string;
 
