@@ -3,24 +3,24 @@ import { DownloadOutlined } from '@ant-design/icons';
 import { useParams } from 'react-router-dom';
 
 import {
-  useParticipants,
-} from '../hooks/useParticipants';
+  useNgười tham gia,
+} from '../hooks/useNgười tham gia';
 
 import {
   exportAttendance,
 } from '../api/attendance.api';
 
-import ParticipantsTable from '../components/ParticipantsTable';
+import Người tham giaTable from '../components/Người tham giaTable';
 
 const { Title } = Typography;
 
-export default function ParticipantsPage() {
+export default function Người tham giaPage() {
   const { id } = useParams();
 
   const {
     data,
     isLoading,
-  } = useParticipants(id ?? '');
+  } = useNgười tham gia(id ?? '');
 
   const handleExport = async () => {
     if (!id) return;
@@ -35,7 +35,7 @@ export default function ParticipantsPage() {
       document.createElement('a');
 
     link.href = url;
-    link.download = 'attendance.xlsx';
+    link.download = 'danh-sach-diem-danh.xlsx';
 
     link.click();
 
@@ -52,7 +52,7 @@ export default function ParticipantsPage() {
         }}
       >
         <Title level={3}>
-          Participants
+          Người tham gia
         </Title>
 
         <Button
@@ -60,11 +60,11 @@ export default function ParticipantsPage() {
           icon={<DownloadOutlined />}
           onClick={handleExport}
         >
-          Export Excel
+          Xuất Excel
         </Button>
       </Space>
 
-      <ParticipantsTable
+      <Người tham giaTable
         data={data ?? []}
         loading={isLoading}
       />
