@@ -25,17 +25,17 @@ import CheckInByEventChart from '../../../components/charts/CheckInByEventChart'
 
 import RecentAttendanceTable from '../../../components/tables/RecentAttendanceTable';
 
-import { useTổng quan } from '../hooks/useTổng quan';
+import { useDashboard } from '../hooks/useDashboard';
 
 const { Title, Text } = Typography;
 
-export default function Tổng quan() {
+export default function Dashboard() {
   const {
     summary,
     byDay,
     byEvent,
     recentAttendance,
-  } = useTổng quan();
+  } = useDashboard();
 
   const isLoading =
     summary.isLoading ||
