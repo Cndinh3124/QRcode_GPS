@@ -1,16 +1,16 @@
 export const ATTENDANCE_STATUS = {
   PRESENT: {
     color: 'green',
-    label: 'Present',
+    label: 'Có mặt',
   },
 
   LATE: {
     color: 'orange',
-    label: 'Late',
+    label: 'Đi muộn',
   },
 
   REJECTED: {
     color: 'red',
-    label: 'Rejected',
+    label: 'Bị từ chối',
   },
 } as const;
