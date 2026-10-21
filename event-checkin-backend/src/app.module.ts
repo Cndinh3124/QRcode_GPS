@@ -21,7 +21,7 @@ import { AiFraudModule } from './ai-fraud/ai-fraud.module';
       envFilePath: '.env',
     }),
 
-    // Gioi han mac dinh moi dia chi IP toi da 60 request moi phut.
+    // Gioi han mac dinh moi dia chi IP toi da 120 request moi phut.
     ThrottlerModule.forRoot([
       {
         ttl: 60_000,
