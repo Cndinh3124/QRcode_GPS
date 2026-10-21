@@ -55,7 +55,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Ten su kien',
+      title: 'Tên sự kiện',
       key: 'title',
       dataIndex: 'title',
       width: 220,
@@ -63,7 +63,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Dia diem',
+      title: 'Địa điểm',
       key: 'locationName',
       dataIndex: 'locationName',
       width: 220,
@@ -71,7 +71,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Bat dau',
+      title: 'Bắt đầu',
       key: 'startTime',
       dataIndex: 'startTime',
       width: 170,
@@ -82,7 +82,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Ket thuc',
+      title: 'Kết thúc',
       key: 'endTime',
       dataIndex: 'endTime',
       width: 170,
@@ -93,7 +93,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Trang thai',
+      title: 'Trạng thái',
       key: 'status',
       width: 140,
       align: 'center',
@@ -135,7 +135,7 @@ export default function EventTable({
               )
             }
           >
-            Nguoi tham gia
+            Người tham gia
           </Button>
 
           <Button
@@ -146,14 +146,14 @@ export default function EventTable({
               onEdit(record)
             }
           >
-            Sua
+            Sửa
           </Button>
 
           <Popconfirm
-            title="Xoa su kien"
-            description="Ban co chac muon xoa su kien nay?"
-            okText="Xoa"
-            cancelText="Huy"
+            title="Xóa sự kiện"
+            description="Bạn có chắc muốn xóa sự kiện này không?"
+            okText="Xóa"
+            cancelText="Hủy"
             disabled={!isAdmin}
             onConfirm={() =>
               onDelete(record.id)
@@ -189,7 +189,7 @@ export default function EventTable({
           '50',
         ],
         showTotal: (total) =>
-          `Tong cong ${total} su kien`,
+          `Tổng cộng ${total} su kien`,
       }}
     />
   );
