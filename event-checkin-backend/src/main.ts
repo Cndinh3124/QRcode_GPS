@@ -16,8 +16,8 @@ async function bootstrap() {
     .map((url) => url.trim())
     .filter(Boolean);
 
-  // Ung dung nam sau ALB va Nginx: tin dung dung hai proxy hop nay.
-  app.set('trust proxy', 2);
+  // Nginx chuyen tiep X-Forwarded-For do ALB tao; chi tin Nginx mot hop.
+  app.set('trust proxy', 1);
   app.use(helmet());
   app.enableCors({
     origin: frontendUrls,
