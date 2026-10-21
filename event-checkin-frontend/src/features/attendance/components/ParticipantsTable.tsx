@@ -45,7 +45,7 @@ export default function ParticipantsTable({
     },
 
     {
-      title: 'Full Name',
+      title: 'Họ và tên',
       dataIndex: 'fullName',
       key: 'fullName',
       width: 200,
