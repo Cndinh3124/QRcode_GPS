@@ -12,7 +12,7 @@ import type {
 
 import type { AuthUser } from '../types/auth.types';
 
-import { getUser } from '../utils/auth.storage';
+import { getAccessToken, getUser } from '../utils/auth.storage';
 
 interface AuthContextValue {
   user: AuthUser | null;
