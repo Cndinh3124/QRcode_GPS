@@ -150,7 +150,7 @@ export default function AttendanceTable({
 
       {
         title:
-          'Check-in Time',
+          'Thời gian điểm danh',
         dataIndex:
           'checkInTime',
         key:
@@ -193,7 +193,7 @@ export default function AttendanceTable({
       },
 
       {
-        title: 'Status',
+        title: 'Trạng thái',
         dataIndex:
           'status',
         key:
@@ -392,7 +392,7 @@ export default function AttendanceTable({
                 </Descriptions.Item>
 
                 <Descriptions.Item
-                  label="Location"
+                  label="Vị trí"
                 >
                   {
                     selectedAttendance
@@ -563,7 +563,7 @@ export default function AttendanceTable({
                 size="small"
               >
                 <Descriptions.Item
-                  label="Attendance ID"
+                  label="Mã điểm danh"
                 >
                   <Text copyable>
                     {
@@ -573,7 +573,7 @@ export default function AttendanceTable({
                 </Descriptions.Item>
 
                 <Descriptions.Item
-                  label="Created At"
+                  label="Ngày tạo"
                 >
                   {
                     selectedAttendance.createdAt
@@ -585,7 +585,7 @@ export default function AttendanceTable({
                 </Descriptions.Item>
 
                 <Descriptions.Item
-                  label="Updated At"
+                  label="Cập nhật lần cuối"
                 >
                   {
                     selectedAttendance.updatedAt
