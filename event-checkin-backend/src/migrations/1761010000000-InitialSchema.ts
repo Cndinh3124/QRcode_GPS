@@ -27,12 +27,12 @@ export class InitialSchema1761010000000 implements MigrationInterface {
         \`isActive\` tinyint NOT NULL DEFAULT 1,
         \`createdAt\` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
         \`updatedAt\` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        \`roleId\` int NOT NULL,
+        \`role_id\` int NOT NULL,
         PRIMARY KEY (\`id\`),
         UNIQUE KEY \`UQ_users_studentCode\` (\`studentCode\`),
         UNIQUE KEY \`UQ_users_email\` (\`email\`),
-        KEY \`IDX_users_role_id\` (\`roleId\`),
-        CONSTRAINT \`FK_users_role\` FOREIGN KEY (\`roleId\`) REFERENCES \`roles\` (\`id\`)
+        KEY \`IDX_users_role_id\` (\`role_id\`),
+        CONSTRAINT \`FK_users_role\` FOREIGN KEY (\`role_id\`) REFERENCES \`roles\` (\`id\`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     `);
 
