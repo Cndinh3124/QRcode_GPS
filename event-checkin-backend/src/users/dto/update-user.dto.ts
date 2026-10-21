@@ -21,7 +21,7 @@ export class UpdateUserDto {
 
   @IsOptional()
   @IsEmail()
-  @MaxLength(150)
+  @MaxLength(100)
   email?: string;
 
   @IsOptional()
