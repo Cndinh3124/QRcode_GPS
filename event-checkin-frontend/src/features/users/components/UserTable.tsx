@@ -112,7 +112,7 @@ export default function UserTable({
               danger
               icon={<DeleteOutlined />}
             >
-              Delete
+              Xóa
             </Button>
           </Popconfirm>
         </Space>
