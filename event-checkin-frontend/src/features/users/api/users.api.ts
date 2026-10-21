@@ -46,7 +46,7 @@ export async function updateUser(
 }
 
 export async function deleteUser(
-  id: number,
+  id: string,
 ): Promise<{ message: string }> {
   const response = await api.delete<{
     message: string;
