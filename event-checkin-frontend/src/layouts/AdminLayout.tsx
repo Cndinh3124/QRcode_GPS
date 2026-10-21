@@ -33,6 +33,8 @@ import {
 
 import { useAuth } from '../features/auth/hooks/useAuth';
 import { getUser } from '../features/auth/utils/auth.storage';
+import BrandLogo from '../components/brand/BrandLogo';
+import { BRAND } from '../constants/brand';
 
 import { ROUTES } from '../constants/routes';
 
@@ -329,7 +331,7 @@ export default function AdminLayout() {
 
       <Sider
         className="admin-desktop-sider"
-        theme="light"
+        theme="dark"
         width={248}
         collapsedWidth={72}
         collapsible
@@ -337,8 +339,8 @@ export default function AdminLayout() {
         onCollapse={setCollapsed}
         breakpoint="lg"
         style={{
-          background: 'var(--color-surface)',
-          borderRight: '1px solid var(--color-border)',
+          background: 'var(--color-sidebar)',
+          borderRight: '1px solid rgba(255,255,255,0.08)',
         }}
       >
         {/* ===================================================
@@ -360,31 +362,7 @@ export default function AdminLayout() {
               '1px solid var(--color-border)',
           }}
         >
-          {/* QR LOGO */}
-
-          <div
-            style={{
-              width: 36,
-              height: 36,
-
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-
-              borderRadius: 8,
-
-              background: 'var(--color-primary)',
-
-              color: '#ffffff',
-
-              fontSize: 17,
-              fontWeight: 700,
-
-              flexShrink: 0,
-            }}
-          >
-            QR
-          </div>
+          <BrandLogo size={36} />
 
           {/* BRAND NAME */}
 
@@ -424,7 +402,7 @@ export default function AdminLayout() {
 
         <Menu
           mode="inline"
-          theme="light"
+          theme="dark"
           selectedKeys={[
             getSelectedMenuKey(),
           ]}
@@ -447,7 +425,7 @@ export default function AdminLayout() {
       {/* Menu truot danh cho man hinh nho. */}
       <Drawer
         className="admin-drawer"
-        title="QR Event - Quản lý điểm danh"
+        title={`${BRAND.name} - ${BRAND.description}`}
         placement="left"
         width={280}
         open={mobileMenuOpen}
@@ -456,7 +434,7 @@ export default function AdminLayout() {
       >
         <Menu
           mode="inline"
-          theme="light"
+          theme="dark"
           selectedKeys={[getSelectedMenuKey()]}
           items={menuItems}
           onClick={({ key }) => handleMenuClick(key)}
