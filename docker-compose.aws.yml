@@ -1,0 +1,36 @@
+services:
+  ai-fraud:
+    build:
+      context: ./ai-fraud-service
+    restart: unless-stopped
+    env_file:
+      - ./event-checkin-backend/.env
+    environment:
+      MODEL_PATH: /var/lib/ai-fraud/model.joblib
+    volumes:
+      - ai_fraud_model:/var/lib/ai-fraud
+
+  backend:
+    build:
+      context: ./event-checkin-backend
+    restart: unless-stopped
+    env_file:
+      - ./event-checkin-backend/.env
+    environment:
+      AI_FRAUD_SERVICE_URL: http://ai-fraud:8001
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - ai-fraud
+
+  frontend:
+    build:
+      context: ./event-checkin-frontend
+      args:
+        VITE_API_URL: /api
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
+
+volumes:
+  ai_fraud_model:
