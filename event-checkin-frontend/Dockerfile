@@ -1,4 +1,4 @@
-# Giai doan 1: cai package va build giao dien Vue.
+# Giai doan 1: cai package va build giao dien React.
 FROM node:22-alpine AS build
 WORKDIR /app
 
