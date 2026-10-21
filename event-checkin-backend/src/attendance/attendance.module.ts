@@ -11,6 +11,7 @@ import { AttendanceService } from './attendance.service';
 import { Event } from '../events/entities/event.entity';
 
 import { User } from '../users/entities/user.entity';
+import { AttendanceRiskAssessment } from '../ai-fraud/entities/attendance-risk-assessment.entity';
 
 import { GpsModule } from '../gps/gps.module';
 
@@ -22,6 +23,7 @@ import { EventsModule } from '../events/events.module';
       Attendance,
       Event,
       User,
+      AttendanceRiskAssessment,
     ]),
 
     EventsModule,

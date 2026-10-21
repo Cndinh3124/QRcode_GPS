@@ -13,6 +13,7 @@ import { GpsModule } from './gps/gps.module';
 import { QrModule } from './qr/qr.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ReportsModule } from './reports/reports.module';
+import { AiFraudModule } from './ai-fraud/ai-fraud.module';
 
 @Module({
   imports: [
@@ -57,6 +58,7 @@ import { ReportsModule } from './reports/reports.module';
     QrModule,
     DashboardModule,
     ReportsModule,
+    AiFraudModule,
   ],
 })
 export class AppModule {}

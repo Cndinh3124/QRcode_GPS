@@ -17,6 +17,7 @@ import Attendance from '../features/attendance/pages/Attendance';
 import ParticipantsPage from '../features/attendance/pages/ParticipantsPage';
 import Reports from '../features/reports/pages/Reports';
 import Settings from '../features/settings/pages/Settings';
+import AiFraudDashboard from '../features/ai-fraud/pages/AiFraudDashboard';
 
 import CheckIn from '../features/checkin/pages/CheckIn';
 
@@ -104,6 +105,11 @@ export default function AppRouter() {
           <Route
             path="reports"
             element={<Reports />}
+          />
+
+          <Route
+            path="ai-fraud"
+            element={<AiFraudDashboard />}
           />
 
           {/* Settings */}

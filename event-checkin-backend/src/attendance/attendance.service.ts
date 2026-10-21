@@ -33,6 +33,8 @@ import { EventsService } from '../events/events.service';
 import { GpsService } from '../gps/gps.service';
 
 import type { Response } from 'express';
+import { AttendanceRiskAssessment } from '../ai-fraud/entities/attendance-risk-assessment.entity';
+import { AnalysisStatus } from '../ai-fraud/entities/attendance-risk-assessment.entity';
 
 @Injectable()
 export class AttendanceService {
@@ -278,13 +280,19 @@ export class AttendanceService {
     let savedAttendance: Attendance;
 
     try {
-      const savedAttendances =
-        await this.attendanceRepository.save([
-          attendance,
-        ]);
-
-      savedAttendance =
-        savedAttendances[0];
+      savedAttendance = await this.attendanceRepository.manager.transaction(
+        async (manager) => {
+          const saved = await manager.getRepository(Attendance).save(attendance);
+          const assessment = manager.getRepository(AttendanceRiskAssessment).create({
+            attendance: saved,
+            analysisStatus: AnalysisStatus.PENDING,
+            featureVersion: 'v1',
+            attemptCount: 0,
+          });
+          await manager.getRepository(AttendanceRiskAssessment).save(assessment);
+          return saved;
+        },
+      );
     } catch (error) {
       // -----------------------------------------------------
       // MySQL duplicate entry

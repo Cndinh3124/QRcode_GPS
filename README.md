@@ -20,6 +20,7 @@ Thành phần:
 - **Frontend:** React + Vite + TypeScript + Ant Design + React Query
 - **Backend:** NestJS + TypeORM + JWT + RBAC
 - **Database:** MySQL
+- **AI anomaly scorer:** Python FastAPI + scikit-learn Isolation Forest (internal service)
 - **Web Server / Reverse Proxy:** Nginx
 - **SSL:** HTTPS
 - **Process Manager:** PM2 hoặc Docker
@@ -59,7 +60,28 @@ Project gồm:
 ```text
 event-checkin-backend/
 event-checkin-frontend/
+ai-fraud-service/
 ```
+
+## AI check-in risk MVP
+
+Mỗi check-in hợp lệ tạo một assessment `PENDING` trong cùng transaction với attendance. Worker NestJS xử lý assessment nền và gọi dịch vụ Python; check-in không đợi mô hình. Nếu AI service chưa sẵn sàng, bản ghi được retry và sau 8 lần sẽ chuyển `FAILED`. Sau khi baseline được huấn luyện, thao tác huấn luyện sẽ đưa các job `FAILED` về hàng đợi.
+
+Màn quản trị **AI điểm danh** chỉ dành cho tài khoản `ADMIN`, tại `/ai-fraud`. Nó hiển thị mức bất thường, tín hiệu, và cho phép lưu kết quả xác minh có audit history. Hệ thống không tự đổi trạng thái điểm danh hoặc tự kết luận gian lận.
+
+### Khởi chạy dịch vụ AI
+
+Trong `event-checkin-backend/.env`, tạo token riêng dài/ngẫu nhiên cho `AI_SERVICE_TOKEN` và cấu hình `AI_FRAUD_SERVICE_URL`. Không dùng giá trị ví dụ. Từ thư mục backend:
+
+```bash
+docker compose up -d --build ai-fraud
+```
+
+Đảm bảo backend Node chạy trên cùng host với Docker nếu đang dùng URL mặc định `http://127.0.0.1:8001`. Volume `ai_fraud_model` lưu model qua lần khởi động lại. AI service chỉ bind vào loopback; không mở port 8001 ra Internet.
+
+Sau khi có ít nhất 30 lượt điểm danh `PRESENT` hoặc `LATE`, đăng nhập bằng ADMIN, mở **AI điểm danh**, rồi chọn **Huấn luyện baseline**. Baseline lấy tối đa 2.000 lượt gần nhất. Màn hình gọi score “mức bất thường tương đối”, không phải xác suất gian lận. Dữ liệu GPS/device hiện do client gửi nên có thể bị giả mạo; dùng kết quả để ưu tiên xem xét thủ công, không coi là bằng chứng.
+
+Các entity mới được TypeORM tự tạo trong cấu hình hiện tại (`synchronize: true`). Trước khi tắt `synchronize` ở production, cần sinh và áp dụng migration cho `attendance_risk_assessments` và `attendance_risk_reviews`; không bật synchronize trên database production.
 
 ---
 
