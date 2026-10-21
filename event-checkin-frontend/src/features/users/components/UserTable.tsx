@@ -29,20 +29,20 @@ export default function UserTable({
 }: UserTableProps) {
   const columns: ColumnsType<User> = [
     {
-      title: 'No.',
+      title: 'STT',
       key: 'index',
       width: 70,
       align: 'center',
       render: (_, __, index) => index + 1,
     },
     {
-      title: 'Student Code',
+      title: 'Mã sinh viên',
       dataIndex: 'studentCode',
       key: 'studentCode',
       width: 150,
     },
     {
-      title: 'Full Name',
+      title: 'Họ và tên',
       dataIndex: 'fullName',
       key: 'fullName',
       width: 220,
@@ -54,7 +54,7 @@ export default function UserTable({
       ellipsis: true,
     },
     {
-      title: 'Role',
+      title: 'Vai trò',
       key: 'role',
       width: 120,
       align: 'center',
@@ -78,8 +78,8 @@ export default function UserTable({
           }
         >
           {record.isActive
-            ? 'ACTIVE'
-            : 'INACTIVE'}
+            ? 'Đang hoạt động'
+            : 'Đã khóa'}
         </Tag>
       ),
     },
@@ -101,8 +101,8 @@ export default function UserTable({
           <Popconfirm
             title="Xóa người dùng"
             description="Bạn có chắc muốn xóa người dùng này không?"
-            okText="Yes"
-            cancelText="No"
+            okText="Đồng ý"
+            cancelText="Hủy"
             onConfirm={() =>
               onDelete(record.id)
             }
