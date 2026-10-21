@@ -13,7 +13,7 @@ export async function getUsers(): Promise<User[]> {
 }
 
 export async function getUserById(
-  id: number,
+  id: string,
 ): Promise<User> {
   const response = await api.get<User>(
     `/users/${id}`,
@@ -34,7 +34,7 @@ export async function createUser(
 }
 
 export async function updateUser(
-  id: number,
+  id: string,
   data: UpdateUserDto,
 ): Promise<User> {
   const response = await api.patch<User>(
