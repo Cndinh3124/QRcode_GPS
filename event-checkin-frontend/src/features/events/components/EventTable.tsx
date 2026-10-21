@@ -47,7 +47,7 @@ export default function EventTable({
 
   const columns: ColumnsType<Event> = [
     {
-      title: 'No.',
+      title: 'STT',
       key: 'index',
       width: 70,
       align: 'center',
@@ -55,7 +55,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Title',
+      title: 'Ten su kien',
       key: 'title',
       dataIndex: 'title',
       width: 220,
@@ -63,7 +63,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Location',
+      title: 'Dia diem',
       key: 'locationName',
       dataIndex: 'locationName',
       width: 220,
@@ -71,7 +71,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Start Time',
+      title: 'Bat dau',
       key: 'startTime',
       dataIndex: 'startTime',
       width: 170,
@@ -82,7 +82,7 @@ export default function EventTable({
     },
 
     {
-      title: 'End Time',
+      title: 'Ket thuc',
       key: 'endTime',
       dataIndex: 'endTime',
       width: 170,
@@ -93,7 +93,7 @@ export default function EventTable({
     },
 
     {
-      title: 'Status',
+      title: 'Trang thai',
       key: 'status',
       width: 140,
       align: 'center',
@@ -109,9 +109,10 @@ export default function EventTable({
     },
 
     {
-      title: 'Actions',
+      title: 'Thao tac',
       key: 'actions',
       width: 300,
+      fixed: 'right',
       align: 'center',
       render: (_, record) => (
         <Space>
@@ -134,7 +135,7 @@ export default function EventTable({
               )
             }
           >
-            Participants
+            Nguoi tham gia
           </Button>
 
           <Button
@@ -145,14 +146,14 @@ export default function EventTable({
               onEdit(record)
             }
           >
-            Edit
+            Sua
           </Button>
 
           <Popconfirm
-            title="Delete Event"
-            description="Are you sure you want to delete this event?"
-            okText="Delete"
-            cancelText="Cancel"
+            title="Xoa su kien"
+            description="Ban co chac muon xoa su kien nay?"
+            okText="Xoa"
+            cancelText="Huy"
             disabled={!isAdmin}
             onConfirm={() =>
               onDelete(record.id)
@@ -164,7 +165,7 @@ export default function EventTable({
               icon={<DeleteOutlined />}
               disabled={!isAdmin}
             >
-              Delete
+              Xoa
             </Button>
           </Popconfirm>
         </Space>
@@ -188,7 +189,7 @@ export default function EventTable({
           '50',
         ],
         showTotal: (total) =>
-          `Total ${total} events`,
+          `Tong cong ${total} su kien`,
       }}
     />
   );
