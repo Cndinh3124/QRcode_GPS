@@ -44,7 +44,7 @@ export default function ProfileCard({
         <Descriptions.Item
           label={
             <>
-              <UserOutlined /> Full Name
+              <UserOutlined /> Họ và tên
             </>
           }
         >
@@ -64,7 +64,7 @@ export default function ProfileCard({
         <Descriptions.Item
           label={
             <>
-              <IdcardOutlined /> Student Code
+              <IdcardOutlined /> Mã sinh viên
             </>
           }
         >
@@ -74,7 +74,7 @@ export default function ProfileCard({
         <Descriptions.Item
           label={
             <>
-              <SafetyOutlined /> Role
+              <SafetyOutlined /> Vai trò
             </>
           }
         >
