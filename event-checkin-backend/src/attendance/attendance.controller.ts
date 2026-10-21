@@ -41,7 +41,7 @@ export class AttendanceController {
   // ==========================================
 
   @Post('check-in')
-  @Throttle({ default: { limit: 10, ttl: 60_000 } })
+  @Throttle({ default: { limit: 120, ttl: 60_000 } })
   async checkIn(
     @Body() dto: CheckInDto,
   ) {
