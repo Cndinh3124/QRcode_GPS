@@ -377,7 +377,7 @@ export default function AdminLayout() {
                 style={{
                   fontSize: 17,
                   fontWeight: 700,
-                  color: '#1f1f1f',
+                  color: '#ffffff',
                 }}
               >
                 QR Event
@@ -387,7 +387,7 @@ export default function AdminLayout() {
                 style={{
                   marginTop: 3,
                   fontSize: 12,
-                  color: '#8c8c8c',
+                  color: 'rgba(255,255,255,0.68)',
                 }}
               >
                 Quản lý điểm danh
