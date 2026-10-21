@@ -95,9 +95,13 @@ export default function UserForm({
             message:
               'Vui lòng nhập họ và tên.',
           },
+          {
+            max: 100,
+            message: 'Ho va ten khong duoc vuot qua 100 ky tu.',
+          },
         ]}
       >
-        <Input />
+        <Input maxLength={100} />
       </Form.Item>
 
       <Form.Item
@@ -128,6 +132,7 @@ export default function UserForm({
                 {
                   required: true,
                   min: 6,
+                  max: 255,
                   message:
                     'Mật khẩu phải có ít nhất 6 ký tự.',
                 },
