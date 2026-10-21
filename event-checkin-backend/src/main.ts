@@ -10,14 +10,11 @@ async function bootstrap() {
   const isProduction = process.env.NODE_ENV === 'production';
 
   // Production phai khai bao domain frontend ro rang.
-  const frontendUrls = (process.env.FRONTEND_URL || 'http://localhost:5173')
+  const defaultFrontendUrl = isProduction ? '' : 'http://localhost:5173';
+  const frontendUrls = (process.env.FRONTEND_URL ?? defaultFrontendUrl)
     .split(',')
     .map((url) => url.trim())
     .filter(Boolean);
-
-  if (isProduction && frontendUrls.length === 0) {
-    throw new Error('FRONTEND_URL phai duoc khai bao trong production.');
-  }
 
   // Ung dung nam sau ALB va Nginx: tin dung dung hai proxy hop nay.
   app.set('trust proxy', 2);
