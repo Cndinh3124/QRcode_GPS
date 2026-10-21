@@ -17,7 +17,7 @@ import type {
 interface UserFormProps {
   mode: 'create' | 'edit';
   user?: User;
-  roles: Vai trò[];
+  roles: Role[];
   loading: boolean;
   onSubmit: (
     values: CreateUserDto | UpdateUserDto,
@@ -59,8 +59,6 @@ export default function UserForm({
     }
 
     await onSubmit(payload);
-
-    form.resetFields();
   };
 
   return (
@@ -81,11 +79,11 @@ export default function UserForm({
           {
             max: 50,
             message:
-              'Mã sinh viên không được vượt quá 20 ký tự.',
+              'Ma sinh vien khong duoc vuot qua 50 ky tu.',
           },
         ]}
       >
-        <Input />
+        <Input maxLength={50} />
       </Form.Item>
 
       <Form.Item
