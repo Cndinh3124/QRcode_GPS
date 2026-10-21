@@ -31,12 +31,12 @@ export default function UserTable({
     },
 
     {
-      title: 'Student Code',
+      title: 'Mã sinh viên',
       dataIndex: 'studentCode',
     },
 
     {
-      title: 'Full Name',
+      title: 'Họ và tên',
       dataIndex: 'fullName',
     },
 
@@ -46,7 +46,7 @@ export default function UserTable({
     },
 
     {
-      title: 'Role',
+      title: 'Vai trò',
       dataIndex: 'role',
       render: (role: string) => (
         <Tag
