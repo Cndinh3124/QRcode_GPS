@@ -26,7 +26,7 @@ const FEATURE_VERSION = 'v1';
 const MAX_TRAINING_ROWS = 2000;
 const MAX_ATTEMPTS = 8;
 
-export interface FraudFeatures {
+export interface FraudFeatures extends Record<string, number> {
   seconds_from_event_start: number;
   distance_ratio: number;
   participant_checkins_24h: number;
