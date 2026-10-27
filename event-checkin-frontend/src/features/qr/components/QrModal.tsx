@@ -201,9 +201,9 @@ export default function QrModal({
             description="Mã QR hiện tại sẽ không còn sử dụng được."
             okText="Tạo lại"
             cancelText="Hủy"
-            onConfirm={
-              regenerate
-            }
+            onConfirm={() => {
+              regenerate();
+            }}
             okButtonProps={{
               loading:
                 isRegenerating,
