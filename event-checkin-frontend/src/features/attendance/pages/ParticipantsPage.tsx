@@ -64,7 +64,7 @@ export default function ParticipantsPage() {
         </Button>
       </Space>
 
-      <Người tham giaTable
+      <ParticipantsTable
         data={data ?? []}
         loading={isLoading}
       />
